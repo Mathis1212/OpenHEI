@@ -1,9 +1,24 @@
+DROP DATABASE IF EXISTS projet_OpenHEI;
 CREATE DATABASE projet_OpenHEI;
+
 CREATE TABLE projet_OpenHEI.usager (
     user_id int AUTO_INCREMENT PRIMARY KEY,
     user_name varchar(30) NOT NULL,
     user_login varchar(60) NOT NULL,
     user_password varchar(20) NOT NULL)engine=innodb;
+
+CREATE TABLE projet_OpenHEI.matiere (
+	id_matiere INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	nom_matiere VARCHAR(100) NOT NULL
+	) ENGINE=INNODB;
+
+CREATE TABLE projet_OpenHEI.cours (
+	id_cours INT NOT NULL AUTO_INCREMENT,
+	nom_cours VARCHAR(100) NOT NULL,
+	matiere_cours INT NOT NULL,
+	PRIMARY KEY (id_cours),
+	FOREIGN KEY (matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere)
+	) ENGINE=INNODB;
     
     
     
