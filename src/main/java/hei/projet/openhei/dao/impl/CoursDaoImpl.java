@@ -19,7 +19,7 @@ public class CoursDaoImpl implements CoursDao {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  Statement statement = cnx.createStatement();
-                 ResultSet resultSelect = statement.executeQuery("SELECT * FROM cours JOIN matiere ON matiere.id_matiere = cours.id_cours ORDER BY matiere")) {
+                 ResultSet resultSelect = statement.executeQuery("SELECT * FROM cours JOIN matiere ON matiere.id_matiere = cours.id_matiere_cours ORDER BY nom_cours")) {
                 while(resultSelect.next()) {
                     result.add(createCoursFromResultSet(resultSelect));
                 }
@@ -34,7 +34,7 @@ public class CoursDaoImpl implements CoursDao {
         return new Cours(
                 resultSelect.getInt("id_cours"),
                 resultSelect.getString("nom_cours"),
-                new Matiere(resultSelect.getInt("id_matiere"),resultSelect.getString("nom_matiere")));
+                new Matiere(resultSelect.getInt("id_matiere_cours"),resultSelect.getString("nom_matiere")));
 
 
     }
