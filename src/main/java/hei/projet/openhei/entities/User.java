@@ -1,16 +1,16 @@
 package hei.projet.openhei.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class User {
-    private Integer id;
     private String pseudo;
     private String login;
     private String password;
-    private Date date_creation;
+    private java.util.Date date_creation;
 
-    public User(Integer Id, String Pseudo, String Login, String Password, Date date_creation){
-        this.id=Id;
+    public User(String Pseudo, String Login, String Password){
+        this.date_creation=new Date(System.currentTimeMillis());
+
 
     }
 
