@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
-    public List<Cours> listFilms() {
+    public List<Cours> listCours() {
         List<Cours> result = new ArrayList<>();
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
