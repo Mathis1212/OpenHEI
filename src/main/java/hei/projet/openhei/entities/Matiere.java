@@ -20,11 +20,12 @@ public class Matiere {
 
 
     public Integer getId(){
-        return id;
+        return this.id;
     }
     public void setId(Integer id){
         this.id=id;
     }
+    public Integer getNotion(){return this.notion;}
     public String getNomMatiere(){
         return NomMatiere;
     }
