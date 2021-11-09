@@ -32,15 +32,15 @@ public class InscriptionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
-        if(login==null){
+        if(login==null||login==""){
             //message errur login null
         }
         String password = req.getParameter("password");
-        if(password==null){
+        if(password==null||password==""){
             //message erreur password null
         }
         String pseudo = req.getParameter("pseudo");
-        if(pseudo==null){
+        if(pseudo==null||pseudo==""){
             //affichage erreur pseudo null
         }
 
