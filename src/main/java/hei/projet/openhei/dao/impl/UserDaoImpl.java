@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String getUserlogin() {
-        return q;
+        return ;
     }
 
     private User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
