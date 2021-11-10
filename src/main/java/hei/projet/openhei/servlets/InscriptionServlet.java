@@ -2,6 +2,7 @@ package hei.projet.openhei.servlets;
 
 import hei.projet.openhei.dao.impl.DataSourceProvider;
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,7 +47,7 @@ public class InscriptionServlet extends HttpServlet {
                 //message erreur pseudo absent
             }
         }else{
-            User actualuser = new User(pseudo,login,password);
+
         }
     }
 }

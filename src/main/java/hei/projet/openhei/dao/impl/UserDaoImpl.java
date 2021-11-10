@@ -2,7 +2,7 @@ package hei.projet.openhei.dao.impl;
 
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.entities.User;
-import hei.projet.openhei.service.UserService;
+import hei.projet.openhei.exception.UserNotFoundException;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUser(String login) {
+    public User getUser(String login) throws UserNotFoundException{
         User user=null;
         String sql ="SELECT usager WHERE user_login LIKE ?";
         try {
@@ -32,15 +32,26 @@ public class UserDaoImpl implements UserDao {
                 }
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            throw new UserNotFoundException();
         }
         return user;
     }
 
     @Override
     public String getUserlogin() {
-        return ;
+        return null;
     }
+
+
+    @Override
+    public Boolean getUserbyLogin(String login){
+        try{
+            User usager=getUser(login);
+        }catch(UserNotFoundException e){
+            return false;
+        }
+    }
+
 
     private User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
         return new User(
