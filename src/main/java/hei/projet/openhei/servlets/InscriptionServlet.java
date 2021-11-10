@@ -2,6 +2,7 @@ package hei.projet.openhei.servlets;
 
 import hei.projet.openhei.dao.impl.DataSourceProvider;
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.exception.UserNotFoundException;
 import hei.projet.openhei.service.UserService;
 
 import javax.servlet.ServletException;
@@ -25,29 +26,26 @@ public class InscriptionServlet extends HttpServlet {
         String id = (String) req.getSession().getAttribute("utilisateurConnecte");
 
         if(id==null){
-            //on affiche le formulaire d'inscription ou de connection
+            resp.sendRedirect("connection");
         }else{
-            //on affiche la page d'accueil
+            resp.sendRedirect("accueil");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //on recupere le contenu des champs de la session d'inscription
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String pseudo = req.getParameter("pseudo");
-        if(login==null||login==""||password==null||password==""||pseudo==null||pseudo==""){
-            if(login==null||login==""){
-                //message erreur login absent
-            }
-            if(password==null||password==""){
-                //message erreur password absent
-            }
-            if(pseudo==null||pseudo==""){
-                //message erreur pseudo absent
-            }
-        }else{
-
+        //on crée un objet user à partir du contenu des champs
+        try{
+            User newUser=new User(pseudo,login,password);
+            UserService.getInstance().creatUser(newUser);
+        } catch (IllegalArgumentException | UserNotFoundException iae) {
+            //si erreur dans les champs on envoi une erreur et on redirige l'user vers la page d'inscription
+            req.getSession().setAttribute("errorMessage", iae.getMessage());
+            resp.sendRedirect("inscription");
         }
     }
 }
