@@ -11,7 +11,7 @@ public class User {
 
     public User(String pseudo, String login, String password){
         super();
-        this.id=id;
+        this.id=0;
         this.pseudo=pseudo;
         this.login=login;
         this.password=password;

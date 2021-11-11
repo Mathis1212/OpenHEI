@@ -7,13 +7,15 @@ import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 
 public class UserService {
+    //création de l'insatance du service
     private static class ServiceHolder {
         private final static UserService instance = new UserService();
     }
+    //création de la méthode pour récupérer l'instance
     public static UserService getInstance() {
         return ServiceHolder.instance;
     }
-
+    //récupération de l'instance de UserDaoImpl
     private UserDao userDao = UserDaoImpl.getInstance();
     //méthode d'ajout d'un user a la bdd
     public void creatUser(User user) throws UserNotFoundException {

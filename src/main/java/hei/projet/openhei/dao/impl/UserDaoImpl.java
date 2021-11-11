@@ -13,6 +13,7 @@ public class UserDaoImpl implements UserDao {
     private static class ServiceHolder {
         private final static UserDao instance = new UserDaoImpl();
     }
+    //création de la méthode getInstance pour récupérer les méthodes de UserDaoImpl
     public static UserDao getInstance() {
         UserDao instance = ServiceHolder.instance;
         return instance;
@@ -45,7 +46,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     //méthode qui crée un objet user depuis la requete faite dans la méthode "getUser()"
-    private User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
+    public User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
         return new User(
                 resultSelect.getString("user_pseudo"),
                 resultSelect.getString("user_login"),
