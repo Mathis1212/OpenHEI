@@ -10,6 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
+    //creattion de l'instance
+    private static class ServiceHolder{
+        private final static CoursDao instance = new CoursDaoImpl();
+    }
+    //creation de la methode getInstance pour recuperer les methodes de CoursDaoImpl
+    public static CoursDao getInstance(){
+        CoursDao instance= ServiceHolder.instance;
+        return instance;
+    }
+    @Override
     public Cours createCoursFromResultSet(ResultSet resultSelect) throws SQLException {
         return new Cours(resultSelect.getString("nom_cours"));
     }
