@@ -27,8 +27,9 @@ public class MatiereDaoImpl implements MatiereDao {
     }
 
     @Override
+    // liste l'ensemble des matiere de la BDD
     public List<Matiere> ListMatiere() {
-        List<Matiere> list = new ArrayList<Matiere>();
+        List<Matiere> list = new ArrayList<>();
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
@@ -43,7 +44,7 @@ public class MatiereDaoImpl implements MatiereDao {
         }
         return list;
     }
-
+    // recupere le nom de la matiere a partir d'un id
     @Override
     public String getNom(Integer id) {
         String nom ="";
@@ -63,7 +64,7 @@ public class MatiereDaoImpl implements MatiereDao {
         return nom;
     }
 
-    // compte nb notions dans matiere
+    // compte nb notions dans une matiere a partir de son id
     @Override
     public int getnbCour(Integer id) {
         int nb =0;
@@ -85,7 +86,7 @@ public class MatiereDaoImpl implements MatiereDao {
 
     @Override
     public List<Cours> getListCour(Integer id) {
-        List<Cours> list = new ArrayList<Cours>();
+        List<Cours> list = new ArrayList<>();
         String sql = "SELECT cours.nom_cours FROM cours join matiere on cours.id_matiere_cours=matiere.id_matiere where matiere.id_matiere=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
