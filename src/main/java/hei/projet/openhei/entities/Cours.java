@@ -1,15 +1,17 @@
 package hei.projet.openhei.entities;
 
+import java.util.List;
+
 public class Cours {
     private Integer id;
     private String nomCours;
-    private Matiere matiere;
 
-    public Cours(Integer id, String nomCours, Matiere matiere){
-        this.id=id;
+
+
+    public Cours( String nomCours){
         this.nomCours=nomCours;
-        this.matiere=matiere;
     }
+
     public Integer getId() {
         return id;
     }
@@ -22,10 +24,5 @@ public class Cours {
     public void setNomCours(){
         this.nomCours=nomCours;
     }
-    public Matiere getMatiere(){
-        return matiere;
-    }
-    public void setMatiere(){
-        this.matiere=matiere;
-    }
+
 }

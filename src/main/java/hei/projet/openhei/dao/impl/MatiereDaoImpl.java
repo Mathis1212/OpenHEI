@@ -10,42 +10,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatiereDaoImpl implements MatiereDao {
+
     private Matiere createMatiereFromResultSet(ResultSet resulSelect) throws SQLException {
-        return new Matiere( resulSelect.getInt("id_matiere"), resulSelect.getString("nom_matiere"),resulSelect.getInt("num_notions"));
-
-
+        return new Matiere( resulSelect.getInt("id_matiere"), resulSelect.getString("nom_matiere"));
     }
 
     @Override
     public List<Matiere> ListMatiere() {
-        List<Matiere> result = new ArrayList<>();
+        List<Matiere> list = new ArrayList<Matiere>();
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  Statement statement = cnx.createStatement();
                  ResultSet resultSelect = statement.executeQuery("SELECT * FROM matiere ")) {
                 while(resultSelect.next()) {
-                    result.add(createMatiereFromResultSet(resultSelect));
+                    list.add(createMatiereFromResultSet(resultSelect));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+        return list;
     }
-
 
     @Override
     public String getNom(Integer id) {
         String nom ="";
-        String sql = "SELECT nom_matiere  FROM matiere  WHERE id_matiere=?";
+        String sql = "SELECT nom_matiere FROM matiere  WHERE id_matiere=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
                 preparedStatement.setInt(1, id);
                 try(ResultSet result = preparedStatement.executeQuery()) {
-                    nom=createMatiereFromResultSet(result).getNomMatiere();
+                    nom= result.getString("nom_matiere");
                 }
             }
         } catch (SQLException e) {
@@ -54,18 +52,17 @@ public class MatiereDaoImpl implements MatiereDao {
         return nom;
     }
 
-
     @Override
-    public Integer getNotions(Integer id) {
-        Integer nb =null;
-        String sql = "SELECT num_notions  FROM matiere  WHERE id_matiere=?";
+    public int getnbCour(Integer id) {
+        int nb =0;
+        String sql = "SELECT*FROM matiere  WHERE id_matiere=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
                 preparedStatement.setInt(1, id);
                 try(ResultSet result = preparedStatement.executeQuery()) {
-                    nb=createMatiereFromResultSet(result).getNotion();
+
                 }
             }
         } catch (SQLException e) {
@@ -73,4 +70,25 @@ public class MatiereDaoImpl implements MatiereDao {
         }
         return nb;
     }
+
+    @Override
+    public List<Cours> getListCour(Integer id) {
+        List<Cours> list = new ArrayList<Cours>();
+        String sql = "SELECT*FROM matiere  WHERE id_matiere=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                try(ResultSet resultSelect = preparedStatement.executeQuery()) {
+                    list.add(CoursDaoImpl.createCoursFromResultSet(resultSelect));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // compte nb notions dans matiere
 }
