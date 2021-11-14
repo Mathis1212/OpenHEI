@@ -1,6 +1,7 @@
 package hei.projet.openhei.dao;
 
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.exception.UserFoundException;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 

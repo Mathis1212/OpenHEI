@@ -2,6 +2,7 @@ package hei.projet.openhei.servlets;
 
 import hei.projet.openhei.dao.impl.DataSourceProvider;
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 import hei.projet.openhei.service.UserService;
 
@@ -42,7 +43,7 @@ public class InscriptionServlet extends HttpServlet {
         try{
             User newUser=new User(pseudo,login,password);
             UserService.getInstance().creatUser(newUser);
-        } catch (IllegalArgumentException | UserNotFoundException iae) {
+        } catch (IllegalArgumentException | UserNotFoundException | UserNotAddedException iae) {
             //si erreur dans les champs on envoi une erreur et on redirige l'user vers la page d'inscription
             req.getSession().setAttribute("errorMessage", iae.getMessage());
             resp.sendRedirect("inscription");
