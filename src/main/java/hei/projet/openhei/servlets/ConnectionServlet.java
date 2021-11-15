@@ -16,7 +16,7 @@ public class ConnectionServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("test_inscription", context, resp.getWriter());
+        templateEngine.process("test_connection", context, resp.getWriter());
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
