@@ -5,6 +5,8 @@ import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 import hei.projet.openhei.service.UserService;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +19,14 @@ import java.io.PrintWriter;
 import java.sql.*;
 
 @WebServlet("/inscription")
-public class InscriptionServlet extends HttpServlet {
+public class InscriptionServlet extends GenericServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+        templateEngine.process("test_inscription", context, resp.getWriter());
+
         //récupération d'un objet PrintWriter à partir de l'objet réponse
         PrintWriter out = resp.getWriter();
 
