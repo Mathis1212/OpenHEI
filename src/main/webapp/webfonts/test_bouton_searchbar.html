@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.search-dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 1em;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+}
+
+.search-dropbtn:hover, .search-dropbtn:focus {
+  background-color: #2980B9;
+}
+
+
+.search_dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.search-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 10em;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.search_dropdown input:hover {border: 2px black solid;}
+
+.show-searchbar {display: block;}
+
+/*--CSS pour le champ de recherche--*/
+.search-container {
+  float: right;
+  width: 100%;
+}
+
+input[type=search] {
+  padding: 0.375em;
+  font-size: 1.0625em;
+}
+
+.search-container button {
+  float: right;
+  padding: 0.375em 10px;
+  outline: none;
+  
+  font-size: 1.0625em;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+    border: 2px black solid;
+}
+
+
+</style>
+</head>
+<body>
+
+<h2>Clickable Dropdown</h2>
+<p>Click on the button to open the dropdown menu.</p>
+
+<div class="search_dropdown">
+  <button onclick="ShowingSearchBarOnClick()" class="search-dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
+  <div id="myDropdown" class="search-content">
+    <div class="search-container" id="testid" class="testclass">
+        <form action="">
+          <input type="search" placeholder="Search.." name="search" id="search">
+          <button type="submit" id="loupe"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+  </div>
+</div>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function ShowingSearchBarOnClick() {
+  document.getElementById("myDropdown").classList.toggle("show-searchbar");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.search-dropbtn')) {
+    var dropdowns = document.getElementsByClassName("search-content");
+    var openDropdown = dropdowns[0];
+    if (openDropdown.classList.contains('show-searchbar')&&!document.getElementById("testid")) {
+        openDropdown.classList.remove('show-searchbar');
+    }
+  }
+}
+</script>
+
+</body>
+</html>
