@@ -28,14 +28,14 @@ public class ConnectionServlet extends GenericServlet {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
 
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String login = req.getParameter("Login");
+        String password = req.getParameter("Password");
         try {
             if(UserService.getInstance().checkUser(login, password)==true){
-            resp.sendRedirect("index");
+            resp.sendRedirect("Acceuil");
         }
         } catch (UserNotFoundException e) {
-            resp.sendRedirect("connection");
+            resp.sendRedirect("inscription");
             e.printStackTrace();
         }
     }
