@@ -36,7 +36,7 @@ public class InscriptionServlet extends GenericServlet {
         if(id==null){
             resp.sendRedirect("connection");
         }else{
-            resp.sendRedirect("accueil");
+            resp.sendRedirect("Accueil");
         }
     }
 
