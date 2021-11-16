@@ -23,29 +23,25 @@ public class InscriptionServlet extends GenericServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("test_inscription", context, resp.getWriter());
-
-        //récupération d'un objet PrintWriter à partir de l'objet réponse
-        PrintWriter out = resp.getWriter();
 
         //Récupération de l'id stocké en session
         String id = (String) req.getSession().getAttribute("utilisateurConnecte");
 
+
         if(id==null){
-            resp.sendRedirect("connection");
+            templateEngine.process("test_inscription", context, resp.getWriter());
         }else{
-            resp.sendRedirect("Accueil");
+          resp.sendRedirect("Accueil");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //on recupere le contenu des champs de la session d'inscription
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String pseudo = req.getParameter("pseudo");
+//on recupere le contenu des champs de la session d'inscription
+        String login = req.getParameter("Login");
+        String password = req.getParameter("Password");
+        String pseudo = req.getParameter("Pseudo");
         //on crée un objet user à partir du contenu des champs
         try{
             User newUser=new User(pseudo,login,password);
