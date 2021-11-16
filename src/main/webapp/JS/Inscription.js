@@ -63,25 +63,20 @@ var getNewPersonne=function(){
     let requete=new XMLHttpRequest();
     requete.open("POST","inscription",true);
     requete.responseType="text";
-
-    requete.onload=function (){
+    var Pseudo=document.getElementById("Pseudo");
+    let repPseudo=Pseudo.innerText;
+    var Login=document.getElementById("Login");
+    let repLogin=Login.innerText;
+    var Password=document.getElementById("Password");
+    let repPassword=Password.innerText;
         window.onload=function(){
             if (this.status===200){
-                let repPseudo=this.response;
-                let repLogin=this.response;
-                let repPassword=this.response;
-
-                var Pseudo=document.getElementById("Pseudo");
-                Pseudo.innerText=repPseudo;
-                var Login=document.getElementById("Login");
-                Login.innerText=repLogin;
-                var Password=document.getElementById("Password");
-                Password.innerText=repPassword;
+                console.log("yo");
             }else{
                 console.log("échec de la requête");
             }
         }
-    }
+
     requete.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     requete.send(repPseudo);
     requete.send(repLogin);
