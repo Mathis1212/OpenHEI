@@ -1,7 +1,12 @@
 package hei.projet.openhei.servlets;
 
+
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+
+import hei.projet.openhei.exception.UserNotFoundException;
+import hei.projet.openhei.service.UserService;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/connection")
 public class ConnectionServlet extends GenericServlet {
@@ -19,6 +25,18 @@ public class ConnectionServlet extends GenericServlet {
         templateEngine.process("test_connexion", context, resp.getWriter());
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
 
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+        try {
+            if(UserService.getInstance().checkUser(login, password)==true){
+            resp.sendRedirect("index");
+        }
+        } catch (UserNotFoundException e) {
+            resp.sendRedirect("connection");
+            e.printStackTrace();
+        }
     }
 }
