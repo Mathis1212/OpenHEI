@@ -58,4 +58,10 @@ public class UserService {
         }
 
     }
+
+    public void checkUser(String login, String password){
+        if(userDao.getUserbyLogin(login)==true){
+
+        }
+    }
 }

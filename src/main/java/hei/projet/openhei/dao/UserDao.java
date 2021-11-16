@@ -17,4 +17,6 @@ public interface UserDao {
     public User addUser(User user) throws UserNotAddedException;
 
     public User createUserFromResultSet(ResultSet resultset) throws SQLException;
+
+    public String getUserPassword(String login) throws UserNotFoundException;
 }
