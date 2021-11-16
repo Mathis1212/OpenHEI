@@ -1,3 +1,7 @@
+form.onsubmit
+document.forms['Login']
+document.forms[0].elements['Login']
+
 var getPseudo=function(){
     let requete=new XMLHttpRequest();
     requete.open("POST","inscription",true);
