@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
     public User getUser(String login) throws UserNotFoundException{
         User user=null;
         //requete sql
-        String sql ="SELECT usager WHERE user_login LIKE ?";
+        String sql ="SELECT * FROM usager WHERE user_login LIKE ?";
         try {
             DataSource datasource = DataSourceProvider.getDataSource();
             try(Connection cnx =datasource.getConnection();
