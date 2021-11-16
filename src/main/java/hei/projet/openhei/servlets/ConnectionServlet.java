@@ -34,7 +34,7 @@ public class ConnectionServlet extends GenericServlet {
             if (UserService.getInstance().checkUser(login, password)) {
                 resp.sendRedirect("Acceuil");
             }else{
-
+                throw new IllegalArgumentException("un champ n'est pas bon");
             }
         } catch (UserNotFoundException e) {
             resp.sendRedirect("inscription");

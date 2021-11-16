@@ -3,7 +3,7 @@ var getPseudo=function(){
     requete.open("POST","inscription",true);
     requete.responseType="text";
     var Pseudo=document.getElementById("Pseudo");
-    response=Pseudo.innerText=;
+    response=Pseudo.innerText;
 
         window.onload=function(){
             if (this.status===200){
@@ -13,9 +13,10 @@ var getPseudo=function(){
                 console.log("échec de la requête");
             }
         }
-    }
     requete.send(response);
-}
+    }
+
+
 
 
 var getLogin=function(){
