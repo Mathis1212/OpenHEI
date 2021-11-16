@@ -32,7 +32,7 @@ public class InscriptionServlet extends GenericServlet {
         if(id==null){
             templateEngine.process("test_inscription", context, resp.getWriter());
         }else{
-          resp.sendRedirect("Accueil");
+          resp.sendRedirect("Acceuil");
         }
     }
 

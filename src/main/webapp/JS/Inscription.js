@@ -2,14 +2,13 @@ var getPseudo=function(){
     let requete=new XMLHttpRequest();
     requete.open("POST","inscription",true);
     requete.responseType="text";
+    var Pseudo=document.getElementById("Pseudo");
+    response=Pseudo.innerText=;
 
-    requete.onload=function (){
         window.onload=function(){
             if (this.status===200){
-                let response=this.response;
-                console.log(response);
-                var Pseudo=document.getElementById("Pseudo");
-                Pseudo.innerText=response;
+
+
             }else{
                 console.log("échec de la requête");
             }
@@ -72,11 +71,11 @@ var getNewPersonne=function(){
                 let repPassword=this.response;
 
                 var Pseudo=document.getElementById("Pseudo");
-                Pseudo.innerText=repPassword;
+                Pseudo.innerText=repPseudo;
                 var Login=document.getElementById("Login");
-                Login.innerText=repPassword;
+                Login.innerText=repLogin;
                 var Password=document.getElementById("Password");
-                Password.innerText=repLogin;
+                Password.innerText=repPassword;
             }else{
                 console.log("échec de la requête");
             }

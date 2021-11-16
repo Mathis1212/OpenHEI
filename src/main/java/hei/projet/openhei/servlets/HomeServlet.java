@@ -18,4 +18,6 @@ public class HomeServlet extends GenericServlet {
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("index", context, resp.getWriter());
     }
+
+
 }

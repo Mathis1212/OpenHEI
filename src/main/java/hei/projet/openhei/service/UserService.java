@@ -61,13 +61,11 @@ public class UserService {
 
     public boolean checkUser(String login, String password) throws UserNotFoundException {
         boolean result=false;
-        if(userDao.getUserbyLogin(login)==true){
+        if(userDao.getUserbyLogin(login)){
             User user=userDao.getUser(login);
             String findedPassword = user.getUserpassword();
-            if(findedPassword==password){
+            if(findedPassword.equals(password)){
                 result=true;
-            }else{
-                result=false;
             }
         }
         return result;
