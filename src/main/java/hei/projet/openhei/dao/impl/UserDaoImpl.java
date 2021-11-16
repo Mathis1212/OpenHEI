@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
     //méthode qui crée un objet user depuis la requete faite dans la méthode "getUser()"
     public User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
         return new User(
-                resultSelect.getString("user_pseudo"),
+                resultSelect.getString("user_name"),
                 resultSelect.getString("user_login"),
                 resultSelect.getString("user_password"));
     }
