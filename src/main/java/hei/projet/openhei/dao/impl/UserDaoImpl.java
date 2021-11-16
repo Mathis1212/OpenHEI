@@ -95,4 +95,6 @@ public class UserDaoImpl implements UserDao {
         }
         throw new RuntimeException("Erreur lors de l'inscription");
     }
+
+    public 
 }
