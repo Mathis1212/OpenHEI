@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatiereDaoImpl implements MatiereDao {
+
     //Creation de l'instance de MatiereDaoimpl
     private static class ServiceHolder{
         private final static MatiereDaoImpl instance =new MatiereDaoImpl();
@@ -24,6 +25,9 @@ public class MatiereDaoImpl implements MatiereDao {
 
     private Matiere createMatiereFromResultSet(ResultSet resulSelect) throws SQLException {
         return new Matiere( resulSelect.getInt("id_matiere"), resulSelect.getString("nom_matiere"));
+
+
+
     }
 
     @Override
