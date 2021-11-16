@@ -2,7 +2,6 @@ package hei.projet.openhei.dao.impl;
 
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.entities.User;
-import hei.projet.openhei.exception.UserFoundException;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 
@@ -96,5 +95,5 @@ public class UserDaoImpl implements UserDao {
         throw new RuntimeException("Erreur lors de l'inscription");
     }
 
-    public 
+
 }

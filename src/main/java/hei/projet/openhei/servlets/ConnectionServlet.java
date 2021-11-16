@@ -1,5 +1,6 @@
 package hei.projet.openhei.servlets;
 
+import hei.projet.openhei.exception.UserNotFoundException;
 import hei.projet.openhei.service.UserService;
 
 import javax.servlet.ServletException;
@@ -21,9 +22,13 @@ public class ConnectionServlet extends HttpServlet {
 
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-
-        try{
-            UserService.checkUser();
+        try {
+            if(UserService.getInstance().checkUser(login, password)==true){
+            resp.sendRedirect("index");
+        }
+        } catch (UserNotFoundException e) {
+            resp.sendRedirect("connection");
+            e.printStackTrace();
         }
     }
 }
