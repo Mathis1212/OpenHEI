@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     //méthode qui renvoie true si un user est crée par la méthode "getUser()", false si la méthode "getUser()" renvoie une exception
-    public Boolean getUserbyLogin(String login) throws UserNotFoundException {
+    public Boolean checkUserbyLogin(String login) throws UserNotFoundException {
         boolean result=false;
             if(getUser(login).getUserlogin().equals(login)) {
                 result = true;
