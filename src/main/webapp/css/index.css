@@ -113,7 +113,7 @@ nav{
 	border: 2px solid #ccc;
 	border-radius: 4px;
 	font-size: 1.4vw;
-	background-image: url('../../../images/loupe.png');
+	background-image: url('/images/loupe.png');
 	background-size:1.4vw;
 	background-repeat: no-repeat;
 	background-position: 10px 6px; 
