@@ -12,7 +12,7 @@ public interface UserDao {
 
     public User getUser(String login) throws UserNotFoundException;
 
-    public Boolean getUserbyLogin(String login) throws UserNotFoundException;
+    public Boolean checkUserbyLogin(String login) throws UserNotFoundException;
 
     public User addUser(User user) throws UserNotAddedException;
 

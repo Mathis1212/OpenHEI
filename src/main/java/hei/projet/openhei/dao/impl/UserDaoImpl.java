@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
     public User getUser(String login) throws UserNotFoundException{
         User user=null;
         //requete sql
-        String sql ="SELECT usager WHERE user_login LIKE ?";
+        String sql ="SELECT * FROM usager WHERE user_login LIKE ?";
         try {
             DataSource datasource = DataSourceProvider.getDataSource();
             try(Connection cnx =datasource.getConnection();
@@ -48,14 +48,14 @@ public class UserDaoImpl implements UserDao {
     //méthode qui crée un objet user depuis la requete faite dans la méthode "getUser()"
     public User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
         return new User(
-                resultSelect.getString("user_pseudo"),
+                resultSelect.getString("user_name"),
                 resultSelect.getString("user_login"),
                 resultSelect.getString("user_password"));
     }
 
     @Override
     //méthode qui renvoie true si un user est crée par la méthode "getUser()", false si la méthode "getUser()" renvoie une exception
-    public Boolean getUserbyLogin(String login) throws UserNotFoundException {
+    public Boolean checkUserbyLogin(String login) throws UserNotFoundException {
         boolean result=false;
             if(getUser(login).getUserlogin().equals(login)) {
                 result = true;
