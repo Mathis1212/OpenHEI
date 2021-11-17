@@ -1,0 +1,290 @@
+*{
+	margin: 0;
+	padding: 0;
+	/*box-sizing: border-box;*/
+	text-decoration: none;
+}
+
+body{
+	background-color: gray;
+	font-family: "Courrier New",Arial,Helvetica;
+	font-size: 100%;
+	
+}
+
+/* Responsive form
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+  }
+  
+  @media screen and (max-width: 600px) {
+	.col-25, .col-75, input[type=submit] {
+	  width: 100%;
+	  margin-top: 0;
+	}
+  }
+*/
+/*CSS header*/
+
+#haut_page_header{
+	display: flex;
+	justify-content: space-between;
+	background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+}
+nav{
+	background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+}
+
+#logo{
+	min-width: 8vw;
+	width: 8em;
+	height: auto;
+	margin-left: 1vw;
+}
+
+/*CSS du titre a aficher en hover
+#titre_cache{
+	display: none;
+}
+
+#titre_cache:hover{
+	background-color: red;
+	visibility: visible;
+	
+}*/
+
+#recherche{
+	display: flex;
+	margin-right: 2vw;
+	align-items: center;
+}
+
+#search{
+	border-radius: 0.4em;
+	width: 80%;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 1.4vw;
+	background-image: url('/images/loupe.png');
+	background-size:1.4vw;
+	background-repeat: no-repeat;
+	background-position: 10px 6px; 
+	padding: 5px 10px 5px 40px;
+}
+
+button{
+	align-items: center;
+	width: 50%;
+	border: 2px solid #ccc;
+	border-radius: 2em;
+	color: black;
+	padding-top: 0.5em;
+}
+
+
+button #profile{
+	width: 2em;
+}
+
+button p{
+	margin-bottom: 1em;
+	font-weight: bold;
+	padding-left: auto;
+	padding-right: auto;
+}
+
+button:active{
+	background-color: rgb(106, 138, 224);
+	transform: translateY(2px);
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/*CSS de la liste nav*/
+
+#liste_nav{
+	margin-bottom: 5vh;
+	text-align: center;
+}
+
+#liste_nav li{
+	display: inline-block;
+}
+
+#liste_nav li a{
+	font-size: 2.2vw;
+	float: left;
+	color: #f2f2f2;
+	padding: 1.2vh 1.2vw;
+}
+
+#liste_nav li:hover{
+	background-color: brown;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 100px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+
+.dropdown-content a:hover {
+	background-color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover{
+	display: block;
+}
+
+.dropdown-content a{
+	color: black;
+	padding: 12px 16px;
+	text-align: center;
+  }
+
+
+  /*CSS test volet*/
+
+.volet_block{
+	display: none;
+}
+
+.volet_titre:hover .volet_block{
+	display: block;
+	background-color: black;
+}
+/*fin du test*/
+
+
+/*exemple pagination*/
+.pagination {
+	display: inline-block;
+  }
+  
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+	border: 1px solid #ddd;
+	margin: 0 4px;
+  }
+  
+  .pagination a:active {
+	background-color: #4CAF50;
+	color: white;
+	border: 1px solid #4CAF50;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+
+/*Corps de la page*/
+
+article{
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.titre_page{
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 4vw;
+	/*le mettre en vw*/
+	font-style: bold;
+	font-family: Georgia, serif;
+}
+
+
+.liste{
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 8vh;
+}
+
+.liste_block{
+	width: 20vw;
+	max-height: 20vh;
+	margin:2vh auto;
+	padding:1vw;
+	background-color: red;
+	border: 0.4vw solid black;
+	border-radius: 2vw;
+	text-align: center;
+}
+
+.liste_block h4{
+	margin: 2vh auto;
+	font-size: 2.4vw;
+}
+.liste_block select{
+	border-radius: 1vw;
+	height: 3.4vh;
+	margin-bottom: 1vh;
+}
+
+.impair{
+	background-color: blueviolet;
+}
+
+/*Bas de page*/
+footer{
+	padding: 2vh;
+	display: flex;
+	justify-content: space-around;
+	background-color: brown;
+}
