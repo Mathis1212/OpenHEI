@@ -7,8 +7,6 @@ var getPseudo=function(){
 
         window.onload=function(){
             if (this.status===200){
-
-
             }else{
                 console.log("échec de la requête");
             }
