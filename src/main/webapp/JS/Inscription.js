@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-=======
+
+
 var getPseudo=function(){
     let requete=new XMLHttpRequest();
     requete.open("POST","inscription",true);
@@ -15,7 +15,7 @@ var getPseudo=function(){
         }
     requete.send(response);
     }
->>>>>>> 5643648feddbb1b0201e8c5c7f009361f981326a
+
 
 var getNewPersonne=function(){
     let requete=new XMLHttpRequest();
