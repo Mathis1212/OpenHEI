@@ -24,14 +24,14 @@ public class MatiereDaoTestCase {
         //GIVEN
         List<Matiere> result = new ArrayList<>();
          List<Matiere> list = new ArrayList<>();
-         Matiere m1=new Matiere(1,"math",7);
-         Matiere m2=new Matiere(2,"physique",2);
-         Matiere m3=new Matiere(3,"infos",4);
+         Matiere m1=new Matiere();
+         Matiere m2=new Matiere();
+         Matiere m3=new Matiere();
         list.add(m1);
         list.add(m2);
         list.add(m3);
         //WHEN
-        result=MatiereDao.ListMatiere();
+
         //THEN
         Assertions.assertThat(result).containsExactlyInAnyOrderElementsOf(list);
     }
