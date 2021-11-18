@@ -5,8 +5,11 @@ import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UserService {
+    static final Logger LOGGER = LogManager.getLogger();
     //création de l'insatance du service
     private static class ServiceHolder {
         private final static UserService instance = new UserService();
@@ -47,6 +50,7 @@ public class UserService {
                         try {
                             userDao.addUser(user);
                         } catch (UserNotAddedException e) {
+                            LOGGER.info("Exception : {}",e);
                             //on affiche une exception si il y a une erreur dans l'ajout à la bdd
                             throw new InternalError("fail to add to bdd");
                         }

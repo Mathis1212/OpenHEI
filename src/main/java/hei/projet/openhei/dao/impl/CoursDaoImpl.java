@@ -3,6 +3,8 @@ package hei.projet.openhei.dao.impl;
 import hei.projet.openhei.dao.CoursDao;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.entities.Matiere;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
+    static final Logger LOGGER = LogManager.getLogger();
     public List<Cours> listCours() {
         List<Cours> result = new ArrayList<>();
         try {
@@ -25,7 +28,7 @@ public class CoursDaoImpl implements CoursDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info("Exception : {}",e);
         }
         return result;
     }
