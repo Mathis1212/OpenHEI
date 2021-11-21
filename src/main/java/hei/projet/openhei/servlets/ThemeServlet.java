@@ -13,8 +13,8 @@ public class ThemeServlet extends GenericServlet{
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+
         templateEngine.process("Themes", context, resp.getWriter());
     }
 

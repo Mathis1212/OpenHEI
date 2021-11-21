@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link rel="stylesheet" type="text/css" href="/CSS/index.css">
 	<link rel="icon" type="image/png" href="" />
@@ -10,98 +10,12 @@
 </head>
 <body>
 	<header>
-		<header>
-			<div id="haut_page_header">
-				<a href="index.html"><img id="logo" src="/images/O.png" alt="Logo OpenHei" ><!--<h1 id="titre_cache">OpenHei</h1>--></a>
-				
-				<div id="recherche">
-					<form enctype="utf-8" method="GET" action="">
-						<input id="search" type="search" name="ch_recherche" placeholder="Rechercher..."autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value >
-						<!--mettre la loupe en arrière plan-->
-					</form>
-					<button id="connexion" type="submit" ><img id="profile" src="/images/profile.png" alt="Connexion"><p>Se Connecter</p></button>
-					<!-- <div id="form_connxion" class="container">
-							<form >
-							<div class="row">
-								<div class="col-25">
-								<label for="fname">First Name</label>
-								</div>
-								<div class="col-75">
-								<input type="text" id="fname" name="firstname" placeholder="Your name..">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-25">
-								<label for="lname">Last Name</label>
-								</div>
-								<div class="col-75">
-								<input type="text" id="lname" name="lastname" placeholder="Your last name..">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-25">
-								<label for="country">Country</label>
-								</div>
-								<div class="col-75">
-								<select id="country" name="country">
-									<option value="australia">Australia</option>
-									<option value="canada">Canada</option>
-									<option value="usa">USA</option>
-								</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-25">
-								<label for="subject">Subject</label>
-								</div>
-								<div class="col-75">
-								<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<input type="submit" value="Submit">
-							</div>
-							</form>
-							</div>-->
-				</div>
-							
-			</div>
-			<nav>
-				<ul id="liste_nav">
-					<li class="dropdown">
-						<a class="dropbtn">Thèmes</a>
-						<div class="dropdown-content">
-							<a href="#">Link 1</a>
-							<a href="#">Link 2</a>
-							<a href="#">Link 3</a>
-						</div>
-					</li>
-					<li class="test_volet">
-						<a class="volet_titre">Cours</a>
-						<div class="volet_block">
-							<a href="#">Link 1</a>
-							<a href="#">Link 2</a>
-							<a href="#">Link 3</a>
-						</div>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:void(2)" class="dropbtn">Profile</a>
-						<div class="dropdown-content">
-							<a href="#">Link 1</a>
-							<a href="#">Link 2</a>
-							<a href="#">Link 3</a>
-						</div>
-					</li>
-					
-				</ul>
-			</nav>
-		</header>
+		<header th:replace="~{ fragments :: menu('Themes') }"></header>
 	<main>
 		<article>
 			<h1 class="titre_page">Thèmes</h1>
 			<div class="liste">
-				<div class="liste_block">
+				<div class="liste_block" th:insert="~{ fragments :: cours }">
 					<h4>JavaEE</h4>
 					<select>
 						<option>1<sub>ere</sub> notion</option>
@@ -109,31 +23,31 @@
 					</select>					
 				</div>
 				<!--ajout thymleaf pour class impair-->
-				<div class="liste_block impair">
+				<div class="liste_block impair" th:insert="~{ fragments :: cours }">
 					<h4>JavaEE</h4>
 					<select>
 						<option>1<sub>ere</sub> notion</option>
 					</select>					
 				</div>
-				<div class="liste_block">
+				<div class="liste_block" th:insert="~{ fragments :: cours }">
 					<h4>JavaEE</h4>
 					<select>
 						<option>1<sub>ere</sub> notion</option>
 					</select>					
 				</div>
-				<div class="liste_block impair">
+				<div class="liste_block impair" th:insert="~{ fragments :: cours }">
 					<h4>JavaEE</h4>
 					<select>
 						<option>1<sub>ere</sub> notion</option>
 					</select>					
 				</div>
-				<div class="liste_block">
+				<div class="liste_block" th:insert="~{ fragments :: cours }">
 					<h4>JavaEE</h4>
 					<select>
 						<option>1<sub>ere</sub> notion</option>
 					</select>					
 				</div>
-				<div class="liste_block  impair">
+				<div class="liste_block  impair" th:insert="~{ fragments :: cours }">
 					<h4>JavaEE</h4>
 					<select>
 						<option>1<sub>ere</sub> notion</option>
