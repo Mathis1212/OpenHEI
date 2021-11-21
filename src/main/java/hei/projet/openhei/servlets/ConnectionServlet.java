@@ -1,6 +1,8 @@
 package hei.projet.openhei.servlets;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,6 +20,7 @@ import java.io.PrintWriter;
 
 @WebServlet("/connection")
 public class ConnectionServlet extends GenericServlet {
+    static final Logger LOGGER = LogManager.getLogger();
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
@@ -38,7 +41,7 @@ public class ConnectionServlet extends GenericServlet {
             }
         } catch (UserNotFoundException e) {
             resp.sendRedirect("inscription");
-            e.printStackTrace();
+            LOGGER.info("Exception : {}",e);
         }
     }
 }

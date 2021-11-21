@@ -3,6 +3,8 @@ package hei.projet.openhei.dao.impl;
 import hei.projet.openhei.dao.CoursDao;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.entities.Matiere;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
+<<<<<<< HEAD
 
     //creattion de l'instance
     private static class ServiceHolder{
@@ -30,7 +33,10 @@ public class CoursDaoImpl implements CoursDao {
     // recupere l'ensemble de la liste des cours de la BDD
     @Override
     public List<Cours> ListCour() {
-        List<Cours>list = new ArrayList<>();
+    List<Cours>list = new ArrayList<>();
+    final Logger LOGGER = LogManager.getLogger();
+
+
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
@@ -41,7 +47,7 @@ public class CoursDaoImpl implements CoursDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.info("Exception : {}",e);
         }
         return list;
     }

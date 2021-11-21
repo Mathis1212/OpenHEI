@@ -4,11 +4,14 @@ import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDaoImpl implements UserDao {
+    static final Logger LOGGER = LogManager.getLogger();
     //création de l'instance de UserDao
     private static class ServiceHolder {
         private final static UserDao instance = new UserDaoImpl();
@@ -40,7 +43,9 @@ public class UserDaoImpl implements UserDao {
             }
         }catch (SQLException e){
             //envoi d'une exception si on ne trouve pas d'user corespondant au login
+            LOGGER.info("Exception : {}",e);
             throw new UserNotFoundException();
+
         }
         return user;
     }
@@ -87,8 +92,10 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException e) {
             //envoi d'une exception si il y a une erreur dans l'ajout de l'user à la bdd
+            LOGGER.info("Exception : {}",e);
             throw new UserNotAddedException();
         }
+
         throw new RuntimeException("Erreur lors de l'inscription");
     }
 
