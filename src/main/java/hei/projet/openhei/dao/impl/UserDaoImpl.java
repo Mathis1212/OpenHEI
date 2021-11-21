@@ -2,6 +2,7 @@ package hei.projet.openhei.dao.impl;
 
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 
@@ -92,5 +93,23 @@ public class UserDaoImpl implements UserDao {
         throw new RuntimeException("Erreur lors de l'inscription");
     }
 
-
+    @Override
+    public void setNewPassword(String login, String newPassword) throws PasswordNotChangedException {
+        String sql = "UPDATE usager SET user_password=? WHERE user_login=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                //paramètres de la requete sql
+                preparedStatement.setString(1, login);
+                preparedStatement.setString(2, newPassword);
+                preparedStatement.executeUpdate();
+                ResultSet ids = preparedStatement.getGeneratedKeys();
+                if (ids.next()) {
+                }
+            }
+        }catch (SQLException e){
+            throw new PasswordNotChangedException();
+        }
+    }
 }

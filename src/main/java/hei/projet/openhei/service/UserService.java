@@ -3,6 +3,7 @@ package hei.projet.openhei.service;
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 
@@ -59,7 +60,7 @@ public class UserService {
     }
 
     public boolean checkUser(String login, String password) throws UserNotFoundException {
-        boolean result=true;
+        boolean result=false;
         if(userDao.checkUserbyLogin(login)){
             User user=userDao.getUser(login);
             String findedPassword = user.getUserpassword();
@@ -68,5 +69,13 @@ public class UserService {
             }
         }
         return result;
+    }
+
+    public void changePassword(String login, String password, String newpassword) throws UserNotFoundException, PasswordNotChangedException {
+        if (checkUser(login, password)){
+            changePassword(login,password,newpassword);
+        }else{
+            throw new PasswordNotChangedException();
+        }
     }
 }
