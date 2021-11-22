@@ -54,13 +54,13 @@ public class UserService {
                         //Si pas d'user avec le meme pseudo, on ajoute l'user à la bdd
                         try {
                             userDao.addUser(user);
-                        } catch (UserNotAddedException e) {
-                            LOGGER.info("Exception : {}",e);
+                        } catch (UserNotAddedException Exception) {
+                            LOGGER.error("Failed to add user !");
                             //on affiche une exception si il y a une erreur dans l'ajout à la bdd
                             throw new InternalError("fail to add to bdd");
                         }
                     }else{
-                        throw new UserNotAddedException();
+                        LOGGER.error("L'user existe deja !");
                     }
             }
         }

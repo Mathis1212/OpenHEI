@@ -68,7 +68,9 @@ public class UserDaoImpl implements UserDao {
     //méthode qui renvoie true si un user est crée par la méthode "getUser()", false si la méthode "getUser()" renvoie une exception
     public Boolean checkUserbyLogin(String login) throws UserNotFoundException {
         boolean result=false;
-            if(getUser(login).getUserlogin().equals(login)) {
+        if(getUser(login)==null){
+            result=true;
+        }else if(getUser(login).getUserlogin().equals(login)) {
                 result = true;
             }
         return result;
@@ -77,6 +79,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     //méthode qui inscrit l'user a la bdd si toutes les conditions sont respectées
     public User addUser(User user) throws UserNotAddedException {
+
         //Hashage du mdp
         String Encryptedmdp=argon2.hash(4, 1024*1024,8, user.getUserpassword());
         //Verfification du hashage
