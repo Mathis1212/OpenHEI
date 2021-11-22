@@ -5,6 +5,8 @@ import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 import hei.projet.openhei.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -20,6 +22,7 @@ import java.sql.*;
 
 @WebServlet("/inscription")
 public class InscriptionServlet extends GenericServlet {
+    static final Logger LOGGER = LogManager.getLogger();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -48,6 +51,7 @@ public class InscriptionServlet extends GenericServlet {
             UserService.getInstance().creatUser(newUser);
         } catch (IllegalArgumentException | UserNotFoundException | UserNotAddedException iae) {
             //si erreur dans les champs on envoi une erreur et on redirige l'user vers la page d'inscription
+            LOGGER.info("Exception : {}",iae);
             req.getSession().setAttribute("errorMessage", iae.getMessage());
             resp.sendRedirect("inscription");
         }

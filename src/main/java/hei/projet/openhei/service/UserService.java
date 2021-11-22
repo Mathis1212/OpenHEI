@@ -1,13 +1,20 @@
 package hei.projet.openhei.service;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UserService {
+    //récupération de l'instance Argon2
+    Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+    static final Logger LOGGER = LogManager.getLogger();
     //création de l'insatance du service
     private static class ServiceHolder {
         private final static UserService instance = new UserService();
@@ -48,6 +55,7 @@ public class UserService {
                         try {
                             userDao.addUser(user);
                         } catch (UserNotAddedException e) {
+                            LOGGER.info("Exception : {}",e);
                             //on affiche une exception si il y a une erreur dans l'ajout à la bdd
                             throw new InternalError("fail to add to bdd");
                         }
@@ -63,8 +71,9 @@ public class UserService {
         boolean result=false;
         if(userDao.checkUserbyLogin(login)){
             User user=userDao.getUser(login);
+            String encryptedgivenPassword=argon2.hash(4,1024*1024,8,password);
             String findedPassword = user.getUserpassword();
-            if(findedPassword.equals(password)){
+            if(findedPassword.equals(encryptedgivenPassword)){
                 result=true;
             }
         }
