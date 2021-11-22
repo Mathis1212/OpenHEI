@@ -32,7 +32,7 @@ public class InscriptionServlet extends GenericServlet {
         if(id==null){
             templateEngine.process("test_inscription", context, resp.getWriter());
         }else{
-          resp.sendRedirect("Acceuil");
+          resp.sendRedirect("Accueil");
         }
     }
 
@@ -42,10 +42,12 @@ public class InscriptionServlet extends GenericServlet {
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
         String pseudo = req.getParameter("Pseudo");
+
         //on crée un objet user à partir du contenu des champs
         try{
             User newUser=new User(pseudo,login,password);
             UserService.getInstance().creatUser(newUser);
+            resp.sendRedirect("Accueil");
         } catch (IllegalArgumentException | UserNotFoundException | UserNotAddedException iae) {
             //si erreur dans les champs on envoi une erreur et on redirige l'user vers la page d'inscription
             req.getSession().setAttribute("errorMessage", iae.getMessage());
