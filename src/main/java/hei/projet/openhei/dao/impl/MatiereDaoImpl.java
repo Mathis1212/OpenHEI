@@ -25,8 +25,10 @@ public class MatiereDaoImpl implements MatiereDao {
     private CoursDao coursDao = CoursDaoImpl.getInstance();
 
     private Matiere createMatiereFromResultSet(ResultSet resulSelect) throws SQLException {
-        return new Matiere(resulSelect.getInt("id_matiere"), resulSelect.getString("nom_matiere"));
-
+        Matiere mat=new Matiere();
+        mat.setId(resulSelect.getInt("id_matiere"));
+        mat.setNomMatiere(resulSelect.getString("nom_matiere"));
+        return mat;
 
     }
 
@@ -38,7 +40,7 @@ public class MatiereDaoImpl implements MatiereDao {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  Statement statement = cnx.createStatement();
-                 ResultSet resultSelect = statement.executeQuery("SELECT * FROM matiere ")) {
+                 ResultSet resultSelect = statement.executeQuery("SELECT*FROM matiere ")) {
                 while (resultSelect.next()) {
                     list.add(createMatiereFromResultSet(resultSelect));
                 }

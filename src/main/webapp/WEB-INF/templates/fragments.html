@@ -29,9 +29,9 @@
 </header>
 
 <section th:fragment="cours">
-    <h4>${Matiere.nomMatiere}</h4>
+    <h4 id="nom_matiere" th:text="${matiere} "></h4>
     <select>
-        <option><sub></sub> ${Cours.nomCours}</option>
+        <option id="nom_cour" th:text="${cour}"><sub></sub> </option>
     </select>
 </section>
 </body>

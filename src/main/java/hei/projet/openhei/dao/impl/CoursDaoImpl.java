@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
-<<<<<<< HEAD
+
 
     //creattion de l'instance
     private static class ServiceHolder{
