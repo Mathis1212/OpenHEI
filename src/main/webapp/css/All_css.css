@@ -418,8 +418,9 @@ aside{
 }
 #body_champ{
   background-color: rgb(145, 66, 66);
-  padding-top: 30%;
-  overflow: hidden;
+  padding-top: 10%;
+  padding-bottom: 10%;
+
   margin: 0;
 }
 
@@ -437,8 +438,7 @@ aside{
   text-align: center;
   align-items: center;
   font-size: 4vw;
-
-  border-width: 50%;
+  border-width:50%;
 }
 .container form{
   display: flex;
@@ -450,6 +450,13 @@ aside{
 
 }
 
+#body_form .titre_logo #logo{
+
+  width: 4em;
+  height: auto;
+  margin-left: 1vw;
+
+}
 
 .titre_logo h3{
   text-align: center;
