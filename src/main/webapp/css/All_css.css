@@ -17,9 +17,16 @@
   outline: none;
 }
 
+html{
+  height: 100%;
+  width: 100%;
+}
+
 body{
-	font-family: "Courrier New",Arial,Helvetica;
-	font-size: 100%;
+  font-family: "Courrier New",Arial,Helvetica;
+  font-size: 100%;
+  width: 100%;
+  height: 100%;
 }
 /*--CSS all--*/
 
@@ -29,6 +36,25 @@ body{
 /*!--ALL except CONNEXION & INSCRIPTION --!*/
 
 /*-Logo et nom-*/
+#haut_page_header{
+
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+}
+
+
+.titre{
+  text-align: center;
+  margin: auto 20vw;
+  text-align:left;
+  font-size: 3vw;
+  /*le mettre en vw*/
+  font-style: bold;
+  font-family: Georgia, serif;
+  width: 100%;
+}
+
 .logo_nom_header{
   display: flex;
   background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
@@ -48,10 +74,10 @@ body{
 }
 
 #logo{
-	min-width: 8vw;
-	width: 8em;
-	height: auto;
-	margin-left: 1vw;
+  min-width: 8vw;
+  width: 8em;
+  height: auto;
+  margin-left: 1vw;
 }
 
 
@@ -62,6 +88,7 @@ body{
   /*overflow permet que ce qui dépasse du bloc topnav ne soit pas afficher*/
   overflow: hidden;
   background-color: #333;
+  margin-bottom: 2em;
 }
 
 .topnav a {
@@ -151,7 +178,7 @@ input[type=search] {
 }
 
 .menuderoulant .dropbtn {
-  font-size: 1.05em;    
+  font-size: 1.05em;
   color: white;
   padding: 0.8em 1em;
   background-color: inherit;
@@ -319,52 +346,184 @@ body {
 /*!--LISTE_COURS.HTML--!*/
 /*Corps de la page*/
 
-article{
-	margin-left: 5%;
-	margin-right: 5%;
+main{
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .titre_page{
-	text-align: center;
-	margin-bottom: 30px;
-	font-size: 4vw;
-	/*le mettre en vw*/
-	font-style: bold;
-	font-family: Georgia, serif;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2em;
+  /*le mettre en vw*/
+  font-style: bold;
+  font-family: Georgia, serif;
+}
+
+aside{
+  display: inline;
+}
+
+
+.paragraphe{
+  margin-bottom: 1.5em;
+}
+
+.paragraphe h4{
+  font-family: Georgia, serif;
+  text-decoration: underline;
+  margin-bottom: 0.8em;
 }
 
 
 .liste{
-	display: flex;
-	flex-wrap: wrap;
-	margin-bottom: 8vh;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 8vh;
 }
 
 .liste_block{
-	width: 20vw;
-	max-height: 20vh;
-	margin:2vh auto;
-	padding:1vw;
-	background-color: red;
-	border: 0.4vw solid black;
-	border-radius: 2vw;
-	text-align: center;
+  width: 20vw;
+  max-height: 20vh;
+  margin:2vh auto;
+  padding:1vw;
+  background-color: red;
+  border: 0.4vw solid black;
+  border-radius: 2vw;
+  text-align: center;
 }
 
 .liste_block h4{
-	margin: 2vh auto;
-	font-size: 2.4vw;
+  margin: 2vh auto;
+  font-size: 2.4vw;
 }
 .liste_block select{
-	border-radius: 1vw;
-	height: 3.4vh;
-	margin-bottom: 1vh;
+  border-radius: 1vw;
+  height: 3.4vh;
+  margin-bottom: 1vh;
 }
 
 .impair{
-	background-color: blueviolet;
+  background-color: blueviolet;
 }
 /*!--LISTE_COURS.HTML--!*/
+
+/*!--CONNEXION--!*/
+
+@media screen and (max-width: 800px) {
+  #body_champ{
+    padding-top: 0;
+  }
+
+}
+#body_champ{
+  background-color: rgb(145, 66, 66);
+  padding-top: 10%;
+  padding-bottom: 10%;
+
+  margin: 0;
+}
+
+.container{
+  background-color: rgb(167, 167, 167);
+  border: 0.15em solid black;
+
+  margin: auto 25%;
+
+
+}
+
+.titre_logo{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: 4vw;
+  border-width:50%;
+}
+.container form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%;
+  border-top: 2px black dotted;
+  border-bottom: 2px black dotted;
+  margin-bottom: 5%;
+
+}
+
+#body_form .titre_logo #logo{
+
+  width: 4em;
+  height: auto;
+  margin-left: 1vw;
+
+}
+
+.titre_logo h3{
+  text-align: center;
+  margin: auto;
+  text-align:left;
+  font-size: 3vw;
+  padding-left: 1em;
+  font-family: Georgia, serif;
+  width: 100%;
+}
+
+
+.champ{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5em;
+  text-align: center;
+  width: 100%;
+}
+
+
+.champ input{
+  height: 2em;
+  width: 80%;
+
+  text-align: center;
+  border-radius: 1em;
+  font-size: 1.4vw;
+}
+.champ label{
+  margin-left: 10%;
+  width: 80%;
+  margin: 3% auto;
+  font-size: 2vw;
+  text-align: start;
+  text-decoration: underline;
+
+}
+
+
+
+.champ:nth-last-child(1) input{
+  width: 40%;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+#liens_connexion{
+  display: flex;
+  justify-content: space-between;
+  margin: 0.4em;
+  margin-bottom: 0.8em;
+  font-size: 1.4vw;
+  text-align: center;
+}
+
+#body_champ #connexion{
+  text-align: center;
+  margin-bottom: 0.6em;
+  font-size: 1.4vw;
+
+
+}
+/*!--CONNEXION--!*/
+
 
 /*---------------------------------------*/
 
@@ -373,10 +532,10 @@ article{
 /*--FOOTER--*/
 
 footer{
-	padding: 2vh;
-	display: flex;
-	justify-content: space-around;
-	background-color: brown;
+  padding: 2vh;
+  display: flex;
+  justify-content: space-around;
+  background-color: brown;
 }
 
 /*--FOOTER--*/
