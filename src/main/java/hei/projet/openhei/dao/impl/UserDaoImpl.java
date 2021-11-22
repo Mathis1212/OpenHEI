@@ -69,7 +69,6 @@ public class UserDaoImpl implements UserDao {
     public Boolean checkUserbyLogin(String login) throws UserNotFoundException {
         boolean result=false;
         if(getUser(login)==null){
-            result=true;
         }else if(getUser(login).getUserlogin().equals(login)) {
                 result = true;
             }
@@ -83,10 +82,10 @@ public class UserDaoImpl implements UserDao {
         //Hashage du mdp
         String Encryptedmdp=argon2.hash(4, 1024*1024,8, user.getUserpassword());
         //Verfification du hashage
+        User Encrypteduser = new User(user.getUsername(), user.getUserlogin(), Encryptedmdp);
         Boolean VerifyEncrypte= argon2.verify(Encryptedmdp,user.getUserpassword());
         //Si le hashage est verifié on ajoute l'user
         if(VerifyEncrypte) {
-            User Encrypteduser = new User(user.getUsername(), user.getUserlogin(), Encryptedmdp);
             //requete sql
             String sql = "INSERT INTO usager(user_name, user_login, user_password) VALUES (?, ?, ?)";
             try {
