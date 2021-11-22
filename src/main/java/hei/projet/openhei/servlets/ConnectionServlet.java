@@ -47,8 +47,5 @@ public class ConnectionServlet extends GenericServlet {
             resp.sendRedirect("inscription");
             LOGGER.info("Exception : {}",e);
         }
-        finally{
-            resp.sendRedirect("connection");
-        }
     }
 }
