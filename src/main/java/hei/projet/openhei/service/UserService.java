@@ -5,11 +5,11 @@ import de.mkammerer.argon2.Argon2Factory;
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
-import hei.projet.openhei.exception.PasswordNotChangedException;
-import hei.projet.openhei.exception.UserNotAddedException;
-import hei.projet.openhei.exception.UserNotFoundException;
+import hei.projet.openhei.exception.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 public class UserService {
     //récupération de l'instance Argon2
@@ -25,49 +25,35 @@ public class UserService {
     }
     //récupération de l'instance de UserDaoImpl
     private UserDao userDao = UserDaoImpl.getInstance();
-    //méthode d'ajout d'un user a la bdd
-    public void creatUser(User user) throws UserNotFoundException, UserNotAddedException {
-        //on regarde si l'objet user crée à partir des champs remplis par l'utilisateur est null
-        if(user==null){
-            throw new IllegalArgumentException("user can not be null");
-        }else{
-            //check si chaque champs est bien remplis
-            if(user.getUserlogin()==null||"".equals(user.getUserlogin())||user.getUserpassword()==null||"".equals(user.getUserpassword())||user.getUsername()==null||"".equals(user.getUsername())){
-                //login
-                if(user.getUserlogin()==null||"".equals(user.getUserlogin())){
-                    //envoi exception login non remplis
-                    throw new IllegalArgumentException("field login must be filled");
-                }
-                //password
-                if(user.getUserpassword()==null||"".equals(user.getUserpassword())){
-                    //envoi exception password non remplis
-                    throw new IllegalArgumentException("field password must be filled");
-                }
-                //pseudo
-                if(user.getUsername()==null||"".equals(user.getUsername())){
-                    //envoi exception pseudo non remplis
-                    throw new IllegalArgumentException("field pseudo must be filled");
-                }
-            }else{
-                    //Check si un usager existe avec le meme login
-                    if(!userDao.checkUserbyLogin((user.getUserlogin()))){
-                        //Si pas d'user avec le meme pseudo, on ajoute l'user à la bdd
-                        try {
-                            userDao.addUser(user);
-                        } catch (UserNotAddedException e) {
-                            LOGGER.info("Exception : {}",e);
-                            //on affiche une exception si il y a une erreur dans l'ajout à la bdd
-                            throw new InternalError("fail to add to bdd");
-                        }
-                    }else{
-                        throw new UserNotAddedException();
-                    }
-            }
-        }
 
+    //Vérifie si un utilisateur existe déja dans la bdd avec ce login
+    //enlever l'exception UserNotFoundException
+    public boolean userExist(String login){
+        User user=userDao.getUser(login);
+        boolean rep;
+        if(user!=null){
+            rep=true;
+        }else{
+            rep=false;
+        }
+        return rep;
     }
 
-    public boolean checkUser(String login, String password) throws UserNotFoundException {
+    //Vérifie les champs de l'utilisateur et le créer
+    public User CreateUser(User user) throws UserFoundException, UserNullException {
+        if (user==null){
+            //Exception à créer
+            throw new UserNullException();
+        }
+        if (userExist(user.getUserlogin())){
+            //Un  utilisateur existe déjà avec ce login
+            throw new UserFoundException();
+        }
+        return user;
+    }
+
+    //vérifie que le password lier au login est le même que le password saisie
+    public boolean checkUser(String login, String password){
         boolean result=false;
         if(userDao.checkUserbyLogin(login)){
             User user=userDao.getUser(login);
@@ -80,7 +66,7 @@ public class UserService {
         return result;
     }
 
-    public void changePassword(String login, String password, String newpassword) throws UserNotFoundException, PasswordNotChangedException {
+    public void changePassword(String login, String password, String newpassword) throws PasswordNotChangedException {
         if (checkUser(login, password)){
             changePassword(login,password,newpassword);
         }else{

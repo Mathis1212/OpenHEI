@@ -410,12 +410,6 @@ aside{
 
 /*!--CONNEXION--!*/
 
-@media screen and (max-width: 800px) {
-  #body_champ{
-    padding-top: 0;
-  }
-
-}
 #body_champ{
   background-color: rgb(145, 66, 66);
   padding-top: 10%;

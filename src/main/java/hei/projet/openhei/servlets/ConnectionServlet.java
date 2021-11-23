@@ -6,22 +6,19 @@ import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
-import hei.projet.openhei.exception.UserNotFoundException;
 import hei.projet.openhei.service.UserService;
 
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/connection")
 public class ConnectionServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
@@ -29,26 +26,29 @@ public class ConnectionServlet extends GenericServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*ConnectionForm form=new ConnectionForm();
-        boolean result= form.CheckFields(req);
-        req.setAttribute("form",form);
-*/
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        //on recupere le contenu des champs de la session de connexion
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
 
         try {
+            if(login==null||"".equals(login)){
+                LOGGER.info("champ login inccorect");
+                resp.sendRedirect("connexion");
+            }
+            if(password==null||"".equals(password)){
+                LOGGER.info("champ password inccorect");
+                resp.sendRedirect("connexion");
+            }
             if (UserService.getInstance().checkUser(login, password)) {
                 resp.sendRedirect("Accueil");
             }else{
-                throw new IllegalArgumentException("un champ n'est pas bon");
+                throw new NullPointerException();
             }
-        } catch (UserNotFoundException e) {
-            resp.sendRedirect("inscription");
-            LOGGER.info("Exception : {}",e);
-        }
-        finally{
+        } catch (NullPointerException e) {
             resp.sendRedirect("connection");
+            LOGGER.info("Error :",e);
         }
     }
 }
