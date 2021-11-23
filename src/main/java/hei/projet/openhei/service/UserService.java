@@ -11,6 +11,8 @@ import hei.projet.openhei.exception.UserNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
+
 public class UserService {
     //récupération de l'instance Argon2
     Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
@@ -71,18 +73,17 @@ public class UserService {
         boolean result=false;
         if(userDao.checkUserbyLogin(login)){
             User user=userDao.getUser(login);
-            String encryptedgivenPassword=argon2.hash(4,1024*1024,8,password);
             String findedPassword = user.getUserpassword();
-            if(findedPassword.equals(encryptedgivenPassword)){
+            if(argon2.verify(findedPassword,password)){
                 result=true;
             }
         }
         return result;
     }
 
-    public void changePassword(String login, String password, String newpassword) throws UserNotFoundException, PasswordNotChangedException {
+    public void changePassword(String login, String password, String newpassword) throws UserNotFoundException, PasswordNotChangedException, SQLException {
         if (checkUser(login, password)){
-            changePassword(login,password,newpassword);
+            userDao.setNewPassword(login,newpassword);
         }else{
             throw new PasswordNotChangedException();
         }

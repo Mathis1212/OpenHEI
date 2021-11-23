@@ -116,14 +116,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void setNewPassword(String login, String newPassword) throws PasswordNotChangedException {
+        //Hashage du nouveau password
+        String Encryptednewmdp=argon2.hash(4, 1024*1024,8, newPassword);
         String sql = "UPDATE usager SET user_password=? WHERE user_login=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 //paramètres de la requete sql
-                preparedStatement.setString(1, login);
-                preparedStatement.setString(2, newPassword);
+                preparedStatement.setString(2, login);
+                preparedStatement.setString(1, Encryptednewmdp);
                 preparedStatement.executeUpdate();
                 ResultSet ids = preparedStatement.getGeneratedKeys();
                 if (ids.next()) {
