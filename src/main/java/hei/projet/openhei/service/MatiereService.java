@@ -26,10 +26,10 @@ public class MatiereService {
         List<Matiere> list = new ArrayList<>();
         List<Cours> listCour = new ArrayList<>();
         list=MatiereDaoImpl.getInstance().ListMatiere();
-        for(int i=0;i<list.size();i++){
-            listCour=MatiereDaoImpl.getInstance().getListCour(list.get(i).getId());
-            for(int e=0;e<listCour.size();e++){
-                list.get(i).ajouterCour(listCour.get(e));
+        for (Matiere matiere : list) {
+            listCour = MatiereDaoImpl.getInstance().getListCour(matiere.getId());
+            for (Cours cours : listCour) {
+                matiere.ajouterCour(cours);
             }
         }
         return list;

@@ -91,16 +91,18 @@ public class MatiereDaoImpl implements MatiereDao {
     }
 
     @Override
-    public List<Cours> getListCour(Integer id) {
+    public List<Cours> getListCour(Integer matiereId) {
         List<Cours> list = new ArrayList<>();
         String sql = "SELECT cours.nom_cours FROM cours join matiere on cours.id_matiere_cours=matiere.id_matiere where matiere.id_matiere=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
-                preparedStatement.setInt(1, id);
+                preparedStatement.setInt(1, matiereId);
                 try (ResultSet resultSelect = preparedStatement.executeQuery()) {
-                    list.add(coursDao.createCoursFromResultSet(resultSelect));
+                    while(resultSelect.next()){
+                        list.add(coursDao.createCoursFromResultSet(resultSelect));
+                    }
                 }
             }
         } catch (SQLException e) {

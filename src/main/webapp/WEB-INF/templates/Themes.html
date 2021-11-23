@@ -18,7 +18,7 @@
 				<div class="liste_block"th:each="mapItem, state:${matiere} ">
 					<h4 th:utext="${mapItem.key.getNomMatiere()}">JavaEE</h4>
 					<select>
-						<option th:list="${mapItem.value}">1<sub>ere</sub> notion</option>
+						<option th:each="nomCour,state:${mapItem.value}" th:utext="${nomCour}">1<sub>ere</sub> notion</option>
 					</select>
 				</div>
 			</div>
