@@ -12,12 +12,14 @@ CREATE TABLE projet_OpenHEI.usager (
 
 CREATE TABLE projet_OpenHEI.matiere (
 	id_matiere INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	nom_matiere VARCHAR(100) NOT NULL
+	nom_matiere VARCHAR(100) NOT NULL,
+	num_notions INT
 	) ENGINE=INNODB;
 
 CREATE TABLE projet_OpenHEI.cours (
 	id_cours INT NOT NULL AUTO_INCREMENT,
 	nom_cours VARCHAR(100) NOT NULL,
+	url VARCHAR(200),
 	id_matiere_cours INT NOT NULL,
 	PRIMARY KEY (id_cours),
 	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere)

@@ -18,7 +18,7 @@
 				<div class="liste_block"th:each="mapItem, state:${matiere} ">
 					<h4 th:utext="${mapItem.key}">JavaEE</h4>
 					<select>
-						<option th:each="cour,state:${mapItem.value}" th:utext="${cour.getnomCours()}">1<sub>ere</sub> notion</option>
+						<option th:each="cour,state:${mapItem.value}" th:utext="${cour.getnomCours()}"><a href="somepage.html" th:href="@{|${cour.getUrl()}|}">A Link</a>1 notion</option>
 					</select>
 				</div>
 			</div>
