@@ -5,8 +5,9 @@ CREATE TABLE projet_OpenHEI.usager (
     user_id int AUTO_INCREMENT PRIMARY KEY,
     user_name varchar(30) NOT NULL,
     user_login varchar(60) NOT NULL,
-    user_password varchar(20) NOT NULL,
-    date_creation date default NOW()
+    user_password varchar(200) NOT NULL,
+    date_creation date default NULL,
+    user_type varchar(10) NOT NULL
     )engine=innodb;
 
 CREATE TABLE projet_OpenHEI.matiere (
@@ -22,7 +23,7 @@ CREATE TABLE projet_OpenHEI.cours (
 	PRIMARY KEY (id_cours),
 	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere)
 	) ENGINE=INNODB;
-    
+
     
     
     

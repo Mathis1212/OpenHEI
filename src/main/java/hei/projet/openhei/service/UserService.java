@@ -9,6 +9,7 @@ import hei.projet.openhei.exception.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserService {
@@ -52,23 +53,22 @@ public class UserService {
         return user;
     }
 
-    //vérifie que le password lier au login est le même que le password saisie
     public boolean checkUser(String login, String password){
         boolean result=false;
         if(userDao.checkUserbyLogin(login)){
             User user=userDao.getUser(login);
-            String encryptedgivenPassword=argon2.hash(4,1024*1024,8,password);
             String findedPassword = user.getUserpassword();
-            if(findedPassword.equals(encryptedgivenPassword)){
+            if(argon2.verify(findedPassword,password)){
                 result=true;
             }
         }
         return result;
     }
 
-    public void changePassword(String login, String password, String newpassword) throws PasswordNotChangedException {
+
+    public void changePassword(String login, String password, String newpassword) throws PasswordNotChangedException, SQLException {
         if (checkUser(login, password)){
-            changePassword(login,password,newpassword);
+            userDao.setNewPassword(login,newpassword);
         }else{
             throw new PasswordNotChangedException();
         }

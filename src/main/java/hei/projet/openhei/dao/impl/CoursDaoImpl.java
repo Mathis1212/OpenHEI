@@ -7,38 +7,98 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
-    static final Logger LOGGER = LogManager.getLogger();
-    public List<Cours> listCours() {
-        List<Cours> result = new ArrayList<>();
+
+
+    //creattion de l'instance
+    private static class ServiceHolder{
+        private final static CoursDao instance = new CoursDaoImpl();
+    }
+    //creation de la methode getInstance pour recuperer les methodes de CoursDaoImpl
+    public static CoursDao getInstance(){
+        CoursDao instance= ServiceHolder.instance;
+        return instance;
+    }
+
+    // sert a creer un cour depuis un ResultSet
+    @Override
+    public Cours createCoursFromResultSet(ResultSet resultSelect) throws SQLException {
+        return new Cours(resultSelect.getString("nom_cours"),resultSelect.getString("url"));
+    }
+
+    // recupere l'ensemble de la liste des cours de la BDD
+    @Override
+    public List<Cours> ListCour() {
+        List<Cours>list = new ArrayList<>();
+        final Logger LOGGER = LogManager.getLogger();
+
+
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  Statement statement = cnx.createStatement();
-                 ResultSet resultSelect = statement.executeQuery("SELECT * FROM cours JOIN matiere ON matiere.id_matiere = cours.id_matiere_cours ORDER BY nom_cours")) {
+                 ResultSet resultSelect = statement.executeQuery("SELECT*FROM cours ")) {
                 while(resultSelect.next()) {
-                    result.add(createCoursFromResultSet(resultSelect));
+                    list.add(createCoursFromResultSet(resultSelect));
                 }
             }
         } catch (SQLException e) {
             LOGGER.info("Exception : {}",e);
         }
-        return result;
+        return list;
     }
 
-    private Cours createCoursFromResultSet(ResultSet resultSelect) throws SQLException {
-        return new Cours(
-                resultSelect.getInt("id_cours"),
-                resultSelect.getString("nom_cours"),
-                new Matiere(resultSelect.getInt("id_matiere_cours"),resultSelect.getString("nom_matiere")));
+    // recupere le nom du cour
+    @Override
+    public String getNom(Integer id) {
+        String nom ="";
+        String sql = "SELECT nom_cours FROM cours  WHERE id_cours=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                try(ResultSet result = preparedStatement.executeQuery()) {
+                    nom= result.getString("nom_cours");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nom;
+    }
 
+    //recupere le nom de la matiere auxquelle le cour apartient
+    @Override
+    public Matiere getMatiere(Integer id) {
+        String nom ="";
+        Integer id_mat;
+        Matiere mat=new Matiere();
 
+        String sql = "SELECT matiere.nom_matiere, matiere.id_matiere FROM matiere join cours on matiere.id_matiere=cours.id_matiere_cours  WHERE cours.id_cours=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                try(ResultSet result = preparedStatement.executeQuery()) {
+                    while(result.next()) {
+                        nom = result.getString("nom_matiere");
+                        id_mat = result.getInt("id_matiere");
+
+                        mat.setNomMatiere(nom);
+                        mat.setId(id_mat);
+                    }
+                }
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mat;
     }
 }
