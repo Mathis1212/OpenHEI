@@ -1,6 +1,6 @@
 package hei.projet.openhei.service;
 
-import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2 .Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
