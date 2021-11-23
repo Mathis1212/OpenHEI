@@ -20,6 +20,7 @@
 					<select>
 						<option th:each="cour,state:${mapItem.value}" th:value="${cour.getUrl()}" th:utext="${cour.getnomCours()}">1 notion</option>
 					</select>
+					<input type="button" class="w3-button w3-black" value="Download">
 				</div>
 			</div>
 		</article>
