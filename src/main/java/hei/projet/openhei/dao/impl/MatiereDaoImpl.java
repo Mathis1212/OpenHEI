@@ -24,10 +24,8 @@ public class MatiereDaoImpl implements MatiereDao {
     // recuperation de l'instance de CoursDaoImpl
     private CoursDao coursDao = CoursDaoImpl.getInstance();
 
-    private Matiere createMatiereFromResultSet(ResultSet resulSelect) throws SQLException {
-        Matiere mat=new Matiere();
-        mat.setId(resulSelect.getInt("id_matiere"));
-        mat.setNomMatiere(resulSelect.getString("nom_matiere"));
+    private Matiere createMatiereFromResultSet(ResultSet resultSelect) throws SQLException {
+        Matiere mat=new Matiere(resultSelect.getInt("id_matiere"),resultSelect.getString("nom_matiere"));
         return mat;
 
     }
@@ -36,6 +34,7 @@ public class MatiereDaoImpl implements MatiereDao {
     // liste l'ensemble des matiere de la BDD
     public List<Matiere> ListMatiere() {
         List<Matiere> list = new ArrayList<>();
+
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();

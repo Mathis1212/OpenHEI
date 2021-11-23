@@ -18,7 +18,7 @@
 				<div class="liste_block"th:each="theme, state:${matiere} ">
 					<h4 th:utext="${theme.getNomMatiere()}">JavaEE</h4>
 					<select>
-						<option>1<sub>ere</sub> notion</option>
+						<option th:utext="${theme.recupCour()}">1<sub>ere</sub> notion</option>
 						
 					</select>					
 				</div>
