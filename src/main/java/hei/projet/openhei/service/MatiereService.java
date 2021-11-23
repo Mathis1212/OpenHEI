@@ -7,7 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MatiereService {
     static final Logger LOGGER = LogManager.getLogger();
@@ -31,5 +33,20 @@ public class MatiereService {
             }
         }
         return list;
+    }
+
+    // recupere l'ensemble des matieres de la BDD et associe chaques matiere au cours qu'elle possede
+    public Map<Matiere,List<String>> AssociationMatCour() {
+        Map<Matiere, List<String>> hmap = new HashMap<Matiere, List<String>>();
+        int taille = recupMatiereAvecListCour().size();
+        for (int i = 0; i < taille; i++) {
+            Matiere mat = recupMatiereAvecListCour().get(i);
+            List<String> list = new ArrayList<>();
+                for(int e=0;e<recupMatiereAvecListCour().get(i).recupCour().size();e++){
+                   list.add(recupMatiereAvecListCour().get(i).recupCour().get(e).getnomCours());
+                }
+            hmap.put(mat, list);
+        }
+        return hmap;
     }
 }

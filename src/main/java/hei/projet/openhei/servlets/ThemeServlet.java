@@ -16,7 +16,7 @@ public class ThemeServlet extends GenericServlet{
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("matiere", MatiereService.getInstance().recupMatiereAvecListCour());
+        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("Themes", context, resp.getWriter());
     }
