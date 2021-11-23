@@ -2,16 +2,23 @@ package hei.projet.openhei.dao.impl;
 
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserNotAddedException;
 import hei.projet.openhei.exception.UserNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
+import de.mkammerer.argon2.Argon2Factory.Argon2Types;
+
 
 import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDaoImpl implements UserDao {
     static final Logger LOGGER = LogManager.getLogger();
+    //récupération de l'instance Argon2
+    Argon2 argon2 = Argon2Factory.create(Argon2Types.ARGON2id);
     //création de l'instance de UserDao
     private static class ServiceHolder {
         private final static UserDao instance = new UserDaoImpl();
@@ -43,9 +50,8 @@ public class UserDaoImpl implements UserDao {
             }
         }catch (SQLException e){
             //envoi d'une exception si on ne trouve pas d'user corespondant au login
-            LOGGER.info("Exception : {}",e);
+            LOGGER.info("Exception : !",e);
             throw new UserNotFoundException();
-
         }
         return user;
     }
@@ -62,7 +68,8 @@ public class UserDaoImpl implements UserDao {
     //méthode qui renvoie true si un user est crée par la méthode "getUser()", false si la méthode "getUser()" renvoie une exception
     public Boolean checkUserbyLogin(String login) throws UserNotFoundException {
         boolean result=false;
-            if(getUser(login).getUserlogin().equals(login)) {
+        if(getUser(login)==null){
+        }else if(getUser(login).getUserlogin().equals(login)) {
                 result = true;
             }
         return result;
@@ -71,33 +78,61 @@ public class UserDaoImpl implements UserDao {
     @Override
     //méthode qui inscrit l'user a la bdd si toutes les conditions sont respectées
     public User addUser(User user) throws UserNotAddedException {
-        //requete sql
-        String sql = "INSERT INTO usager(user_name, user_login, user_password) VALUES (?, ?, ?)";
+
+        //Hashage du mdp
+        String Encryptedmdp=argon2.hash(4, 1024*1024,8, user.getUserpassword());
+        //Verfification du hashage
+        User Encrypteduser = new User(user.getUsername(), user.getUserlogin(), Encryptedmdp);
+        Boolean VerifyEncrypte= argon2.verify(Encryptedmdp,user.getUserpassword());
+        //Si le hashage est verifié on ajoute l'user
+        if(VerifyEncrypte) {
+            //requete sql
+            String sql = "INSERT INTO usager(user_name, user_login, user_password) VALUES (?, ?, ?)";
+            try {
+                DataSource dataSource = DataSourceProvider.getDataSource();
+                try (Connection cnx = dataSource.getConnection();
+                     PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    //paramètres de la requete sql
+                    preparedStatement.setString(1, Encrypteduser.getUsername());
+                    preparedStatement.setString(2, Encrypteduser.getUserlogin());
+                    preparedStatement.setString(3, Encrypteduser.getUserpassword());
+                    preparedStatement.executeUpdate();
+                    ResultSet ids = preparedStatement.getGeneratedKeys();
+                    if (ids.next()) {
+                        user.setUserId(ids.getInt(1));
+                        //l'id crée dans la bdd est récupéré et ajouté au champs id de l'objet user créé
+                        return user;
+                        //on renvoi l'objet créé
+                    }
+                }
+            } catch (SQLException e) {
+                //envoi d'une exception si il y a une erreur dans l'ajout de l'user à la bdd
+                LOGGER.info("Exception ! :", e);
+                throw new UserNotAddedException();
+            }
+        }
+            throw new RuntimeException("Erreur lors de l'inscription");
+    }
+
+    @Override
+    public void setNewPassword(String login, String newPassword) throws PasswordNotChangedException {
+        //Hashage du nouveau password
+        String Encryptednewmdp=argon2.hash(4, 1024*1024,8, newPassword);
+        String sql = "UPDATE usager SET user_password=? WHERE user_login=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 //paramètres de la requete sql
-                preparedStatement.setString(1, user.getUsername());
-                preparedStatement.setString(2, user.getUserlogin());
-                preparedStatement.setString(3,user.getUserpassword());
+                preparedStatement.setString(2, login);
+                preparedStatement.setString(1, Encryptednewmdp);
                 preparedStatement.executeUpdate();
                 ResultSet ids = preparedStatement.getGeneratedKeys();
                 if (ids.next()) {
-                    user.setUserId(ids.getInt(1));
-                    //l'id crée dans la bdd est récupéré et ajouté au champs id de l'objet user créé
-                    return user;
-                    //on renvoi l'objet créé
                 }
             }
-        } catch (SQLException e) {
-            //envoi d'une exception si il y a une erreur dans l'ajout de l'user à la bdd
-            LOGGER.info("Exception : {}",e);
-            throw new UserNotAddedException();
+        }catch (SQLException e){
+            throw new PasswordNotChangedException();
         }
-
-        throw new RuntimeException("Erreur lors de l'inscription");
     }
-
-
 }

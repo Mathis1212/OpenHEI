@@ -30,12 +30,16 @@ public class ConnectionServlet extends GenericServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        /*ConnectionForm form=new ConnectionForm();
+        boolean result= form.CheckFields(req);
+        req.setAttribute("form",form);
+*/
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
+
         try {
             if (UserService.getInstance().checkUser(login, password)) {
-                resp.sendRedirect("Acceuil");
+                resp.sendRedirect("Accueil");
             }else{
                 throw new IllegalArgumentException("un champ n'est pas bon");
             }
