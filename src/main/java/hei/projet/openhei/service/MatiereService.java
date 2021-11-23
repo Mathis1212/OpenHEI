@@ -36,16 +36,16 @@ public class MatiereService {
     }
 
     // recupere l'ensemble des matieres de la BDD et associe chaques matiere au cours qu'elle possede
-    public Map<Matiere,List<String>> AssociationMatCour() {
-        Map<Matiere, List<String>> hmap = new HashMap<Matiere, List<String>>();
+    public Map<String,List<Cours>> AssociationMatCour() {
+        Map<String, List<Cours>> hmap = new HashMap<String, List<Cours>>();
         int taille = recupMatiereAvecListCour().size();
         for (int i = 0; i < taille; i++) {
-            Matiere mat = recupMatiereAvecListCour().get(i);
-            List<String> list = new ArrayList<>();
+            String nom =recupMatiereAvecListCour().get(i).getNomMatiere();
+            List<Cours> list = new ArrayList<>();
                 for(int e=0;e<recupMatiereAvecListCour().get(i).recupCour().size();e++){
-                   list.add(recupMatiereAvecListCour().get(i).recupCour().get(e).getnomCours());
+                   list.add(recupMatiereAvecListCour().get(i).recupCour().get(e));
                 }
-            hmap.put(mat, list);
+            hmap.put(nom, list);
         }
         return hmap;
     }

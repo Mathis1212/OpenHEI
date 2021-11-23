@@ -27,7 +27,7 @@ public class CoursDaoImpl implements CoursDao {
     // sert a creer un cour depuis un ResultSet
     @Override
     public Cours createCoursFromResultSet(ResultSet resultSelect) throws SQLException {
-        return new Cours(resultSelect.getString("nom_cours"));
+        return new Cours(resultSelect.getString("nom_cours"),resultSelect.getString("url"));
     }
 
     // recupere l'ensemble de la liste des cours de la BDD
@@ -41,7 +41,7 @@ public class CoursDaoImpl implements CoursDao {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  Statement statement = cnx.createStatement();
-                 ResultSet resultSelect = statement.executeQuery("SELECT nom_cours FROM cours ")) {
+                 ResultSet resultSelect = statement.executeQuery("SELECT*FROM cours ")) {
                 while(resultSelect.next()) {
                     list.add(createCoursFromResultSet(resultSelect));
                 }

@@ -16,9 +16,9 @@
 			<h1 class="titre_page">Thèmes</h1>
 			<div class="liste"  >
 				<div class="liste_block"th:each="mapItem, state:${matiere} ">
-					<h4 th:utext="${mapItem.key.getNomMatiere()}">JavaEE</h4>
+					<h4 th:utext="${mapItem.key}">JavaEE</h4>
 					<select>
-						<option th:each="nomCour,state:${mapItem.value}" th:utext="${nomCour}">1<sub>ere</sub> notion</option>
+						<option th:each="cour,state:${mapItem.value}" th:utext="${cour.getnomCours()}">1<sub>ere</sub> notion</option>
 					</select>
 				</div>
 			</div>
