@@ -21,7 +21,7 @@ public class NewPasswordServlet extends GenericServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("changepassword", context, resp.getWriter());
+        templateEngine.process("newpassword", context, resp.getWriter());
     }
 
     @Override
@@ -37,10 +37,10 @@ public class NewPasswordServlet extends GenericServlet{
             resp.sendRedirect("connection");
         } catch (PasswordNotChangedException e) {
             LOGGER.error("Fail to change password", new PasswordNotChangedException());
-            resp.sendRedirect("changepassword");
+            resp.sendRedirect("newpassword");
         } catch (NullPointerException throwables) {
             throwables.printStackTrace();
-            resp.sendRedirect("changepassword");
+            resp.sendRedirect("newpassword");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
