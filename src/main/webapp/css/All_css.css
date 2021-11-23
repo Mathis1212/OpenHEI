@@ -1,7 +1,7 @@
 /*--CSS Commun--*/
 
 /*Descirption des types de commentaires
-  /* /  /:Décrit ce que fait une fonction css;
+  /* */  /*:Décrit ce que fait une fonction css;
   /*- -*/   /*:Délimite les fonctions CSS d'un/d'éléments HTML;
   /*-- --*/  /*:Délimite les parties de code HTML;
   /*!-- --!*/   /*:Désigne le fichier Cibler
@@ -75,7 +75,7 @@ body{
 
 #logo{
     min-width: 8vw;
-    width: 6em;
+    width: 8em;
     height: auto;
     margin-left: 1vw;
 }
@@ -408,26 +408,29 @@ aside{
 }
 /*!--LISTE_COURS.HTML--!*/
 
-
-
 /*!--CONNEXION--!*/
 
+@media screen and (max-width: 800px) {
+    #body_champ{
+        padding-top: 0;
+    }
+
+}
 #body_champ{
     background-color: rgb(145, 66, 66);
     padding-top: 10%;
-    padding-bottom: 20%;
+    padding-bottom: 10%;
+
     margin: 0;
 }
 
 .container{
     background-color: rgb(167, 167, 167);
     border: 0.15em solid black;
+
     margin: auto 25%;
 
-}
 
-.container .titre_logo a{
-    color: black;
 }
 
 .titre_logo{
@@ -437,9 +440,6 @@ aside{
     font-size: 4vw;
     border-width:50%;
 }
-
-
-
 .container form{
     display: flex;
     flex-direction: column;
@@ -468,6 +468,7 @@ aside{
     width: 100%;
 }
 
+
 .champ{
     display: flex;
     flex-direction: column;
@@ -477,6 +478,7 @@ aside{
     text-align: center;
     width: 100%;
 }
+
 
 .champ input{
     height: 2em;
@@ -495,6 +497,8 @@ aside{
     text-decoration: underline;
 
 }
+
+
 
 .champ:nth-last-child(1) input{
     width: 40%;
@@ -515,6 +519,8 @@ aside{
     text-align: center;
     margin-bottom: 0.6em;
     font-size: 1.4vw;
+
+
 }
 /*!--CONNEXION--!*/
 
