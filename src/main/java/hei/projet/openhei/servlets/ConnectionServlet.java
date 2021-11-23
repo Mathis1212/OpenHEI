@@ -20,9 +20,8 @@ public class ConnectionServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("test_connexion", context, resp.getWriter());
+        templateEngine.process("connexion", context, resp.getWriter());
     }
 
     @Override

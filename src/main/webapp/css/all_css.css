@@ -75,7 +75,7 @@ body{
 
 #logo{
   min-width: 8vw;
-  width: 8em;
+  width: 6em;
   height: auto;
   margin-left: 1vw;
 }
@@ -423,6 +423,11 @@ aside{
   background-color: rgb(167, 167, 167);
   border: 0.15em solid black;
   margin: auto 25%;
+
+}
+
+.container .titre_logo a{
+  color: black;
 }
 
 .titre_logo{
@@ -432,6 +437,8 @@ aside{
   font-size: 4vw;
   border-width:50%;
 }
+
+
 
 .container form{
   display: flex;

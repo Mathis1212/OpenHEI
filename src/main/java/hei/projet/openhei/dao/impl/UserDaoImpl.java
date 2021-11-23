@@ -114,7 +114,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void setNewPassword(String login, String newPassword) throws PasswordNotChangedException {
+    public void setNewPassword(String login, String newPassword){
         String sql = "UPDATE usager SET user_password=? WHERE user_login=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
@@ -124,13 +124,10 @@ public class UserDaoImpl implements UserDao {
                 preparedStatement.setString(1, login);
                 preparedStatement.setString(2, newPassword);
                 preparedStatement.executeUpdate();
-                ResultSet ids = preparedStatement.getGeneratedKeys();
-                if (ids.next()) {
-                }
+
             }
         }catch (SQLException e){
             LOGGER.error("Exception : !",e);
-            throw new PasswordNotChangedException();
         }
     }
 

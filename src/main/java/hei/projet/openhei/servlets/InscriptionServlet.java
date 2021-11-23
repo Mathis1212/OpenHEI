@@ -28,9 +28,8 @@ public class InscriptionServlet extends GenericServlet {
         //Récupération de l'id stocké en session
         String id = (String) req.getSession().getAttribute("utilisateurConnecte");
 
-
         if(id==null){
-            templateEngine.process("test_inscription", context, resp.getWriter());
+            templateEngine.process("inscription", context, resp.getWriter());
         }else{
             resp.sendRedirect("Accueil");
         }

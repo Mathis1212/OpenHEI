@@ -16,7 +16,7 @@ public class NewPasswordServlet extends GenericServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         final Logger LOGGER = LogManager.getLogger();
-//on recupere le contenu des champs de la session de changement de mdp
+    //on recupere le contenu des champs de la session de changement de mdp
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
         String newPassword = req.getParameter("newPassword");
