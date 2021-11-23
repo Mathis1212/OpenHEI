@@ -9,6 +9,7 @@ body{
 	background-color: gray;
 	font-family: "Courrier New",Arial,Helvetica;
 	font-size: 100%;
+	
 }
 
 /* Responsive form
@@ -78,7 +79,9 @@ input[type=submit]:hover {
 	justify-content: space-between;
 	background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
 }
-
+nav{
+	background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+}
 
 #logo{
 	min-width: 8vw;
@@ -98,6 +101,38 @@ input[type=submit]:hover {
 	
 }*/
 
+#recherche{
+	display: flex;
+	margin-right: 2vw;
+	align-items: center;
+}
+
+#search{
+	border-radius: 0.4em;
+	width: 80%;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 1.4vw;
+	background-image: url('/images/loupe.png');
+	background-size:1.4vw;
+	background-repeat: no-repeat;
+	background-position: 10px 6px; 
+	padding: 5px 10px 5px 40px;
+}
+
+button{
+	align-items: center;
+	width: 50%;
+	border: 2px solid #ccc;
+	border-radius: 2em;
+	color: black;
+	padding-top: 0.5em;
+}
+
+
+button #profile{
+	width: 2em;
+}
 
 button p{
 	margin-bottom: 1em;
