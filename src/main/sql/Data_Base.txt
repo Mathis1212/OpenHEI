@@ -24,3 +24,4 @@ CREATE TABLE projet_OpenHEI.cours (
 	PRIMARY KEY (id_cours),
 	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere)
 	) ENGINE=INNODB;
+

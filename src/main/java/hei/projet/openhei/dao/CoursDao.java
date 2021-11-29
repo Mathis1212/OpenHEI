@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface CoursDao {
     public Cours createCoursFromResultSet(ResultSet resultSelect) throws SQLException; // corriger la creation d'instance dans le DaoImpl
+
     public List<Cours> ListCour();
+
     public String getNom(Integer id);
+
     public Matiere getMatiere(Integer id);
 }

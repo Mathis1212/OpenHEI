@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+
 @WebServlet("/Themes")
 public class ThemeServlet extends GenericServlet{
     @Override
@@ -18,7 +20,8 @@ public class ThemeServlet extends GenericServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("Themes", context, resp.getWriter());
+        templateEngine.process("themes", context, resp.getWriter());
+
     }
 
     @Override

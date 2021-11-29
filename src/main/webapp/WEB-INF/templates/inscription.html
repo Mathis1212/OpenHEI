@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--librairie css pour les icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--css pour la navbar-->
+    <link rel="stylesheet" type="text/css"  href="..\..\css\all_css.css">
+    <!--js pour les évènements-->
+    <!--<script src="..\..\js\all_js.js"></script>-->
+    <link rel="icon" type="image/png" href="../../images/O.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscription - OpenHei</title>
+</head>
+<body id="body_champ">
+<div class="container">
+    <div class="titre_logo">
+            <img id="logo" src="../../images/O.png" alt="Logo OpenHei">
+            <h3>OpenHei</h3>
+    </div>
+    <form method="POST" >
+        <div class="champ">
+            <label for="Pseudo">Pseudo :</label>
+            <input type="text" id="Pseudo" name="Pseudo" placeholder="Your Pseudo.." autocomplete="false" required>
+        </div>
+        <div class="champ">
+            <label for="Login">Login :</label>
+            <input type="email" id="Login" name="Login" placeholder="Your Login.." autocomplete="false" required>
+        </div>
+        <div class="champ">
+            <label for="Password">Password :</label>
+            <input type="password" id="Password" name="Password" placeholder="Your password.. " autocomplete="false" required>
+        </div>
+        <div class="champ">
+            <input type="submit" value="S'inscrire" id="envoi">
+        </div>
+    </form>
+    <div id="connexion" >
+        <a href="/connection" >Vous êtes déja inscrit ?</a>
+    </div>
+</div>
+</body>
+</html>
