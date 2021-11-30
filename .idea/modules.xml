@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/openhei.iml" filepath="$PROJECT_DIR$/.idea/openhei.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenHei.iml" filepath="$PROJECT_DIR$/OpenHei.iml" />
     </modules>
   </component>
 </project>
