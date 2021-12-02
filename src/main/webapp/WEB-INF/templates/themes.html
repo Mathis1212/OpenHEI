@@ -4,9 +4,9 @@
 	<!--librairie css pour les icons-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!--css pour la navbar-->
-	<link rel="stylesheet" type="text/css" href="..\..\css\All_css.css">
+	<link rel="stylesheet" type="text/css" href="..\..\css\all_css.css">
 	<!--js pour les évènements-->
-	<script src="..\..\js\All_js.js"></script>
+	<script src="..\..\js\all_js.js"></script>
 	<link rel="icon" type="image/png" href="../../images/O.png" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +48,7 @@
 				<div class="menuderoulant">
 					<button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
 					<div class="menuderoulant-content">
-					  <a href="#">Link 1</a>
+					  <a href="/Themes">Themes</a>
 					  <a href="#">Link 2</a>
 					  <a href="#">Link 3</a>
 					</div>
@@ -65,72 +65,41 @@
 			  </div>
 			  <!--Code pour la navbar-->
 		</header>
-	<main>
-		<article>
-			<h1 class="titre_page">Thèmes</h1>
-			<div class="liste">
-				<div class="liste_block">
-					<h4>JavaEE</h4>
-					<select>
-						<option>1<sub>ere</sub> notion</option>
-						
-					</select>					
+		<main>
+			<article>
+				<h1 class="titre_page">Thèmes</h1>
+				<div class="liste"  >
+					<div class="liste_block"th:each="mapItem, state:${matiere} ">
+						<h4 th:utext="${mapItem.key}">JavaEE</h4>
+						<select>
+							<option th:each="cour,state:${mapItem.value}" th:value="${cour.getUrl()}" th:utext="${cour.getnomCours()}">1 notion</option>
+						</select>
+						<input type="button" class="w3-button w3-black" value="Download">
+					</div>
 				</div>
-				<!--ajout thymleaf pour class impair-->
-				<div class="liste_block impair">
-					<h4>JavaEE</h4>
-					<select>
-						<option>1<sub>ere</sub> notion</option>
-					</select>					
-				</div>
-				<div class="liste_block">
-					<h4>JavaEE</h4>
-					<select>
-						<option>1<sub>ere</sub> notion</option>
-					</select>					
-				</div>
-				<div class="liste_block impair">
-					<h4>JavaEE</h4>
-					<select>
-						<option>1<sub>ere</sub> notion</option>
-					</select>					
-				</div>
-				<div class="liste_block">
-					<h4>JavaEE</h4>
-					<select>
-						<option>1<sub>ere</sub> notion</option>
-					</select>					
-				</div>
-				<div class="liste_block  impair">
-					<h4>JavaEE</h4>
-					<select>
-						<option>1<sub>ere</sub> notion</option>
-					</select>					
-				</div>
+			</article>
+
+		</main>
+		<footer>
+			<div>
+				<h4>Qui sommes nous ?</h4>
+				<ul>
+					<li>Un groupe d'étudiants</li>
+				</ul>
 			</div>
-		</article>
-		
-	</main>
-	<footer>
-		<div>
-			<h4>Qui sommes nous ?</h4>
-			<ul>
-				<li>Un groupe d'étudiants</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Où nous trouver</h4>
-			<ul>
-				<li>à HEI</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Détails</h4>
-			<ul>
-				<li> Creéation du site</li>
-			</ul>
-		</div>
-	</footer>
+			<div>
+				<h4>Où nous trouver</h4>
+				<ul>
+					<li>à HEI</li>
+				</ul>
+			</div>
+			<div>
+				<h4>Détails</h4>
+				<ul>
+					<li> Creéation du site</li>
+				</ul>
+			</div>
+		</footer>
 
 </body>
 </html>
