@@ -21,7 +21,7 @@ public class NewPasswordServlet extends GenericServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("newpassword", context, resp.getWriter());
+        templateEngine.process("changepassword", context, resp.getWriter());
     }
 
     @Override
