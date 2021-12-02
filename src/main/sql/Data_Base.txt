@@ -7,13 +7,15 @@ CREATE TABLE projet_OpenHEI.usager (
     user_login varchar(60) NOT NULL,
     user_password varchar(200) NOT NULL,
     date_creation date default now(),
-    user_admin tinyint(1) unsigned not null default(0)
+    user_admin tinyint(1) unsigned not null default(0),
+    UNIQUE(user_login)
     )engine=innodb;
 
 CREATE TABLE projet_OpenHEI.matiere (
 	id_matiere INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	nom_matiere VARCHAR(100) NOT NULL,
-	num_notions int not null default(0)
+	nom_matiere VARCHAR(100)  NOT NULL,
+	num_notions int not null default(0),
+	UNIQUE(nom_matiere)
 	)engine=innodb;
 
 CREATE TABLE projet_OpenHEI.cours (
@@ -22,8 +24,11 @@ CREATE TABLE projet_OpenHEI.cours (
 	url_cours varchar(300) not null,
 	id_matiere_cours INT NOT NULL,
 	PRIMARY KEY (id_cours),
-	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere)
+	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere),
+	UNIQUE(url_cours)
 	)engine=innodb;
+
+
 
     
     
