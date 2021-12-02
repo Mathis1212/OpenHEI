@@ -50,6 +50,7 @@ public class UserService {
             //Un  utilisateur existe déjà avec ce login
             throw new UserFoundException();
         }
+
         return user;
     }
 
@@ -61,6 +62,15 @@ public class UserService {
             if(argon2.verify(findedPassword,password)){
                 result=true;
             }
+        }
+        return result;
+    }
+
+    public boolean isAdmin(String login){
+        boolean result=false;
+        User user=userDao.getUser(login);
+        if(user.getstatus()){
+            result=true;
         }
         return result;
     }

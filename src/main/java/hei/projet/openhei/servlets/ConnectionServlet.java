@@ -58,6 +58,9 @@ public class ConnectionServlet extends GenericServlet {
             }
             if (UserService.getInstance().checkUser(login, password)) {
                 User userConnecter=UserDaoImpl.getInstance().getUser(login);
+                if(UserService.getInstance().isAdmin(login)){
+                    resp.sendRedirect("Accueil");
+                }
                 session.setAttribute("Pseudo",userConnecter.getPseudo());
                 session.setAttribute("Login",login);
                 session.setAttribute("Password",password);
