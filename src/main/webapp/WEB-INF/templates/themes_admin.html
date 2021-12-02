@@ -71,16 +71,6 @@
 				<div class="liste"  >
 					<div class="liste_block"th:each="mapItem, state:${matiere} ">
 						<h4 th:utext="${mapItem.key}">JavaEE</h4>
-						<select>
-							<option th:each="cour,state:${mapItem.value}" th:value="${cour.getUrl()}" th:utext="${cour.getnomCours()}">1 notion</option>
-						</select>
-						<input type="button" class="w3-button w3-black" value="Download">
-					</div>
-				</div>
-
-				<div class="liste"  >
-					<div class="liste_block"th:each="mapItem, state:${matiere} ">
-						<h4 th:utext="${mapItem.key}">JavaEE</h4>
 						<div class="dropdown">
 							<button class="dropbtn">Dropdown</button>
 							<div id="myDropdown" class="dropdown-content">
