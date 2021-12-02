@@ -8,6 +8,7 @@ public class User {
     private String login;
     private String password;
     private java.util.Date date_creation;
+    private boolean administrateur;
 
     public User(String pseudo, String login, String password){
         this.id=0;
@@ -16,6 +17,15 @@ public class User {
         this.password=password;
         this.date_creation=new Date(System.currentTimeMillis());
     }
+    public User(String pseudo, String login, String password,boolean admin){
+        this.id=0;
+        this.pseudo=pseudo;
+        this.login=login;
+        this.password=password;
+        this.date_creation=new Date(System.currentTimeMillis());
+        this.administrateur=admin;
+    }
+
     public String getUserlogin(){
         return this.login;
     }

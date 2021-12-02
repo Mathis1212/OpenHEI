@@ -58,7 +58,7 @@ public class UserDaoImpl implements UserDao {
     //méthode qui crée un objet user depuis la requete faite dans la méthode "getUser()"
     @Override
     public User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
-        User user=new User(resultSelect.getString("user_name"), resultSelect.getString("user_login"), resultSelect.getString("user_password"));
+        User user=new User(resultSelect.getString("user_pseudo"), resultSelect.getString("user_login"), resultSelect.getString("user_password"));
         return user;
     }
 
@@ -90,7 +90,7 @@ public class UserDaoImpl implements UserDao {
             try {
                 DataSource dataSource = DataSourceProvider.getDataSource();
                 try (Connection cnx = dataSource.getConnection()) {
-                    String sql = "INSERT INTO usager(user_name, user_login, user_password) VALUES (?,?,?)";
+                    String sql = "INSERT INTO usager(user_pseudo, user_login, user_password) VALUES (?,?,?)";
                     try (PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                         //paramètres de la requete sql
                         preparedStatement.setString(1, Encrypteduser.getPseudo());
@@ -126,7 +126,7 @@ public class UserDaoImpl implements UserDao {
                 preparedStatement.setString(2, login);
                 preparedStatement.setString(1, Encryptednewmdp);
                 preparedStatement.executeUpdate();
-                ResultSet ids = preparedStatement.getGeneratedKeys();
+                preparedStatement.getGeneratedKeys();
             }
         }catch (SQLException e){
             throw new PasswordNotChangedException();
@@ -144,7 +144,7 @@ public class UserDaoImpl implements UserDao {
                     try (ResultSet results = statement.executeQuery("select * from usager order by user_id")) {
                         while (results.next()) {
                             User user = new User(
-                                    results.getString("user_name"),
+                                    results.getString("user_pseudo"),
                                 results.getString("user_login"),
                                 results.getString("user_password"));
                             listOfUser.add(user);

@@ -1,6 +1,8 @@
 package hei.projet.openhei.servlets;
 
 
+import hei.projet.openhei.dao.impl.UserDaoImpl;
+import hei.projet.openhei.entities.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
@@ -9,16 +11,25 @@ import org.thymeleaf.context.WebContext;
 import hei.projet.openhei.service.UserService;
 
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @WebServlet("/connection")
 public class ConnectionServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+
+        HttpSession session=req.getSession();
+
+        String login= (String) session.getAttribute("login");
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("connexion", context, resp.getWriter());
@@ -31,6 +42,14 @@ public class ConnectionServlet extends GenericServlet {
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
 
+        HttpSession session=req.getSession();
+
+        //on peut créer un User en paramètre de la session
+
+        //permet de mettre fin à la connexion sur le click du bouton déconnexion
+        //session.invalidate()
+
+
         try {
             if(login==null||"".equals(login)){
                 LOGGER.info("champ login inccorect");
@@ -41,6 +60,10 @@ public class ConnectionServlet extends GenericServlet {
                 resp.sendRedirect("connexion");
             }
             if (UserService.getInstance().checkUser(login, password)) {
+                User userConnecter=UserDaoImpl.getInstance().getUser(login);
+                session.setAttribute("Pseudo",userConnecter.getPseudo());
+                session.setAttribute("Login",login);
+                session.setAttribute("Password",password);
                 resp.sendRedirect("Accueil");
             }else{
                 throw new NullPointerException();
