@@ -30,7 +30,6 @@ public class ConnectionServlet extends GenericServlet {
         //on recupere le contenu des champs de la session de connexion
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
-
         try {
             if(login==null||"".equals(login)){
                 LOGGER.info("champ login inccorect");
