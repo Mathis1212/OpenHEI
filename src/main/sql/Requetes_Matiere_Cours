@@ -1,12 +1,5 @@
 INSERT INTO projet_OpenHEI.matiere (nom_matiere, num_notions)
-VALUES
-('C', 4),
-('C++', 2),
-('DevOPS', 9),
-('DevWEB', 9),
-('Java', 5),
-('JavaFX', 5),
-('SQL', 5);
+VALUES ('C', 4), ('C++', 2), ('DevOPS', 9), ('DevWEB', 9), ('Java', 5), ('JavaFX', 5), ('SQL', 5);
 
 INSERT INTO projet_OpenHEI.cours (nom_cours, id_matiere_cours,url_cours)
 VALUES
