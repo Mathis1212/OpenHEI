@@ -41,15 +41,12 @@ public class ConnectionServlet extends GenericServlet {
         //on recupere le contenu des champs de la session de connexion
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
-
         HttpSession session=req.getSession();
 
         //on peut créer un User en paramètre de la session
 
         //permet de mettre fin à la connexion sur le click du bouton déconnexion
         //session.invalidate()
-
-
         try {
             if(login==null||"".equals(login)){
                 LOGGER.info("champ login inccorect");
