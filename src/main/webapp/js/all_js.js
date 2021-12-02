@@ -30,7 +30,7 @@ window.onload=function(){
     window.onscroll = function() {
         StickNavbarMenu();
     };
-
+/*
     // Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
         if (!event.target.matches('.search-dropbtn')) {
@@ -57,7 +57,7 @@ window.onload=function(){
     //Qd perd le focus perd la classe "active"
     searchbar.onblur=function(){
         searchbar.classList.remove("active");
-    }
+    }*/
 
 
     //liste cours
@@ -74,6 +74,15 @@ window.onload=function(){
             }
         }
     }
+
+    //récupère la liste des éléments de classe dropbtn et itère sur le click de chaque élément
+    var button_liste_cours=document.getElementsByClassName("dropbtn");
+    for (let button of button_liste_cours) {
+        button.onclick=function (){
+            showListCours();
+        }
+    }
+
 
 }
 
@@ -107,7 +116,11 @@ function StickNavbarMenu() {
 toggle between hiding and showing the dropdown content */
 function ShowingSearchBarOnClick() {
     document.getElementById("myDropdown").classList.toggle("show-searchbar");
-}   
+}
+
+function showListCours() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
 
 
