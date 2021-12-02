@@ -42,11 +42,15 @@ public class MatiereService {
         for (int i = 0; i < taille; i++) {
             String nom =recupMatiereAvecListCour().get(i).getNomMatiere();
             List<Cours> list = new ArrayList<>();
+
                 for(int e=0;e<recupMatiereAvecListCour().get(i).recupCour().size();e++){
                    list.add(recupMatiereAvecListCour().get(i).recupCour().get(e));
                 }
+
             hmap.put(nom, list);
         }
         return hmap;
     }
+
 }
+

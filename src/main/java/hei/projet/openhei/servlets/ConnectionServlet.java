@@ -1,47 +1,73 @@
 package hei.projet.openhei.servlets;
 
 
+import hei.projet.openhei.dao.impl.UserDaoImpl;
+import hei.projet.openhei.entities.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
-import hei.projet.openhei.exception.UserNotFoundException;
 import hei.projet.openhei.service.UserService;
 
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Enumeration;
 
 @WebServlet("/connection")
 public class ConnectionServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        WebContext context = new WebContext(req, resp, req.getServletContext());
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
 
+        HttpSession session=req.getSession();
+
+        String login= (String) session.getAttribute("login");
+
+        WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("test_connexion", context, resp.getWriter());
+        templateEngine.process("connexion", context, resp.getWriter());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+        //on recupere le contenu des champs de la session de connexion
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
+        HttpSession session=req.getSession();
+
+        //on peut créer un User en paramètre de la session
+
+        //permet de mettre fin à la connexion sur le click du bouton déconnexion
+        //session.invalidate()
         try {
-            if (UserService.getInstance().checkUser(login, password)) {
-                resp.sendRedirect("Acceuil");
-            }else{
-                throw new IllegalArgumentException("un champ n'est pas bon");
+            if(login==null||"".equals(login)){
+                LOGGER.info("champ login inccorect");
+                resp.sendRedirect("connexion");
             }
-        } catch (UserNotFoundException e) {
-            resp.sendRedirect("inscription");
-            LOGGER.info("Exception : {}",e);
+            if(password==null||"".equals(password)){
+                LOGGER.info("champ password inccorect");
+                resp.sendRedirect("connexion");
+            }
+            if (UserService.getInstance().checkUser(login, password)) {
+                User userConnecter=UserDaoImpl.getInstance().getUser(login);
+                session.setAttribute("Pseudo",userConnecter.getPseudo());
+                session.setAttribute("Login",login);
+                session.setAttribute("Password",password);
+                resp.sendRedirect("Accueil");
+            }else{
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            resp.sendRedirect("connection");
+            LOGGER.info("Error :",e);
         }
     }
 }

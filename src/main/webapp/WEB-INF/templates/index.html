@@ -1,38 +1,129 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<link rel="stylesheet" type="text/css" href="/CSS/index.css">
-	<link rel="icon" type="image/png" href="" />
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Acceuil - OpenHei</title>
-	
-</head>
-<body>
+	<head>
+		<!--librairie css pour les icons-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--css pour la navbar-->
+		<link rel="stylesheet" type="text/css" href="..\..\css\all_css.css">
+		<!--js pour les évènements-->
+		<script src="..\..\js\all_js.js"></script>
+		<link rel="icon" type="image/png" href="../../images/O.png" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Accueil - OpenHei</title>
 
-	<header th:replace="~{ fragments :: menu('Acceuil') }"></header>
+	</head>
+	<body>
+		<header >
+			<div id="haut_page_header">
+				<img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
+				<h1 class="titre">OpenHei</h1>
+			</div>
+			<!--Code pour la navbar-->
+			<div class="topnav" id="myTopnav">
 
-	<main>
-		<article>
-			<h1 class="titre_page">Acceuil</h1>
-			<p>Je suis le texte de l'acceuil Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis, rerum perferendis? Magni et nesciunt veritatis distinctio itaque, accusamus dicta quam velit quos quo amet corporis sunt nemo? Voluptas, tenetur adipisci.</p>
-		</article>
-		
-	</main>
-	<footer>
-		<div>
-			<h4>Qui sommes nous ?</h4>
-			<ul>
-				<li></li>
-			</ul>
-		</div>
-		<div>
-			<h4>Où nous trouver</h4>
-			<ul>
-				<li></li>
-			</ul>
-		</div>
-	</footer>
+				<!--les classes des balises i sont chargés depuis le css en ligne-->
+				<a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
 
-</body>
+				<!--Créer fonction pour faire apparaitre barre de recherche-->
+				<a href="#"><i class="fa fa-fw fa-search"></i> Search</a>
+
+				<!--Code à compléter champ de recherche-->
+				<!--<div class="search_dropdown">
+					  <button onclick="ShowingSearchBarOnClick()" class="search-dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
+					  <div id="myDropdown" class="search-content">
+						<div class="search-container" id="testid" class="testclass">
+							<form action="">
+							  <input type="search" placeholder="Search.." name="search" id="search">
+							  <button type="submit" id="loupe"><i class="fa fa-search"></i></button>
+							</form>
+						  </div>
+					  </div>
+					</div>-->
+
+				<a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+
+				<!--bloc pour faire apparaitre un menu déroulant au survol-->
+				<div class="menuderoulant">
+					<button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
+					<div class="menuderoulant-content">
+						<a href="/Themes">Matieres</a>
+						<a href="#">Link 2</a>
+						<a href="#">Link 3</a>
+					</div>
+				</div>
+
+				<!--blog pour les champs a mettre à droite sur la topnav-->
+				<div class="topnav-right">
+
+					<!--<button onclick="ShowingSearchBarOnClick()" class="user-dropbtn"><i class="fa fa-fw fa-user"></i>User</button>
+					  <div id="myDropdown_User" class="user-content">
+						<div class="user-container" id="testid" class="testclass">
+							<a href="/Compte">Mon Compte</a>
+
+							<a href="#">Link 3</a>
+
+						  </div>
+					  </div>
+					  <button id="deconnexion">Déconnexion</button>-->
+
+
+					<a href="/connection"><i class="fa fa-fw fa-user"></i>Login</a>
+
+					<a href="/inscription">Sign In</a>
+				</div>
+
+				<!--icone pour afficher tous les champs de la topnav-->
+				<a href="javascript:void(0);" class="menu" id="menuBar">&#9776;</a>
+			</div>
+			<!--Code pour la navbar-->
+		</header>
+		<main>
+			<h2 class="titre_page">Accueil</h2>
+			<article>
+				<div class="paragraphe">
+					<h4>l'origine d'OpenHei :</h4>
+					<p>Ce projet à été créer dans le but de rendre plus accessible un ensemble de cours sur le sujet de l'informatique.</p>
+				</div>
+				<div class="paragraphe">
+					<h4>Notre Objectif :</h4>
+					<p>Faciliter l'accés à diverses notions de cours et pouvoir gérer son propre espace de travail personnel.</p>
+
+				</div>
+				<div class="paragraphe">
+					<h4>Notre Futur :</h4>
+					<p>Faciliter l'accés à diverses notions de cours et pouvoir gérer son propre espace de travail personnel.</p>
+
+				</div>
+				<div class="paragraphe">
+					<h4>Nos Futur Projets :</h4>
+					<p>Continuer de nous améliorer ensemble.</p>
+				</div>
+
+			</article>
+			<aside>
+				<ul>
+					<li>Liste des pages</li>
+				</ul>
+			</aside>
+
+		</main>
+		<footer>
+			<div>
+				<h4>Qui sommes nous ?</h4>
+				<ul>
+					<li></li>
+				</ul>
+			</div>
+			<div>
+				<h4>Où nous trouver</h4>
+				<ul>
+					<li><a>Facebook</a></li>
+					<li><a href="">Instagram</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	</body>
+
 </html>

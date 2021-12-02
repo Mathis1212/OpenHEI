@@ -29,4 +29,6 @@ public class Cours {
         this.nomCours=nomCours;
     }
 
+
 }
+

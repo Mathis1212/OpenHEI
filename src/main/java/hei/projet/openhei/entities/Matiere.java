@@ -31,5 +31,6 @@ public class Matiere {
     }
     public void ajouterCour(Cours c){this.listCour.add(c);}
     public List<Cours> recupCour(){return this.listCour;}
+
     
 }
