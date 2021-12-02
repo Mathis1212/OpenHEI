@@ -93,7 +93,7 @@ public class MatiereDaoImpl implements MatiereDao {
     @Override
     public List<Cours> getListCour(Integer matiereId) {
         List<Cours> list = new ArrayList<>();
-        String sql = "SELECT cours.nom_cours,cours.url FROM cours join matiere on cours.id_matiere_cours=matiere.id_matiere where matiere.id_matiere=?";
+        String sql = "SELECT cours.nom_cours,cours.url_cours FROM cours join matiere on cours.id_matiere_cours=matiere.id_matiere where matiere.id_matiere=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
