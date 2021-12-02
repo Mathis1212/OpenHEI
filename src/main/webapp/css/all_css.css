@@ -147,7 +147,7 @@ body{
     z-index: 1;
 }
 
-.show-searchbar {display: block;}
+.show-searchbar,.show {display: block;}
 
 .search-container {
     float: right;
@@ -406,6 +406,88 @@ aside{
 .impair{
     background-color: blueviolet;
 }
+
+
+/*css du bouton de liste de cours*/
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+/*classe qui permmet d'afficher le bouton+div des cours*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/*block qui s'affiche au click et qui contient la liste des cours*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+/*les liens s'affichent en display block*/
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover,.cours:hover {background-color: #ddd;}
+.cours a:hover{background-color: none;}
+
+.show {display: block;}
+
+.cours{
+    display: flex;
+    flex-direction: row;
+    color: black;
+    padding: 4px 16px;
+    text-decoration: none;
+
+}
+.cours h5{
+    font-style: none;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: auto;
+    white-space:nowrap;
+}
+
+
+/*css du bouton de téléchargemet*/
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    width: 80px;
+    align-items: center;
+    padding: 6px 5px;
+    margin-top: 8%;
+    cursor: pointer;
+    font-size: 60%;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+
 /*!--LISTE_COURS.HTML--!*/
 
 
