@@ -123,7 +123,7 @@ function showListCours(id) {
 function addCour(){
 
     let request = new XMLHttpRequest();
-    request.open("POST", "/Theme/admin/add", true);
+    request.open("POST", "/admin/ThemesAdmin", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     let nom=document.getElementById("nom_add").value;
     let  url=document.getElementById("url_add").value;
