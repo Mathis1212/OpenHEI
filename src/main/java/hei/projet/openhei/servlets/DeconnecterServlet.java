@@ -21,8 +21,9 @@ public class DeconnecterServlet extends GenericServlet {
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("deconnexion", context, resp.getWriter());
 
-        req.getSession().removeAttribute("utilisateurConnecte");
-        req.getSession().invalidate();
+        req.getSession().removeAttribute("Pseudo");
+        req.getSession().removeAttribute("Login");
+        req.getSession().removeAttribute("Password");
         resp.sendRedirect("Accueil");
 
     }
