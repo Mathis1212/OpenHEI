@@ -10,7 +10,6 @@ import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 
-@WebFilter("/*")
 public class ConnexionFilter implements Filter {
     private HttpServletRequest httpRequest;
 

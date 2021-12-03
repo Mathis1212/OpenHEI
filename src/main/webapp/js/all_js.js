@@ -4,7 +4,7 @@ window.onload=function(){
     navbar = document.getElementById("myTopnav");
     /*sticky indique la position de l'élément navbar par rapport au haut de la page */
     sticky = navbar.offsetTop;
-    
+
     //Permet de récuper un Array de tous les liens de la navbar
     lien_navbar=navbar.querySelectorAll("a");
     //Pour chaque lien du tableau on itère dessus
@@ -59,6 +59,22 @@ window.onload=function(){
         searchbar.classList.remove("active");
     }
 
+
+    //liste cours
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')&&event.target.matches('.dropdown-content')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
 }
 
 
@@ -69,7 +85,7 @@ window.onload=function(){
 avec l'ajout de la classe responsive*/
 function showAllNavBarElement() {
     if (navbar.className === "topnav"||navbar.className === "topnav sticky") {
-        /*Ajoute la classe responsive a l'objet "myTopnav"*/ 
+        /*Ajoute la classe responsive a l'objet "myTopnav"*/
         navbar.classList.add("responsive");
     } else {
         navbar.classList.remove("responsive");
@@ -79,7 +95,7 @@ function showAllNavBarElement() {
 /*Permet d'afficher toute la barre de navigation 
 lorsque l'on scroll plus que la disatnce a laquelle se situe la navbar*/
 function StickNavbarMenu() {
-    /*window.pageYOffset indique le nombre de pixel scroller sur l'axe vertical*/   
+    /*window.pageYOffset indique le nombre de pixel scroller sur l'axe vertical*/
     if (window.pageYOffset >= sticky) {
         navbar.classList.add("sticky")
     } else {

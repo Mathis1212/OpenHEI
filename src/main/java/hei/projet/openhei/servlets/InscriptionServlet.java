@@ -25,7 +25,7 @@ public class InscriptionServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        templateEngine.process("test_inscription", context, resp.getWriter());
+        templateEngine.process("inscription", context, resp.getWriter());
 
         //Récupération de l'id stocké en session
         String id = (String) req.getSession().getAttribute("utilisateurConnecte");
