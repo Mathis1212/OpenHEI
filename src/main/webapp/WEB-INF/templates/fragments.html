@@ -24,45 +24,31 @@
             <!--les classes des balises i sont chargés depuis le css en ligne-->
             <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Home</a>
 
-            <!--Créer fonction pour faire apparaitre barre de recherche-->
-            <a href="#"><i class="fa fa-fw fa-search"></i> Search</a>
 
             <!--Code à compléter champ de recherche-->
-            <!--<div class="search_dropdown">
-                  <button onclick="ShowingSearchBarOnClick()" class="search-dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
-                  <div id="myDropdown" class="search-content">
-                    <div class="search-container" id="testid" class="testclass">
-                        <form action="">
-                          <input type="search" placeholder="Search.." name="search" id="search">
-                          <button type="submit" id="loupe"><i class="fa fa-search"></i></button>
-                        </form>
-                      </div>
+            <div class="menuderoulant">
+              <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
+              <div id="myDropdown" class="menuderoulant-content">
+                <div class="search-container" id="testid">
+                    <form action="">
+                      <input type="search" placeholder="Search.." name="search" id="search">
+                      <button type="submit" id="loupe"><i class="fa fa-search"></i></button>
+                    </form>
                   </div>
-                </div>-->
+              </div>
+            </div>
 
-            <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
 
             <!--bloc pour faire apparaitre un menu déroulant au survol-->
             <div class="menuderoulant">
                 <button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
                 <div class="menuderoulant-content">
-                    <a href="/Themes" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Matieres</a>
+                    <a href="/Themes" th:class="${currentPage == 'Themes' ? 'active' : ''}">Matieres</a>
                 </div>
             </div>
 
             <!--blog pour les champs a mettre à droite sur la topnav-->
             <div class="topnav-right">
-
-                <!--<button onclick="ShowingSearchBarOnClick()" class="user-dropbtn"><i class="fa fa-fw fa-user"></i>User</button>
-                  <div id="myDropdown_User" class="user-content">
-                    <div class="user-container" id="testid" class="testclass">
-                        <a href="/Compte">Mon Compte</a>
-
-                        <a href="#">Link 3</a>
-
-                      </div>
-                  </div>
-                  <button id="deconnexion">Déconnexion</button>-->
 
                 <!--remplacer par le bouton avec affichage des champs au click-->
                 <th:block th:if="${Connected}!=null" >

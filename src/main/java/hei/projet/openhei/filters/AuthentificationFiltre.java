@@ -19,19 +19,17 @@ public class AuthentificationFiltre  implements Filter{
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        int admin=0;
-        if (httpRequest.getSession()!=null){
-            admin=(int) httpRequest.getSession().getAttribute("Admin");
-        }else{
-            System.out.println("Il faut être aministrateur pour accéder à cette page !");
-            httpResponse.sendRedirect("/connection");
-        }
-
-        if ((admin != 0)) {
+        if (httpRequest.getSession().getAttribute("Pseudo")!=null){
+            boolean admin=(boolean) httpRequest.getSession().getAttribute("Admin");
+            if(!admin) {
+                System.out.println("Il faut être connecté pour accéder à cette page !");
+                httpResponse.sendRedirect("/Accueil");
+                return;
+            }
             chain.doFilter(request, response);
-        } else {
-            System.out.println("Il faut être aministrateur pour accéder à cette page !");
-            httpResponse.sendRedirect("/connection");
+        }else{
+            System.out.println("Il faut être connecté pour accéder à cette page !");
+            httpResponse.sendRedirect("/Accueil");
             return;
         }
     }

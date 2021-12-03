@@ -30,9 +30,14 @@ window.onload=function(){
     window.onscroll = function() {
         StickNavbarMenu();
     };
-/*
+
+    /*var searchBar=document.getElementById("search_bar");
+    searchBar.onclick=function (){
+        ShowingSearchBarOnClick();
+    }*/
+
     // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
+    /*window.onclick = function(event) {
         if (!event.target.matches('.search-dropbtn')) {
             var dropdowns = document.getElementsByClassName("search-content");
             var openDropdown = dropdowns[0];
@@ -40,11 +45,11 @@ window.onload=function(){
                 openDropdown.classList.remove('show-searchbar');
             }
         }
-    }
+    }*/
 
     //Permet d'afficher le champ de recherche au click sur le bouton
-    search_button=document.getElementsByClassName("search-dropbtn");
-    search_button.onclick = function() {
+    /*search_button=document.getElementsByClassName("search-dropbtn");
+    search_button[0].onclick = function() {
         ShowingSearchBarOnClick();
     }
 

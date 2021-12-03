@@ -25,7 +25,7 @@ public class InscriptionServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        if(req.getSession()!=null) {
+        if(req.getSession().getAttribute("Pseudo")!=null) {
             resp.sendRedirect("Accueil");
         }else{
             templateEngine.process("inscription", context, resp.getWriter());
