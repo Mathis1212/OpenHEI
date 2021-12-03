@@ -72,19 +72,14 @@
 			<div class="liste"  >
 				<div class="liste_block"th:each="mapItem, state:${matiere} ">
 					<h4 th:utext="${mapItem.key}">JavaEE</h4>
-					<div class="dropdown">
-						<button class="dropbtn">Cours</button>
-						<div id="myDropdown" class="dropdown-content">
+					<div class="dropdown" >
+						<button class="dropbtn" onclick="showListCours()">Cours</button>
+						<div th:id="dropdown" class="dropdown-content">
 							<div class="cours"th:each="cour,state:${mapItem.value}" ><h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5><a download th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a></div>
 						</div>
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
-		</footer>
-	</header>
-=======
-
 		</article>
 
 	</main>
@@ -108,7 +103,5 @@
 			</ul>
 		</div>
 	</footer>
-
->>>>>>> dev-view
 </body>
 </html>

@@ -75,17 +75,6 @@ window.onload=function(){
         }
     }
 
-    //récupère la liste des éléments de classe dropbtn et itère sur le click de chaque élément
-    var button_liste_cours=document.getElementsByClassName("dropbtn");
-    for (let button of button_liste_cours) {
-        button.onclick=function (){
-            showListCours();
-        }
-    }
- var button=document.getElementsByClassName("button_add");
-    button.onclick=function(){
-        addCour();
-    }
 
 }
 
@@ -122,7 +111,8 @@ function ShowingSearchBarOnClick() {
 }
 
 function showListCours() {
-    document.getElementById("myDropdown").classList.toggle("show");
+
+    document.getElementById("dropdown").classList.toggle("show");
 }
 
 function addCour(){

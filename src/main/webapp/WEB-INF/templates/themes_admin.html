@@ -68,14 +68,14 @@
 		<main>
 			<article>
 				<h1 class="titre_page">Thèmes</h1>
+				<a><form><input class="nom_add" type="text" placeholder="nom du cours"><input type="text" class="url_add" placeholder="url" ><input type="submit" value="Ajouter"></form></a>
 				<div class="liste"  >
 					<div class="liste_block"th:each="mapItem, state:${matiere} ">
 						<h4 th:utext="${mapItem.key}">JavaEE</h4>
 						<div class="dropdown">
 							<button class="dropbtn">Dropdown</button>
-							<a><form><input class="nom_add" type="text" placeholder="nom du cours"><input type="text" class="url_add" placeholder="url" ><input class="button_add" type="submit" value="Ajouter"></form></a>
 							<div id="myDropdown" class="dropdown-content">
-								<div class="cours" th:each="cour,state:${mapItem.value}"><h5 th:utext="${cour.getnomCours()}">Cours</h5>
+								<div class="cours" th:each="cour,state:${mapItem.value}"><h5 th:value="${cour.getId()}" th:utext="${cour.getnomCours()}">Cours</h5>
 									<a><form><input class="nom_update" type="text" placeholder="nom du cours"><input type="text" class="url_update" placeholder="url" ><input type="submit" value="Update"></form></a>
                                     <a><button class="btn" >&times; Delete</button></a>
                                 </div>
