@@ -41,7 +41,7 @@ public class ConnectionServlet extends GenericServlet {
         //on recupere le contenu des champs de la session de connexion
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
-        HttpSession session=req.getSession();
+
 
         //on peut créer un User en paramètre de la session
 
@@ -57,10 +57,13 @@ public class ConnectionServlet extends GenericServlet {
                 resp.sendRedirect("connexion");
             }
             if (UserService.getInstance().checkUser(login, password)) {
+                HttpSession session=req.getSession();
                 User userConnecter=UserDaoImpl.getInstance().getUser(login);
+                //set en session le pseudo, à récupérer
                 session.setAttribute("Pseudo",userConnecter.getPseudo());
                 session.setAttribute("Login",login);
                 session.setAttribute("Password",password);
+                session.setAttribute("Admin",userConnecter.getstatus());
                 resp.sendRedirect("Accueil");
             }else{
                 throw new NullPointerException();

@@ -1,32 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Fragments</title>
+<head th:fragment="head(title)">
+    <!--librairie css pour les icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--css pour la navbar-->
+    <link rel="stylesheet" type="text/css" href="..\..\css\all_css.css">
+    <!--js pour les évènements-->
+    <script src="..\..\js\all_js.js"></script>
+    <link rel="icon" type="image/png" href="../../images/O.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}+' - OpenHei'">Fragments</title>
 </head>
 <body>
-<header class="haut_de_page"  th:fragment="menu(currentPage)">
-    <div id="haut_page_header">
-        <img id="logo" src="/images/O.png" alt="Logo OpenHei" width="100px">
-
-        <div id="recherche">
-            <form enctype="utf-8" method="GET" action="">
-                <input type="search" name="ch_recherche" placeholder="Rechercher..."autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value >
-                <input id="loupe" type="image" name="validation" alt="Bouton validation de la recherche" src="//images/loupe.png" value="recherche">
-            </form>
+    <header th:fragment="menu(currentPage)">
+        <div id="haut_page_header">
+            <img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
+            <h1 class="titre">OpenHei</h1>
         </div>
-        <a href="/connection">
-            <button type="submit" ><img id="connexion" src="//images/profile.png" alt="Connexion">Se Connecter </button>
-        </a>
-    </div>
-    <nav>
-        <ul id="liste_nav">
-            <li><a href="/Themes">Thèmes</a></li>
-            <li><a href="">Cours</a></li>
-            <li><a href="">Profil</a></li>
-        </ul>
-    </nav>
-</header>
+        <!--Code pour la navbar-->
+        <div class="topnav" id="myTopnav">
+
+            <!--les classes des balises i sont chargés depuis le css en ligne-->
+            <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Home</a>
+
+
+            <!--Code à compléter champ de recherche-->
+            <div class="menuderoulant">
+              <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
+              <div id="myDropdown" class="menuderoulant-content">
+                <div class="search-container" id="testid">
+                    <form action="">
+                      <input type="search" placeholder="Search.." name="search" id="search">
+                      <button type="submit" id="loupe"><i class="fa fa-search"></i></button>
+                    </form>
+                  </div>
+              </div>
+            </div>
+
+
+            <!--bloc pour faire apparaitre un menu déroulant au survol-->
+            <div class="menuderoulant">
+                <button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
+                <div class="menuderoulant-content">
+                    <a href="/Themes" th:class="${currentPage == 'Themes' ? 'active' : ''}">Matieres</a>
+                </div>
+            </div>
+            <div class="addCour">
+                <p>Ajouter Cour</p>
+                <a><form><input id="nom_add" type="text" placeholder="nom du cours"><input type="text" id="url_add" placeholder="url" ><input type="text" id="mat_add" placeholder="Matiere du cour" ><button onclick="addCour()">Ajouter</button></form></a>
+            </div>
+            <!--blog pour les champs a mettre à droite sur la topnav-->
+            <div class="topnav-right">
+
+                <!--remplacer par le bouton avec affichage des champs au click-->
+                <th:block th:if="${Connected}!=null" >
+                    <div class="menuderoulant">
+                        <button class="dropbtn" ><i class='fa fa-fw fa-user'></i><span th:text="${Connected}"></span> <i class="fa fa-caret-down"></i></button>
+                        <div class="menuderoulant-content">
+                            <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mon Profil</a>
+                            <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mes cours</a>
+                            <a href="/deconnection" th:class="${ currentPage == 'deconnection' ? 'active' : ''}">Déconnexion</a>
+                        </div>
+                    </div>
+                </th:block>
+                <th:block th:if="${Connected}==null">
+                    <a href="/connection" ><i class="fa fa-fw fa-user"></i>Login</a>
+                    <a href="/inscription">Sign In</a>
+                </th:block>
+            </div>
+
+            <!--icone pour afficher tous les champs de la topnav-->
+            <a href="javascript:void(0);" class="menu" id="menuBar">&#9776;</a>
+        </div>
+        <!--Code pour la navbar-->
+    </header>
+
+
+    <footer th:fragment="footer(currentPage)">
+        <div>
+            <h4>Qui sommes nous ?</h4>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Où nous trouver</h4>
+            <ul>
+                <li><a>Facebook</a></li>
+                <li><a href="">Instagram</a></li>
+            </ul>
+        </div>
+    </footer>
 
 
 </body>

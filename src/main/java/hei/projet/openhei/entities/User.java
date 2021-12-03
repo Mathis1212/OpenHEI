@@ -47,5 +47,6 @@ public class User {
     public void setUserId(Integer id){
         this.id=id;
     }
+    public boolean getstatus(){return this.administrateur;}
 
 }

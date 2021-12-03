@@ -25,20 +25,14 @@ public class InscriptionServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        templateEngine.process("test_inscription", context, resp.getWriter());
-
-        //Récupération de l'id stocké en session
-        String id = (String) req.getSession().getAttribute("utilisateurConnecte");
-
-        if(id==null){
-            templateEngine.process("inscription", context, resp.getWriter());
-        }else{
+        if(req.getSession().getAttribute("Pseudo")!=null) {
             resp.sendRedirect("Accueil");
+        }else{
+            templateEngine.process("inscription", context, resp.getWriter());
         }
     }
 
     @Override
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         //on recupere le contenu des champs de la session d'inscription
@@ -46,17 +40,16 @@ public class InscriptionServlet extends GenericServlet {
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
 
-
         try {
             //Vérification des champs
             if(pseudo==null||"".equals(pseudo)){
-                resp.sendRedirect("inscritpion");
+                resp.sendRedirect("inscription");
             }
             if(login==null||"".equals(login)){
-                resp.sendRedirect("inscritpion");
+                resp.sendRedirect("inscription");
             }
             if(password==null||"".equals(password)){
-                resp.sendRedirect("inscritpion");
+                resp.sendRedirect("inscription");
             }
 
             User user_champ=new User(pseudo,login,password);
