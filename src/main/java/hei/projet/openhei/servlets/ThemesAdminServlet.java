@@ -1,5 +1,6 @@
 package hei.projet.openhei.servlets;
 
+import hei.projet.openhei.service.MatiereService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -17,7 +18,7 @@ public class ThemesAdminServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-
+        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         String pseudo = (String) req.getSession().getAttribute("Pseudo");
         context.setVariable("Pseudo", pseudo);
 
