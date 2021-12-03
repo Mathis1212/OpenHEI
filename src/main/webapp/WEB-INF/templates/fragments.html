@@ -64,18 +64,21 @@
                   </div>
                   <button id="deconnexion">Déconnexion</button>-->
 
-                <!--remplacer par le bouton avec affichage des champs au click
-                <th:block th:if="${#session.getAttribute('Pseudo')!=null}" >
-                    <a href="/connection"  th:text="${#session.getAttribute('Pseudo')}"><i class="fa fa-fw fa-user"></i>Login</a>
+                <!--remplacer par le bouton avec affichage des champs au click-->
+                <th:block th:if="${Connected}!=null" >
+                    <div class="menuderoulant">
+                        <button class="dropbtn" ><i class='fa fa-fw fa-user'></i><span th:text="${Connected}"></span> <i class="fa fa-caret-down"></i></button>
+                        <div class="menuderoulant-content">
+                            <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mon Profil</a>
+                            <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mes cours</a>
+                            <a href="/deconnection" th:class="${ currentPage == 'deconnection' ? 'active' : ''}">Déconnexion</a>
+                        </div>
+                    </div>
                 </th:block>
-                <th:block th:if="${#session.getAttribute('Pseudo')==null}">
+                <th:block th:if="${Connected}==null">
                     <a href="/connection" ><i class="fa fa-fw fa-user"></i>Login</a>
                     <a href="/inscription">Sign In</a>
-                </th:block>-->
-
-                <a href="/connection" ><i class="fa fa-fw fa-user"></i>Login</a>
-
-                <a href="/inscription">Sign In</a>
+                </th:block>
             </div>
 
             <!--icone pour afficher tous les champs de la topnav-->

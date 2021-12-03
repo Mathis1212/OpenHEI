@@ -31,8 +31,7 @@ public class ThemeServlet extends GenericServlet{
             resp.sendRedirect("ThemesAdmin");
         }
         String pseudo = (String) req.getSession().getAttribute("Pseudo");
-        context.setVariable("Pseudo", pseudo);
-
+        context.setVariable("Connected", pseudo);
         templateEngine.process("themes", context, resp.getWriter());
     }
 

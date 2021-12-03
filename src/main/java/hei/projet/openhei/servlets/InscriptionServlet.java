@@ -25,15 +25,10 @@ public class InscriptionServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        templateEngine.process("inscription", context, resp.getWriter());
-
-        //Récupération de l'id stocké en session
-        String id = (String) req.getSession().getAttribute("utilisateurConnecte");
-
-        if(id==null){
-            templateEngine.process("inscription", context, resp.getWriter());
-        }else{
+        if(req.getSession()!=null) {
             resp.sendRedirect("Accueil");
+        }else{
+            templateEngine.process("inscription", context, resp.getWriter());
         }
     }
 
@@ -44,7 +39,6 @@ public class InscriptionServlet extends GenericServlet {
         String pseudo = req.getParameter("Pseudo");
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
-
 
         try {
             //Vérification des champs

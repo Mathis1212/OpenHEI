@@ -17,15 +17,14 @@ import java.io.IOException;
 public class DeconnecterServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("deconnexion", context, resp.getWriter());
-
-        req.getSession().removeAttribute("Pseudo");
-        req.getSession().removeAttribute("Login");
-        req.getSession().removeAttribute("Password");
-        resp.sendRedirect("Accueil");
-
+        if(req.getSession()==null) {
+            resp.sendRedirect("Accueil");
+        }else{
+            req.getSession().removeAttribute("Pseudo");
+            req.getSession().removeAttribute("Login");
+            req.getSession().removeAttribute("Password");
+            resp.sendRedirect("Accueil");
+        }
     }
 
 }

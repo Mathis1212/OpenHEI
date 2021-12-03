@@ -19,9 +19,13 @@ public class NewPasswordServlet extends GenericServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("changepassword", context, resp.getWriter());
+
+        if(req.getSession()!=null) {
+            resp.sendRedirect("Accueil");
+        }else{
+            templateEngine.process("changepassword", context, resp.getWriter());
+        }
     }
 
     @Override

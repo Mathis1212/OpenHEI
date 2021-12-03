@@ -18,7 +18,7 @@ public class HomeServlet extends GenericServlet {
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
         String pseudo = (String) req.getSession().getAttribute("Pseudo");
-        context.setVariable("Pseudo", pseudo);
+        context.setVariable("Connected", pseudo);
 
         templateEngine.process("index", context, resp.getWriter());
     }
