@@ -38,7 +38,6 @@ public class InscriptionServlet extends GenericServlet {
     }
 
     @Override
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         //on recupere le contenu des champs de la session d'inscription
