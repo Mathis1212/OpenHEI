@@ -109,15 +109,15 @@ public class CoursDaoImpl implements CoursDao {
         String nom = cours.getnomCours();
         String url = cours.getUrl();
         Integer id_mat = cours.getId_mat();
-        String sql = "Insert into cours (nom_cours, id_matiere_cours,url) values (nom,id_mat,url)";
+        String sql = "Insert into cours (nom_cours, id_matiere_cours,url_cours) values (?,?,?)";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
-                try (ResultSet result = preparedStatement.executeQuery()) {
-
-                }
-            }
+                preparedStatement.setString(1, nom);
+                preparedStatement.setString(3, url);
+                preparedStatement.setInt(2, id_mat);
+                preparedStatement.executeUpdate();            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

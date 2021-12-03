@@ -110,9 +110,9 @@ function ShowingSearchBarOnClick() {
     document.getElementById("myDropdown").classList.toggle("show-searchbar");
 }
 
-function showListCours() {
+function showListCours(id) {
 
-    document.getElementById("dropdown").classList.toggle("show");
+    document.getElementById("id").classList.toggle("show");
 }
 
 function addCour(){
@@ -120,21 +120,10 @@ function addCour(){
     let request = new XMLHttpRequest();
     request.open("POST", "/Theme/admin/add", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    let nom=document.getElementsByClassName("nom_add").value;
-    let  url=document.getElementsByClassName("url_add").value;
-    let nomM=document.querySelectorAll("liste_block h4");
-    for(let matiere of nomM){
-        if(matiere.innerText !=null || !("").equals(matiere.innerText)){
-
-        }
-    }
+    let nom=document.getElementById("nom_add").value;
+    let  url=document.getElementById("url_add").value;
+    let nomM=document.getElementById("mat_add").value;
     request.send("nom_cour=" + nom+ "&url_cour=" +url + "&nom_mat=" + nomM);
-    request.onload=function () {
-        if(status===200){
-
-        }
-        else{}
-    }
 }
 
 

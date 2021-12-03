@@ -33,7 +33,7 @@ public class AddThemeServlet extends GenericServlet {
         String nom_mat= req.getParameter("nom_mat");
         Integer id_mat= MatiereDaoImpl.getInstance().getID(nom_mat);
         Cours c =new Cours(nom,url);
-        c.setId(id_mat);
+        c.setIdMat(id_mat);
         try {
             Add_ThemeService.getInstance().addCour(c);
         } catch (SQLException e) {
