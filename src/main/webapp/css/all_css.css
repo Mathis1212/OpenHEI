@@ -493,6 +493,11 @@ aside{
 
 
 /*!--CONNEXION--!*/
+.back_home{
+    display: inline;
+    text-decoration: none;
+}
+
 
 #body_champ{
     background-color: rgb(145, 66, 66);
@@ -516,11 +521,9 @@ aside{
     display: flex;
     text-align: center;
     align-items: center;
-    font-size: 4vw;
-    border-width:50%;
+    font-size: 2.5vw;
+    margin-top: 1.2em;
 }
-
-
 
 .container form{
     display: flex;
@@ -533,10 +536,10 @@ aside{
 }
 
 #body_form .titre_logo #logo{
-
+    max-width: 210px;
     width: 4em;
     height: auto;
-    margin-left: 1vw;
+    margin-left: 5vw;
 
 }
 

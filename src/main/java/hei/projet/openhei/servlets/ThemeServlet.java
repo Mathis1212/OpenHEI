@@ -15,17 +15,25 @@ import java.io.IOException;
 
 @WebServlet("/Themes")
 public class ThemeServlet extends GenericServlet{
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+    }
+
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         Boolean status = (Boolean) req.getSession().getAttribute("Status");
-        if(status) {
+        if ((status!=null)&&status){
             resp.sendRedirect("ThemesAdmin");
-        }else {
-            templateEngine.process("themes", context, resp.getWriter());
         }
+        String pseudo = (String) req.getSession().getAttribute("Pseudo");
+        context.setVariable("Pseudo", pseudo);
+
+        templateEngine.process("themes", context, resp.getWriter());
     }
 
     @Override

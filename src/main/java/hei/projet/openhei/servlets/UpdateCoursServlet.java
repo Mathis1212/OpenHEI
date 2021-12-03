@@ -18,7 +18,7 @@ import java.io.IOException;
 public class UpdateCoursServlet {
     static final Logger LOGGER = LogManager.getLogger();
 
-
+/*
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
@@ -32,5 +32,5 @@ public class UpdateCoursServlet {
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/template/themes_admins.html").forward(req, resp);
     }
-    }
+    }*/
 }

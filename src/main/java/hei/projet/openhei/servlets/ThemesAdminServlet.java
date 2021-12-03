@@ -17,6 +17,10 @@ public class ThemesAdminServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+
+        String pseudo = (String) req.getSession().getAttribute("Pseudo");
+        context.setVariable("Pseudo", pseudo);
+
         templateEngine.process("themes_admin", context, resp.getWriter());
     }
 }
