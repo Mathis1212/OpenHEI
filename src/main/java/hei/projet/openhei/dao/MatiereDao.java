@@ -10,6 +10,7 @@ public interface MatiereDao {
     public String getNom(Integer id);
     public int getnbCour(Integer id);
     public List<Cours> getListCour(Integer id);
+    public Integer getID(String nom);
 
 
 }

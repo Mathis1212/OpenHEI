@@ -110,7 +110,24 @@ public class MatiereDaoImpl implements MatiereDao {
         }
         return list;
     }
-
+    @Override
+    public Integer getID(String nom) {
+        Integer id=0;
+        String sql = "SELECT id_matiere FROM matiere  WHERE nom_matiere=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setString(1, nom);
+                try (ResultSet result = preparedStatement.executeQuery()) {
+                    id = result.getInt("id_matiere");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 }
 
 

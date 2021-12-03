@@ -82,7 +82,10 @@ window.onload=function(){
             showListCours();
         }
     }
-
+ var button=document.getElementsByClassName("button_add");
+    button.onclick=function(){
+        addCour();
+    }
 
 }
 
@@ -122,6 +125,27 @@ function showListCours() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+function addCour(){
+
+    let request = new XMLHttpRequest();
+    request.open("POST", "/Theme/admin/add", true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    let nom=document.getElementsByClassName("nom_add").value;
+    let  url=document.getElementsByClassName("url_add").value;
+    let nomM=document.querySelectorAll("liste_block h4");
+    for(let matiere of nomM){
+        if(matiere.innerText !=null || !("").equals(matiere.innerText)){
+
+        }
+    }
+    request.send("nom_cour=" + nom+ "&url_cour=" +url + "&nom_mat=" + nomM);
+    request.onload=function () {
+        if(status===200){
+
+        }
+        else{}
+    }
+}
 
 
 

@@ -15,4 +15,5 @@ public interface CoursDao {
     public String getNom(Integer id);
 
     public Matiere getMatiere(Integer id);
+    public void addCour(Cours cours) throws SQLException;
 }
