@@ -112,7 +112,7 @@ function ShowingSearchBarOnClick() {
 
 function showListCours(id) {
 
-    document.getElementById("id").classList.toggle("show");
+    document.getElementById(id).classList.toggle("show");
 }
 
 function addCour(){
