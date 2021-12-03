@@ -22,9 +22,9 @@ public class ThemeServlet extends GenericServlet{
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         Boolean status = (Boolean) req.getSession().getAttribute("Status");
         if(status) {
-            resp.sendRedirect("themes_admin");
+            resp.sendRedirect("ThemesAdmin");
         }else {
-            resp.sendRedirect("themes");
+            templateEngine.process("themes", context, resp.getWriter());
         }
     }
 
