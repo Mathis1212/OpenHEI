@@ -7,4 +7,9 @@
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 
+    <!--<filter-mapping>
+        <filter-name>AuthentificationFiltre</filter-name>
+        <url-pattern>/Admin/*</url-pattern>
+    </filter-mapping>-->
+
 </web-app>
