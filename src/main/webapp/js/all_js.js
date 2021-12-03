@@ -80,14 +80,6 @@ window.onload=function(){
         }
     }
 
-    //récupère la liste des éléments de classe dropbtn et itère sur le click de chaque élément
-    var button_liste_cours=document.getElementsByClassName("dropbtn");
-    for (let button of button_liste_cours) {
-        button.onclick=function (){
-            showListCours();
-        }
-    }
-
     /*
 
     function filterThemes() {
@@ -110,7 +102,6 @@ window.onload=function(){
 }
 
      */
-
 
 }
 
@@ -146,10 +137,21 @@ function ShowingSearchBarOnClick() {
     document.getElementById("myDropdown").classList.toggle("show-searchbar");
 }
 
-function showListCours() {
-    document.getElementById("myDropdown").classList.toggle("show");
+function showListCours(id) {
+
+    document.getElementById(id).classList.toggle("show");
 }
 
+function addCour(){
+
+    let request = new XMLHttpRequest();
+    request.open("POST", "/admin/ThemesAdmin", true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    let nom=document.getElementById("nom_add").value;
+    let  url=document.getElementById("url_add").value;
+    let nomM=document.getElementById("mat_add").value;
+    request.send("nom_cour=" + nom+ "&url_cour=" +url + "&nom_mat=" + nomM);
+}
 
 
 
