@@ -49,13 +49,13 @@ public class InscriptionServlet extends GenericServlet {
         try {
             //Vérification des champs
             if(pseudo==null||"".equals(pseudo)){
-                resp.sendRedirect("inscritpion");
+                resp.sendRedirect("inscription");
             }
             if(login==null||"".equals(login)){
-                resp.sendRedirect("inscritpion");
+                resp.sendRedirect("inscription");
             }
             if(password==null||"".equals(password)){
-                resp.sendRedirect("inscritpion");
+                resp.sendRedirect("inscription");
             }
 
             User user_champ=new User(pseudo,login,password);
