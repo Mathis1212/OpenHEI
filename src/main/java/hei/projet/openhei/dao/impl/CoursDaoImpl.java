@@ -33,8 +33,10 @@ public class CoursDaoImpl implements CoursDao {
     // recupere l'ensemble de la liste des cours de la BDD
     @Override
     public List<Cours> ListCour() {
+
         List<Cours>list = new ArrayList<>();
         final Logger LOGGER = LogManager.getLogger();
+
 
 
         try {

@@ -61,6 +61,7 @@ public class ConnectionServlet extends GenericServlet {
                 session.setAttribute("Pseudo",userConnecter.getPseudo());
                 session.setAttribute("Login",login);
                 session.setAttribute("Password",password);
+                session.setAttribute("Status",userConnecter.getstatus());
                 resp.sendRedirect("Accueil");
             }else{
                 throw new NullPointerException();

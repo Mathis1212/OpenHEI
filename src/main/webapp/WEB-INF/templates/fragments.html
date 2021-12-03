@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+</head>
+<body>
+<header class="haut_de_page"  th:fragment="menu(currentPage)">
+    <div id="haut_page_header">
+        <img id="logo" src="/images/O.png" alt="Logo OpenHei" width="100px">
+
+        <div id="recherche">
+            <form enctype="utf-8" method="GET" action="">
+                <input type="search" name="ch_recherche" placeholder="Rechercher..."autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value >
+                <input id="loupe" type="image" name="validation" alt="Bouton validation de la recherche" src="//images/loupe.png" value="recherche">
+            </form>
+        </div>
+        <a href="/connection">
+            <button type="submit" ><img id="connexion" src="//images/profile.png" alt="Connexion">Se Connecter </button>
+        </a>
+    </div>
+    <nav>
+        <ul id="liste_nav">
+            <li><a href="/Themes">Thèmes</a></li>
+            <li><a href="">Cours</a></li>
+            <li><a href="">Profil</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+</body>
+</html>
