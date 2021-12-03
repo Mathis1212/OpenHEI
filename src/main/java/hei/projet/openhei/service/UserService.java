@@ -1,6 +1,6 @@
 package hei.projet.openhei.service;
 
-import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2 .Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
@@ -50,6 +50,7 @@ public class UserService {
             //Un  utilisateur existe déjà avec ce login
             throw new UserFoundException();
         }
+
         return user;
     }
 
@@ -61,6 +62,15 @@ public class UserService {
             if(argon2.verify(findedPassword,password)){
                 result=true;
             }
+        }
+        return result;
+    }
+
+    public boolean isAdmin(String login){
+        boolean result=false;
+        User user=userDao.getUser(login);
+        if(user.getstatus()){
+            result=true;
         }
         return result;
     }

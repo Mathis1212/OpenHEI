@@ -11,4 +11,6 @@ public interface MatiereDao {
     public int getnbCour(Integer id);
     public List<Cours> getListCour(Integer id);
 
+
 }
+

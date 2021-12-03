@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<!--librairie css pour les icons-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,7 +14,6 @@
 
 </head>
 <body>
-<header>
 	<header>
 		<div id="haut_page_header">
 			<img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
@@ -68,8 +67,6 @@
 	<main>
 		<article>
 			<h1 class="titre_page">Thèmes</h1>
-
-
 			<div class="liste"  >
 				<div class="liste_block"th:each="mapItem, state:${matiere} ">
 					<h4 th:utext="${mapItem.key}">JavaEE</h4>
@@ -81,9 +78,7 @@
 					</div>
 				</div>
 			</div>
-
 		</article>
-
 	</main>
 	<footer>
 		<div>
@@ -105,6 +100,5 @@
 			</ul>
 		</div>
 	</footer>
-
 </body>
 </html>

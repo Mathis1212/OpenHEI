@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 @WebServlet("/Themes")
 public class ThemeServlet extends GenericServlet{
     @Override
@@ -19,7 +20,12 @@ public class ThemeServlet extends GenericServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        templateEngine.process("themes", context, resp.getWriter());
+        Boolean status = (Boolean) req.getSession().getAttribute("Status");
+        if(status) {
+            resp.sendRedirect("ThemesAdmin");
+        }else {
+            templateEngine.process("themes", context, resp.getWriter());
+        }
     }
 
     @Override
