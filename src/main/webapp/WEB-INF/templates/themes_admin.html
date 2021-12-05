@@ -10,53 +10,105 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Thèmes - OpenHei</title>
+
 </head>
 <body>
-<header th:replace="~{fragments :: menu('ThemesAdmin')}"></header>
-		<main>
-			<article>
-				<h1 class="titre_page">Thèmes</h1>
-				<div class="liste"  >
-					<div class="liste_block"th:each="mapItem, state:${matiere} ">
-						<h4 th:utext="${mapItem.key}">JavaEE</h4>
-						<div class="dropdown" >
-							<button  class="dropbtn" th:attr="onclick=|showListCours('${mapItem.key}')|" >Cours</button>
-							<div th:id="${mapItem.key}" class="dropdown-content">
-								<div class="cours"th:each="cour,state:${mapItem.value}" ><h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5>
-									<a download th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
-									</hr>
-									<a><form><input class="nom_update" type="text" placeholder="nom du cours"><input type="text" class="url_update" placeholder="url" ><input class="updatebtn" type="submit" value="Update"></form></a>
-								</div>
+<header>
+	<header>
+		<div id="haut_page_header">
+			<img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
+			<h1 class="titre">OpenHei</h1>
+		</div>
+		<!--Code pour la navbar-->
+		<div class="topnav" id="myTopnav">
+
+			<!--les classes des balises i sont chargés depuis le css en ligne-->
+			<a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+
+			<!--Créer fonction pour faire apparaitre barre de recherche-->
+			<a href="#"><i class="fa fa-fw fa-search"></i> Search</a>
+
+			<!--Code à compléter champ de recherche-->
+			<!--<div class="search_dropdown">
+                  <button onclick="ShowingSearchBarOnClick()" class="search-dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
+                  <div id="myDropdown" class="search-content">
+                    <div class="search-container" id="testid" class="testclass">
+                        <form action="">
+                          <input type="search" placeholder="Search.." name="search" id="search">
+                          <button type="submit" id="loupe"><i class="fa fa-search"></i></button>
+                        </form>
+                      </div>
+                  </div>
+                </div>-->
+
+			<a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+
+			<!--bloc pour faire apparaitre un menu déroulant au survol-->
+			<div class="menuderoulant">
+				<button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
+				<div class="menuderoulant-content">
+					<a href="/Themes">Themes</a>
+					<a href="#">Link 2</a>
+					<a href="#">Link 3</a>
+				</div>
+			</div>
+			<div class="addCour">
+				<p>Ajouter Cour</p>
+				<a><form><input id="nom_add" type="text" placeholder="nom du cours"><input type="text" id="url_add" placeholder="url" ><input type="text" id="mat_add" placeholder="Matiere du cour" ><button onclick="addCour()">Ajouter</button></form></a>
+			</div>
+			<!--blog pour les champs a mettre à droite sur la topnav-->
+			<div class="topnav-right">
+				<a href="/connection"><i class="fa fa-fw fa-user"></i> Login</a>
+				<a href="/inscription">Sign In</a>
+			</div>
+
+			<!--icone pour afficher tous les champs de la topnav-->
+			<a href="javascript:void(0);" class="menu" id="menuBar">&#9776;</a>
+		</div>
+		<!--Code pour la navbar-->
+	</header>
+	<main>
+		<article>
+			<h1 class="titre_page">Thèmes</h1>
+			<div class="liste"  >
+				<div class="liste_block"th:each="mapItem, state:${matiere} ">
+					<h4 th:utext="${mapItem.key}">JavaEE</h4>
+					<div class="dropdown" >
+						<button  class="dropbtn" th:attr="onclick=|showListCours('${mapItem.key}')|" >Cours</button>
+						<div th:id="${mapItem.key}" class="dropdown-content">
+							<div class="cours"th:each="cour,state:${mapItem.value}" ><h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5>
+								<a download th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
+								<a><form><input class="nom_update" type="text" placeholder="nom du cours"><input type="text" class="url_update" placeholder="url" ><input class="updatebtn" type="submit" value="Update"></form></a>
+								<a><button class="deletebtn" >&times; Delete</button></a>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 
 		</article>
-
 	</main>
 	<footer>
 		<div>
-			<h4>Qui sommes nous ?</h4>
+			<h4>Qui sommes-nous ?</h4>
 			<ul>
-				<li>Un groupe d'étudiants</li>
+				<li>• Un groupe d'étudiants.</li>
 			</ul>
 		</div>
 		<div>
-			<h4>Où nous trouver</h4>
+			<h4>Où nous trouver ?</h4>
 			<ul>
-				<li>à HEI</li>
+				<li>• À HEI (ou à La Faluche, ça dépend des heures).</li>
 			</ul>
 		</div>
 		<div>
 			<h4>Détails</h4>
 			<ul>
-				<li> Creéation du site</li>
+				<li>• Création du site : lors du premier semestre de l'année 2021-2022</li>
 			</ul>
 		</div>
 	</footer>
+
 </body>
 <script src="..\..\js\all_js.js"></script>
 </html>

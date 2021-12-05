@@ -2,6 +2,7 @@ package hei.projet.openhei.servlets;
 
 import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
+import hei.projet.openhei.service.CoursService;
 import hei.projet.openhei.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,23 +15,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/updateCours")
-public class UpdateCoursServlet {
+@WebServlet("/cours/update")
+public class UpdateCoursServlet extends  GenericServlet{
     static final Logger LOGGER = LogManager.getLogger();
-
-/*
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-        //on recupere le contenu des champs de la session de connexion
-        String nom_cours = req.getParameter("nom_cours");
-        String url_cours = req.getParameter("url_cours");
-        HttpSession session=req.getSession();
-
-        req.setAttribute("nom_cours", nom_cours);
-        req.setAttribute("url_cours", url_cours);
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/template/themes_admins.html").forward(req, resp);
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp){
+        Integer id_cours = Integer.parseInt(req.getParameter("idcours"));
+        String  nom_cours= req.getParameter("nom_cours");
+        String url_cours= req.getParameter("url_cours");
+        LOGGER.info("coursid to update : "+id_cours);
+        if(nom_cours==null || nom_cours==" "){
+            LOGGER.warn("le nom du cours a update ne doit pas etre vide");
+        }
+        if(url_cours==null||url_cours==" "){
+            LOGGER.warn("l'url du cours a update ne doit pas etre vide");
+        }else {
+            try {
+                CoursService.getInstance().updateCours(id_cours, nom_cours, url_cours);
+            } catch (Exception e) {
+                LOGGER.warn("Le cours n'as pas pu etre update", e);
+            }
+        }
     }
-    }*/
 }

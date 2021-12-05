@@ -30,39 +30,34 @@ window.onload=function(){
     window.onscroll = function() {
         StickNavbarMenu();
     };
-
-    /*var searchBar=document.getElementById("search_bar");
-    searchBar.onclick=function (){
-        ShowingSearchBarOnClick();
-    }*/
-
-    // Close the dropdown if the user clicks outside of it
-    /*window.onclick = function(event) {
-        if (!event.target.matches('.search-dropbtn')) {
-            var dropdowns = document.getElementsByClassName("search-content");
-            var openDropdown = dropdowns[0];
-            if (openDropdown.classList.contains('show-searchbar')&&!document.getElementById("testid")) {
-                openDropdown.classList.remove('show-searchbar');
+    /*
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.search-dropbtn')) {
+                var dropdowns = document.getElementsByClassName("search-content");
+                var openDropdown = dropdowns[0];
+                if (openDropdown.classList.contains('show-searchbar')&&!document.getElementById("testid")) {
+                    openDropdown.classList.remove('show-searchbar');
+                }
             }
         }
-    }*/
 
-    //Permet d'afficher le champ de recherche au click sur le bouton
-    /*search_button=document.getElementsByClassName("search-dropbtn");
-    search_button[0].onclick = function() {
-        ShowingSearchBarOnClick();
-    }
+        //Permet d'afficher le champ de recherche au click sur le bouton
+        search_button=document.getElementsByClassName("search-dropbtn");
+        search_button.onclick = function() {
+            ShowingSearchBarOnClick();
+        }
 
-    //Permet de récuper la search bar
-    searchbar=navbar.querySelector("input");
-    //Sur le click gagne la classe "active"
-    searchbar.onclick=function(){
-        searchbar.classList.add("active");
-    }
-    //Qd perd le focus perd la classe "active"
-    searchbar.onblur=function(){
-        searchbar.classList.remove("active");
-    }*/
+        //Permet de récuper la search bar
+        searchbar=navbar.querySelector("input");
+        //Sur le click gagne la classe "active"
+        searchbar.onclick=function(){
+            searchbar.classList.add("active");
+        }
+        //Qd perd le focus perd la classe "active"
+        searchbar.onblur=function(){
+            searchbar.classList.remove("active");
+        }*/
 
 
     //liste cours
@@ -80,46 +75,27 @@ window.onload=function(){
         }
     }
 
-
-    //récupère la liste des éléments de classe dropbtn et itère sur le click de chaque élément
-    var button_liste_cours=document.getElementsByClassName("dropbtn");
-    for (let button of button_liste_cours) {
-        button.onclick=function (){
-            showListCours();
+    var button_delete_cours=document.getElementsByClassName("deletebtn");
+    for (let delbutton of button_delete_cours) {
+        delbutton.onclick=function (){
+            deleteCours();
         }
     }
 
-    /*
-
-    function filterThemes() {
-    //déclaration des variables
-    var input, filter,classname, a, i, txtValue;
-    input = document.getElementById("site-search");
-    filter = input.value.toUpperCase();
-    classname=document.getElementsByClassName("liste_block");
-
-    // boucle pour lister les bons résultats et cacher les autres
-    for (i = 0; i < classname.length; i++) {
-        a = classname[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            classname[i].style.display = "";
-        } else {
-            classname[i].style.display = "none";
+    var button_update_cours=document.getElementsByClassName("updatebtn");
+    for (let updatebutton of button_update_cours) {
+        updatebutton.onclick = function () {
+            updateCours();
         }
+
     }
-}
-
-     */
-
-
 }
 
 
 /*--Functions--*/
 
 
-/*Permet d'afficher toute la barre de navigation 
+/*Permet d'afficher toute la barre de navigation
 avec l'ajout de la classe responsive*/
 function showAllNavBarElement() {
     if (navbar.className === "topnav"||navbar.className === "topnav sticky") {
@@ -130,7 +106,7 @@ function showAllNavBarElement() {
     }
 }
 
-/*Permet d'afficher toute la barre de navigation 
+/*Permet d'afficher toute la barre de navigation
 lorsque l'on scroll plus que la disatnce a laquelle se situe la navbar*/
 function StickNavbarMenu() {
     /*window.pageYOffset indique le nombre de pixel scroller sur l'axe vertical*/
@@ -141,7 +117,7 @@ function StickNavbarMenu() {
     }
 }
 
-/* When the user clicks on the button, 
+/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function ShowingSearchBarOnClick() {
     document.getElementById("myDropdown").classList.toggle("show-searchbar");
@@ -163,5 +139,46 @@ function addCour(){
     request.send("nom_cour=" + nom+ "&url_cour=" +url + "&nom_mat=" + nomM);
 }
 
+let updateCours = function () {
+    let updateRequest = new XMLHttpRequest();
+    updateRequest.open("POST", "cours/update", true);
+    let idcours = document.querySelectorAll("cours h5");
+    for (var id_cours of idcours){
+        id_cours=idcours.getAttribute("value");
+    }
+    let nomcours = document.querySelectorAll("nom_update");
+    for (var nom_cours of nomcours){
+        nom_cours=nomcours.getValue();
+    }
+    let urlcours = document.querySelectorAll("url_update");
+    for (var url_cours of urlcours){
+        url_cours=urlcours.getValue();
+    }
+
+    updateRequest.onload = function () {
+        if(this.status === 200) {
+            console.log("Requete envoyé")
+        } else {
+            console.log("Echec de la requete")
+        }
+    }
+    updateRequest.send("idcours="+idcours, "nom_cours="+nom_cours, "url_cours="+url_cours);
+}
 
 
+let deleteCours = function () {
+    let deleteRequest = new XMLHttpRequest();
+    deleteRequest.open("POST", "cours/delete", true);
+    let cours = document.querySelectorAll("cours h5");
+    for (var idcours of cours){
+        idcours=cours.getAttribute("value");
+    }
+    deleteRequest.onload = function () {
+        if(this.status === 200) {
+            console.log("Requete envoyé")
+        } else {
+            console.log("Echec de la requete")
+        }
+    }
+    deleteRequest.send("id="+idcours);
+}

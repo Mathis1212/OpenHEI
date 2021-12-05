@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
 
-
+    static final Logger LOGGER = LogManager.getLogger();
     //creattion de l'instance
     private static class ServiceHolder {
         private final static CoursDao instance = new CoursDaoImpl();
@@ -121,5 +121,59 @@ public class CoursDaoImpl implements CoursDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+    @Override
+    public Integer deleteCoursFromDB(Integer id_cours){
+        String sqlQuery = "DELETE FROM cours WHERE cours.id_cours=?";
+        int row = 0;
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
+                preparedStatement.setInt(1, id_cours);
+                row = preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Erreur SQL");
+        }
+        return row;
+    }
+
+    @Override
+    public Integer updateCoursFromDB(Integer id_cours, String nom_cours, String url_cours){
+        String sqlQuery = "UPDATE projet_OpenHEI.cours SET nom_cours=?, url_cours=? WHERE cours.id_cours=?";
+        int row = 0;
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
+                preparedStatement.setString(1, nom_cours);
+                preparedStatement.setString(2, url_cours);
+                preparedStatement.setInt(3, id_cours);
+                row = preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Erreur SQL");
+        }
+        return row;
+    }
+
+    @Override
+    public boolean ExistCours( Integer id) throws SQLException {
+        boolean resultat=false;
+        String sql = "SELECT * FROM cours WHERE courd.id_cours=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                try (ResultSet result = preparedStatement.executeQuery()) {
+                    if (result.next()) {
+                        resultat=true;
+                    }
+        } catch (SQLException e) {
+            LOGGER.info("Erreur SQL");
+        }
+        return resultat;
     }
 }
