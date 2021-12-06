@@ -80,6 +80,28 @@ window.onload=function(){
         }
     }
 
+    /*
+
+    function filterThemes() {
+    //déclaration des variables
+    var input, filter,classname, a, i, txtValue;
+    input = document.getElementById("site-search");
+    filter = input.value.toUpperCase();
+    classname=document.getElementsByClassName("liste_block");
+
+    // boucle pour lister les bons résultats et cacher les autres
+    for (i = 0; i < classname.length; i++) {
+        a = classname[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            classname[i].style.display = "";
+        } else {
+            classname[i].style.display = "none";
+        }
+    }
+}
+
+     */
 
 }
 

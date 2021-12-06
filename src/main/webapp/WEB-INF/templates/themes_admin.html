@@ -12,26 +12,11 @@
 	<title>Thèmes - OpenHei</title>
 </head>
 <body>
-<div id="haut_page_header">
-	<img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
-	<h1 class="titre">OpenHei</h1>
-</div>
-<!--Code pour la navbar-->
-<div class="topnav" id="myTopnav">
-
-	<!--les classes des balises i sont chargés depuis le css en ligne-->
-	<a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Home</a>
-
-
-	<!--Code à compléter champ de recherche-->
-	<div class="menuderoulant">
-		<button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
-		<div id="myDropdown" class="menuderoulant-content">
-			<div class="search-container" id="testid">
-				<form action="">
-					<input type="search" placeholder="Search.." name="search" id="search">
-					<button type="submit" id="loupe"><i class="fa fa-search"></i></button>
-				</form>
+	<header>
+		<header>
+			<div id="haut_page_header">
+				<img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
+				<h1 class="titre">OpenHei</h1>
 			</div>
 		</div>
 	</div>
@@ -87,32 +72,28 @@
 						</div>
 					</div>
 				</div>
-
+			</article>
+		</main>
+		<footer>
+			<div>
+				<h4>Qui sommes-nous ?</h4>
+				<ul>
+					<li>• Un groupe d'étudiants.</li>
+				</ul>
 			</div>
-
-		</article>
-
-	</main>
-	<footer>
-		<div>
-			<h4>Qui sommes nous ?</h4>
-			<ul>
-				<li>Un groupe d'étudiants</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Où nous trouver</h4>
-			<ul>
-				<li>à HEI</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Détails</h4>
-			<ul>
-				<li> Creéation du site</li>
-			</ul>
-		</div>
-	</footer>
+			<div>
+				<h4>Où nous trouver ?</h4>
+				<ul>
+					<li>• À HEI (ou à La Faluche, ça dépend des heures).</li>
+				</ul>
+			</div>
+			<div>
+				<h4>Détails</h4>
+				<ul>
+					<li>• Création du site : lors du premier semestre de l'année 2021-2022</li>
+				</ul>
+			</div>
+		</footer>
 </body>
 <script src="..\..\js\all_js.js"></script>
 </html>
