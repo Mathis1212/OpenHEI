@@ -28,17 +28,19 @@ public class ThemesAdminServlet extends GenericServlet {
 
         templateEngine.process("themes_admin", context, resp.getWriter());
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nom= req.getParameter("nom_cour");
-        String url=req.getParameter("url_cour");
-        String nom_mat= req.getParameter("nom_mat");
-        Integer id_mat= MatiereDaoImpl.getInstance().getID(nom_mat);
-        Cours c =new Cours(nom,url);
+        String nom = req.getParameter("nom_cour");
+        String url = req.getParameter("url_cour");
+        String nom_mat = req.getParameter("nom_mat");
+        Integer id_mat = MatiereDaoImpl.getInstance().getID(nom_mat);
+        Cours c = new Cours(nom, url);
         c.setIdMat(id_mat);
         try {
             Add_ThemeService.getInstance().addCour(c);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 }
