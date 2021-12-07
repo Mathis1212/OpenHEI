@@ -164,7 +164,7 @@ function addCour(){
 
 let updateCours = function () {
     let updateRequest = new XMLHttpRequest();
-    updateRequest.open("POST", "admin/ThemeAdmin/update", true);
+    updateRequest.open("POST", "/admin/ThemesAdmin", true);
     let idcours = document.querySelectorAll("cours h5");
     for (var id_cours of idcours){
         id_cours=idcours.getAttribute("value");
@@ -185,13 +185,13 @@ let updateCours = function () {
             console.log("Echec de la requete")
         }
     }
-    updateRequest.send("idcours="+idcours, "nom_cours="+nom_cours, "url_cours="+url_cours);
+    updateRequest.send("idcoursToUpdate="+idcours, "NewNomcours="+nom_cours, "NewUrlcours="+url_cours);
 }
 
 
 let deleteCours = function () {
     let deleteRequest = new XMLHttpRequest();
-    deleteRequest.open("POST", "admin/ThemeAdmin/delete", true);
+    deleteRequest.open("POST", "/admin/ThemesAdmin", true);
     let cours = document.querySelectorAll("cours h5");
     for (var idcours of cours){
         idcours=cours.getAttribute("value");
@@ -203,5 +203,5 @@ let deleteCours = function () {
             console.log("Echec de la requete")
         }
     }
-    deleteRequest.send("id="+idcours);
+    deleteRequest.send("idcoursToDelete="+idcours);
 }
