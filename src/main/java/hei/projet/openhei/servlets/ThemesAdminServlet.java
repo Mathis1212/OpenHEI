@@ -33,41 +33,54 @@ public class ThemesAdminServlet extends GenericServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String nom = req.getParameter("nom_cour");
         String url = req.getParameter("url_cour");
         String nom_mat = req.getParameter("nom_mat");
-        Integer id_mat = MatiereDaoImpl.getInstance().getID(nom_mat);
-        Cours c = new Cours(nom, url);
-        c.setIdMat(id_mat);
-        try {
-            Add_ThemeService.getInstance().addCour(c);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        Integer id_cours = Integer.parseInt(req.getParameter("idcoursToUpdate"));
-        String  nom_cours= req.getParameter("NewNomcours");
-        String url_cours= req.getParameter("NewUrlcours");
-        LOGGER.info("cours to update : id= "+id_cours+" nom= "+nom_cours+" url ="+url_cours);
-        if(nom_cours==null || nom_cours==" "){
-            LOGGER.warn("le nom du cours a update ne doit pas etre vide");
-        }
-        if(url_cours==null||url_cours==" "){
-            LOGGER.warn("l'url du cours a update ne doit pas etre vide");
-        }else {
-            try {
-                CoursService.getInstance().updateCours(id_cours, nom_cours, url_cours);
-            } catch (Exception e) {
-                LOGGER.warn("Le cours n'as pas pu etre update", e);
+        if ((nom != null)&&(url != null)&&(nom_mat != null)) {
+            if((!"".equals(nom))&&(!"".equals(url))&&!"".equals(nom_mat)) {
+                Integer id_mat = MatiereDaoImpl.getInstance().getID(nom_mat);
+                Cours c = new Cours(nom, url);
+                c.setIdMat(id_mat);
+                try {
+                    Add_ThemeService.getInstance().addCour(c);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
+//update d'un cours
+        String urlcoursToUpdate = req.getParameter("urlcoursToUpdate");
+        String nom_cours = req.getParameter("NewNomcours");
+        String url_cours = req.getParameter("NewUrlcours");
+        if ((urlcoursToUpdate != null&&!("".equals(urlcoursToUpdate)))&&(nom_cours != null&&!("".equals(nom_cours)))&&(url_cours != null&&!("".equals(url_cours)))) {
+            LOGGER.info("cours to update : id= " + urlcoursToUpdate + " nom= " + nom_cours + " url =" + url_cours);
+            try {
+                CoursService.getInstance().updateCours(urlcoursToUpdate, nom_cours, url_cours);
+            } catch (Exception e) {
+                LOGGER.warn("Le cours n'as pas pu etre update", e);
+            }} else {
+                if (nom_cours == null || "".equals(nom_cours)) {
+                    LOGGER.warn("le nom du cours a update ne doit pas etre vide");
+                }
+                if (url_cours == null || "".equals(url_cours)) {
+                    LOGGER.warn("l'url du cours a update ne doit pas etre vide");
+                }
 
-        Integer coursid = Integer.parseInt(req.getParameter("idcoursToDelete"));
-        LOGGER.info("coursid to delete : "+coursid);
-        try {
-            CoursService.getInstance().deleteCours(coursid);
-        } catch (SQLException e) {
-            LOGGER.warn("Erreur SQL", e);
+            }
+
+//delete un cours
+
+        String coursurl = req.getParameter("urlcoursToDelete");
+        if (coursurl != null&&!"".equals(coursurl)) {
+            LOGGER.info("coursid to delete : " + coursurl);
+            try {
+                CoursService.getInstance().deleteCours(coursurl);
+            } catch (SQLException e) {
+                LOGGER.warn("Erreur SQL", e);
+            }
+        }else{
+            LOGGER.warn("Le cours n'a pas pu etre supprimé");
         }
     }
 }

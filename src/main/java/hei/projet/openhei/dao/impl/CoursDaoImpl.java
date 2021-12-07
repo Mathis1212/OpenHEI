@@ -126,14 +126,14 @@ public class CoursDaoImpl implements CoursDao {
     }
 
     @Override
-    public Integer deleteCoursFromDB(Integer id_cours) {
-        String sqlQuery = "DELETE FROM cours WHERE cours.id_cours=?";
+    public Integer deleteCoursFromDB(String url_cours) {
+        String sqlQuery = "DELETE FROM cours WHERE cours.url_cours=?";
         int row = 0;
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
-                preparedStatement.setInt(1, id_cours);
+                preparedStatement.setString(1, url_cours);
                 row = preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -143,8 +143,8 @@ public class CoursDaoImpl implements CoursDao {
     }
 
     @Override
-    public Integer updateCoursFromDB(Integer id_cours, String nom_cours, String url_cours) {
-        String sqlQuery = "UPDATE projet_OpenHEI.cours SET nom_cours=?, url_cours=? WHERE cours.id_cours=?";
+    public Integer updateCoursFromDB(String urlcoursToUpdate, String nom_cours, String url_cours) {
+        String sqlQuery = "UPDATE projet_OpenHEI.cours SET nom_cours=?, url_cours=? WHERE cours.url_cours=?";
         int row = 0;
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
@@ -152,7 +152,7 @@ public class CoursDaoImpl implements CoursDao {
                  PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
                 preparedStatement.setString(1, nom_cours);
                 preparedStatement.setString(2, url_cours);
-                preparedStatement.setInt(3, id_cours);
+                preparedStatement.setString(3, urlcoursToUpdate);
                 row = preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -162,14 +162,14 @@ public class CoursDaoImpl implements CoursDao {
     }
 
     @Override
-    public boolean ExistCours(Integer id) throws SQLException {
+    public boolean ExistCours(String url_cours) throws SQLException {
         boolean resultat = false;
-        String sql = "SELECT * FROM cours WHERE courd.id_cours=?";
+        String sql = "SELECT * FROM cours WHERE cours.url_cours=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
-                preparedStatement.setInt(1, id);
+                preparedStatement.setString(1, url_cours);
                 try (ResultSet result = preparedStatement.executeQuery()) {
                     if (result.next()) {
                         resultat = true;

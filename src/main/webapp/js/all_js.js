@@ -78,7 +78,8 @@ window.onload=function(){
     var button_delete_cours=document.getElementsByClassName("deletebtn");
     for (let delbutton of button_delete_cours) {
         delbutton.onclick=function (){
-            deleteCours();
+            var url=getUrlValue(delbutton);
+            deleteCours(url);
         }
     }
 
@@ -165,6 +166,7 @@ function addCour(){
 let updateCours = function () {
     let updateRequest = new XMLHttpRequest();
     updateRequest.open("POST", "/admin/ThemesAdmin", true);
+    updateRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     let idcours = document.querySelectorAll("cours h5");
     for (var id_cours of idcours){
         id_cours=idcours.getAttribute("value");
@@ -185,17 +187,16 @@ let updateCours = function () {
             console.log("Echec de la requete")
         }
     }
-    updateRequest.send("idcoursToUpdate="+idcours, "NewNomcours="+nom_cours, "NewUrlcours="+url_cours);
+    updateRequest.send("urlcoursToUpdate="+idcours, "NewNomcours="+nom_cours, "NewUrlcours="+url_cours);
 }
 
 
-let deleteCours = function () {
+let deleteCours = function (url) {
+
     let deleteRequest = new XMLHttpRequest();
     deleteRequest.open("POST", "/admin/ThemesAdmin", true);
-    let cours = document.querySelectorAll("cours h5");
-    for (var idcours of cours){
-        idcours=cours.getAttribute("value");
-    }
+    deleteRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    console.log("url du cours :" +url);
     deleteRequest.onload = function () {
         if(this.status === 200) {
             console.log("Requete envoyé")
@@ -203,5 +204,10 @@ let deleteCours = function () {
             console.log("Echec de la requete")
         }
     }
-    deleteRequest.send("idcoursToDelete="+idcours);
+    deleteRequest.send("urlcoursToDelete="+url);
+}
+
+function getUrlValue(bouton){
+    var url=bouton.parentElement.previousElementSibling.previousElementSibling.getAttribute("href");
+    return url;
 }

@@ -9,7 +9,11 @@ public class Cours {
     private Integer id_mat;
 
 
-
+    public Cours( String nomCours,String url,Integer id){
+        this.nomCours=nomCours;
+        this.url=url;
+        this.id=id;
+    }
     public Cours( String nomCours,String url){
         this.nomCours=nomCours;
         this.url=url;

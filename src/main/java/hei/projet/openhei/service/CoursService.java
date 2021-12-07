@@ -19,14 +19,14 @@ public class CoursService {
     static final Logger LOGGER = LogManager.getLogger();
 
 
-    public Integer deleteCours(Integer id_cours) throws SQLException {
+    public Integer deleteCours(String url_cours) throws SQLException {
         int deletedrows=0;
-        if (id_cours == null){
+        if (url_cours == null){
             LOGGER.warn("Un code cours ne peut pas etre null");
-        }else if(!CoursDaoImpl.getInstance().ExistCours(id_cours)){
+        }else if(!CoursDaoImpl.getInstance().ExistCours(url_cours)){
             LOGGER.warn("Le cours n'existe pas");
         }else{
-            deletedrows=CoursDaoImpl.getInstance().deleteCoursFromDB(id_cours);
+            deletedrows=CoursDaoImpl.getInstance().deleteCoursFromDB(url_cours);
             if(deletedrows!=0){
                 LOGGER.info("Some rows deleted");
             }else{
@@ -36,8 +36,8 @@ public class CoursService {
         return deletedrows;
     }
 
-    public void updateCours(Integer id_cours, String nom_cours, String url_cours){
-        CoursDaoImpl.getInstance().updateCoursFromDB(id_cours,nom_cours,url_cours);
+    public void updateCours(String urlcoursToUpdate, String nom_cours, String url_cours){
+        CoursDaoImpl.getInstance().updateCoursFromDB(urlcoursToUpdate,nom_cours,url_cours);
 
     }
 
