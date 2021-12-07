@@ -28,10 +28,10 @@
             <!--Code à compléter champ de recherche-->
             <div class="menuderoulant">
               <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
-              <div id="myDropdowné" class="menuderoulant-content">
+              <div id="myDropdown" class="menuderoulant-content">
                 <div class="search-container" id="testid">
                     <form action="">
-                      <input type="search" placeholder="Search.." name="search" id="search">
+                      <input type="text" onkeyup="filterThemes()" placeholder="Search..." name="search" id="site-search">
                       <button type="submit" id="loupe"><i class="fa fa-search"></i></button>
                     </form>
                   </div>
@@ -75,13 +75,13 @@
 
     <footer th:fragment="footer(currentPage)">
         <div>
-            <h4>Qui sommes nous ?</h4>
+            <h5>Qui sommes nous ?</h5>
             <ul>
                 <li></li>
             </ul>
         </div>
         <div>
-            <h4>Où nous trouver</h4>
+            <h5>Où nous trouver</h5>
             <ul>
                 <li><a>Facebook</a></li>
                 <li><a href="">Instagram</a></li>
