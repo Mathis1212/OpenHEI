@@ -141,7 +141,7 @@ function addCour(){
 
 let updateCours = function () {
     let updateRequest = new XMLHttpRequest();
-    updateRequest.open("POST", "cours/update", true);
+    updateRequest.open("POST", "admin/ThemeAdmin/update", true);
     let idcours = document.querySelectorAll("cours h5");
     for (var id_cours of idcours){
         id_cours=idcours.getAttribute("value");
@@ -168,7 +168,7 @@ let updateCours = function () {
 
 let deleteCours = function () {
     let deleteRequest = new XMLHttpRequest();
-    deleteRequest.open("POST", "cours/delete", true);
+    deleteRequest.open("POST", "admin/ThemeAdmin/delete", true);
     let cours = document.querySelectorAll("cours h5");
     for (var idcours of cours){
         idcours=cours.getAttribute("value");

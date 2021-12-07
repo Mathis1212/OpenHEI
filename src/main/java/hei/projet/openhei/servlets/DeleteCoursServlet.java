@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
-@WebServlet("/cours/delete")
+@WebServlet("admin/ThemeAdmin/delete")
 public class DeleteCoursServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
     @Override

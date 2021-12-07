@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/cours/update")
+@WebServlet("admin/ThemeAdmin/update")
 public class UpdateCoursServlet extends  GenericServlet{
     static final Logger LOGGER = LogManager.getLogger();
     @Override
@@ -23,7 +23,8 @@ public class UpdateCoursServlet extends  GenericServlet{
         Integer id_cours = Integer.parseInt(req.getParameter("idcours"));
         String  nom_cours= req.getParameter("nom_cours");
         String url_cours= req.getParameter("url_cours");
-        LOGGER.info("coursid to update : "+id_cours);
+
+        LOGGER.info("cours to update : id= "+id_cours+" nom= "+nom_cours+" url ="+url_cours);
         if(nom_cours==null || nom_cours==" "){
             LOGGER.warn("le nom du cours a update ne doit pas etre vide");
         }

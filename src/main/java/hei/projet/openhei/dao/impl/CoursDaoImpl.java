@@ -14,6 +14,7 @@ import java.util.List;
 public class CoursDaoImpl implements CoursDao {
 
     static final Logger LOGGER = LogManager.getLogger();
+
     //creattion de l'instance
     private static class ServiceHolder {
         private final static CoursDao instance = new CoursDaoImpl();
@@ -117,13 +118,15 @@ public class CoursDaoImpl implements CoursDao {
                 preparedStatement.setString(1, nom);
                 preparedStatement.setString(3, url);
                 preparedStatement.setInt(2, id_mat);
-                preparedStatement.executeUpdate();            }
+                preparedStatement.executeUpdate();
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
+
     @Override
-    public Integer deleteCoursFromDB(Integer id_cours){
+    public Integer deleteCoursFromDB(Integer id_cours) {
         String sqlQuery = "DELETE FROM cours WHERE cours.id_cours=?";
         int row = 0;
         try {
@@ -140,7 +143,7 @@ public class CoursDaoImpl implements CoursDao {
     }
 
     @Override
-    public Integer updateCoursFromDB(Integer id_cours, String nom_cours, String url_cours){
+    public Integer updateCoursFromDB(Integer id_cours, String nom_cours, String url_cours) {
         String sqlQuery = "UPDATE projet_OpenHEI.cours SET nom_cours=?, url_cours=? WHERE cours.id_cours=?";
         int row = 0;
         try {
@@ -159,8 +162,8 @@ public class CoursDaoImpl implements CoursDao {
     }
 
     @Override
-    public boolean ExistCours( Integer id) throws SQLException {
-        boolean resultat=false;
+    public boolean ExistCours(Integer id) throws SQLException {
+        boolean resultat = false;
         String sql = "SELECT * FROM cours WHERE courd.id_cours=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
@@ -169,11 +172,11 @@ public class CoursDaoImpl implements CoursDao {
                 preparedStatement.setInt(1, id);
                 try (ResultSet result = preparedStatement.executeQuery()) {
                     if (result.next()) {
-                        resultat=true;
+                        resultat = true;
                     }
-        } catch (SQLException e) {
-            LOGGER.info("Erreur SQL");
-        }
-        return resultat;
+                }}} catch (SQLException e) {
+                    LOGGER.info("Erreur SQL");
+                }
+                return resultat;
     }
 }
