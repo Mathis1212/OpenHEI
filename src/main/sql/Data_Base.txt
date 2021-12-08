@@ -3,27 +3,27 @@ CREATE DATABASE projet_OpenHEI;
 
 CREATE TABLE projet_OpenHEI.usager (
     user_id int AUTO_INCREMENT PRIMARY KEY,
-    user_name varchar(30) NOT NULL,
+    user_pseudo varchar(30) NOT NULL,
     user_login varchar(60) NOT NULL,
-    user_password varchar(20) NOT NULL,
-    date_creation date default GETDATE()
+    user_password varchar(200) NOT NULL,
+    date_creation date default now(),
+    user_admin tinyint(1) unsigned not null default(0),
+    UNIQUE(user_login)
     )engine=innodb;
 
 CREATE TABLE projet_OpenHEI.matiere (
 	id_matiere INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	nom_matiere VARCHAR(100) NOT NULL,
-	num_notions int default 0
-	) ENGINE=INNODB;
+	nom_matiere VARCHAR(100)  NOT NULL,
+	num_notions int not null default(0),
+	UNIQUE(nom_matiere)
+	)engine=innodb;
 
 CREATE TABLE projet_OpenHEI.cours (
 	id_cours INT NOT NULL AUTO_INCREMENT,
 	nom_cours VARCHAR(100) NOT NULL,
+	url_cours varchar(300) not null,
 	id_matiere_cours INT NOT NULL,
 	PRIMARY KEY (id_cours),
-	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere)
-	) ENGINE=INNODB;
-    
-    
-    
-    
-
+	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere),
+	UNIQUE(url_cours)
+	)engine=innodb;
