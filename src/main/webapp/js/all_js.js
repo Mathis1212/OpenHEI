@@ -3,7 +3,7 @@ window.onload=function(){
     //prend pour élément la navbar d'id "myTopnav"
     navbar = document.getElementById("myTopnav");
     /*sticky indique la position de l'élément navbar par rapport au haut de la page */
-    sticky = navbar.offsetTop;
+    //sticky = navbar.offsetTop;
 
     //Permet de récuper un Array de tous les liens de la navbar
     lien_navbar=navbar.querySelectorAll("a");
@@ -80,19 +80,21 @@ window.onload=function(){
         delbutton.onclick=function (){
             var url=getUrlValue(delbutton);
             deleteCours(url);
-            showListCours();
         }
     }
 
     var button_update_cours=document.getElementsByClassName("updatebtn");
     for (let updatebutton of button_update_cours) {
         updatebutton.onclick = function () {
-           var url_oldcours = getUpdateUrlValue(updatebutton);
-
-            updateCours(url_oldcours);
-            showListCours();
+            var url_oldcours = getUpdateUrlValue(updatebutton);
+            var url_newcours = updatebutton.previousElementSibling.previousElementSibling.value;
+            let nom_newcours = updatebutton.previousElementSibling.value;
+        if(verif()==true) {
+            updateCours(url_oldcours, url_newcours, nom_newcours);
+        }else{
+            alert("Veuillez remplir tout les champs pour mettre à jour un cours");
         }
-
+        }
     }
     /*
 
@@ -167,19 +169,13 @@ function addCour(){
     request.send("nom_cour=" + nom+ "&url_cour=" +url + "&nom_mat=" + nomM);
 }
 
-let updateCours = function (url_oldcours) {
+let updateCours = function (url_oldcours, nom_cours, url_cours) {
     console.log(url_oldcours);
+    console.log(nom_cours);
+    console.log(url_cours);
     let updateRequest = new XMLHttpRequest();
     updateRequest.open("POST", "/admin/ThemesAdmin", true);
     updateRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    let url_newcours = document.getElementsByClassName("url_update");
-    for (var url_cours of url_newcours){
-        url_cours=url_newcours.innerText;
-    }
-    let cours_newnom = document.getElementsByClassName("nom_update");
-    for (var nom_cours of cours_newnom){
-        nom_cours=cours_newnom.innerText;
-    }
     updateRequest.onload = function () {
         if(this.status === 200) {
             console.log("Requete envoyé")
@@ -187,7 +183,7 @@ let updateCours = function (url_oldcours) {
             console.log("Echec de la requete")
         }
     }
-    updateRequest.send("urlcoursToUpdate="+url_cours, "NewNomcours="+nom_cours, "NewUrlcours="+url_oldcours);
+    updateRequest.send("urlcoursToUpdate="+url_oldcours+ "&NewNomcours="+nom_cours+ "&NewUrlcours="+url_cours);
 }
 
 
@@ -216,4 +212,18 @@ function getUrlValue(bouton){
 function getUpdateUrlValue(bouton){
     var url_oldcours=bouton.parentElement.parentElement.previousElementSibling.getAttribute("href");
     return url_oldcours;
+}
+
+function verif()
+{
+    result=false;
+    var newnomcours = document.getElementById("nomupdate").value;
+    var url    = document.getElementById("urlupdate").value;
+
+    if((newnomcours!="")&&(url!="")){
+        result=true;
+    }else{
+        result= false;
+    }
+    return result;
 }
