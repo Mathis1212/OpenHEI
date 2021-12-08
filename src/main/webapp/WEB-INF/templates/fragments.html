@@ -22,12 +22,12 @@
         <div class="topnav" id="myTopnav">
 
             <!--les classes des balises i sont chargés depuis le css en ligne-->
-            <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Home</a>
+            <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Accueil</a>
 
 
             <!--Code à compléter champ de recherche-->
             <div class="menuderoulant">
-              <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
+              <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Rechercher</button>
               <div id="myDropdown" class="menuderoulant-content">
                 <div class="search-container" id="testid">
                     <form action="">
@@ -43,7 +43,7 @@
             <div class="menuderoulant">
                 <button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
                 <div class="menuderoulant-content">
-                    <a href="/Themes" th:class="${currentPage == 'Themes' ? 'active' : ''}">Matieres</a>
+                    <a href="/Themes" th:class="${currentPage == 'Themes' ? 'active' : ''}">Matières</a>
                 </div>
             </div>
             <!--blog pour les champs a mettre à droite sur la topnav-->
@@ -75,15 +75,15 @@
 
     <footer th:fragment="footer(currentPage)">
         <div>
-            <h5>Qui sommes nous ?</h5>
+            <h5>Qui sommes-nous ?</h5>
             <ul>
-                <li></li>
+                <li>De futurs ingénieurs</li>
             </ul>
         </div>
         <div>
             <h5>Où nous trouver</h5>
             <ul>
-                <li><a>Facebook</a></li>
+                <li><a href="">Facebook</a></li>
                 <li><a href="">Instagram</a></li>
             </ul>
         </div>
