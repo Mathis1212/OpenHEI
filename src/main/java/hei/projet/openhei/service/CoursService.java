@@ -21,10 +21,10 @@ public class CoursService {
 
     public Integer deleteCours(String url_cours) throws SQLException {
         int deletedrows=0;
-        if (url_cours == null){
-            LOGGER.warn("Un code cours ne peut pas etre null");
+        if (url_cours == null||"".equals(url_cours)){
+            LOGGER.warn("Un code cours ne peut pas etre null ou vide");
         }else if(!CoursDaoImpl.getInstance().ExistCours(url_cours)){
-            LOGGER.warn("Le cours n'existe pas");
+            LOGGER.warn("Le cours a update n'existe pas");
         }else{
             deletedrows=CoursDaoImpl.getInstance().deleteCoursFromDB(url_cours);
             if(deletedrows!=0){
