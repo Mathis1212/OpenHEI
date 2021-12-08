@@ -1,43 +1,264 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!--librairie css pour les icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--css pour la navbar-->
-    <link rel="stylesheet" type="text/css"  href="..\..\css\all_css.css">
-    <!--js pour les évènements-->
-    <!--<script src="..\..\js\all_js.js"></script>-->
-    <link rel="icon" type="image/png" href="../../images/O.png" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inscription - OpenHei</title>
-</head>
-<body id="body_champ">
-<div class="container">
-    <div class="titre_logo">
-        <a class="back_home" href="/Accueil"><img id="logo" src="../../images/O.png" alt="Logo OpenHei"></a>
-        <a class="back_home" href="/Accueil"><h3>OpenHei</h3></a>
-    </div>
-    <form method="POST" >
-        <div class="champ">
-            <label for="Pseudo">Pseudo :</label>
-            <input type="text" id="Pseudo" name="Pseudo" placeholder="Your Pseudo.." autocomplete="false" required>
+    <head>
+        <!--librairie css pour les icons-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--css pour la navbar-->
+        <link rel="stylesheet" type="text/css"  href="..\..\css\all_css.css">
+        <!--js pour les évènements-->
+        <!--<script src="..\..\js\all_js.js"></script>-->
+        <link rel="icon" type="image/png" href="../../images/O.png" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Inscription - OpenHei</title>
+        <style>
+
+            /* The message box is shown when the user clicks on the password field */
+            #message {
+                display:none;
+                color: #000;
+                position: relative;
+                text-align: center;
+                padding: 20px;
+                margin-top: 5px;
+                margin-bottom: 20px;
+                border-bottom: 2px black dotted;
+            }
+
+            #message p {
+                padding: 10px 35px;
+                font-size: 18px;
+            }
+
+            /* Add a green text color and a checkmark when the requirements are right */
+            .valid {
+                color: green;
+            }
+
+            .valid:before {
+                position: relative;
+                left: -35px;
+                content: "✔";
+            }
+
+            /* Add a red text color and an "x" when the requirements are wrong */
+            .invalid,.champ span  {
+                color: #883d3d;
+            }
+
+            .invalid:before{
+                position: relative;
+                left: -15px;
+                content: "✖";
+            }
+            .champ span{
+                padding-left: 30px;
+                padding-top: 5px;
+            }
+        </style>
+    </head>
+    <body id="body_champ">
+        <div class="container">
+            <div class="titre_logo">
+                <a class="back_home" href="/Accueil"><img id="logo" src="../../images/O.png" alt="Logo OpenHei"></a>
+                <a class="back_home" href="/Accueil"><h3>OpenHei</h3></a>
+            </div>
+            <form method="POST" >
+                <div class="champ">
+                    <label for="Pseudo">Pseudo :</label>
+                    <div>
+                        <span class="invalid"></span>
+                        <input type="text" id="Pseudo" name="Pseudo" placeholder="Your Pseudo.." autocomplete="false" spellcheck="false" pattern="(?=.*[0-9])(?=\S+$).{5,}" required>
+                    </div>
+                </div>
+                <div class="champ">
+                    <label for="Login">Login :</label>
+                    <div>
+                        <span class="invalid"></span>
+                        <input type="email" id="Login" class="invalid" name="Login" placeholder="Your Login.." autocomplete="false" spellcheck="false" pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$" required>
+                    </div>
+                </div>
+                <div class="champ">
+                    <label for="Password">Password :</label>
+                    <div>
+                        <span class="invalid"></span>
+                        <input type="password" id="Password" class="invalid" name="Password" placeholder="Your password.. " autocomplete="false" spellcheck="false" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}" required>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="champ">
+                    <input type="submit" value="S'inscrire" id="envoi">
+                </div>
+            </form>
+
+            <div id="message">
+                <h3>Password must contain the following:</h3>
+                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                <p id="number" class="invalid">A <b>number</b></p>
+                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                <p id="specialChar" class="invalid">Minimum <b>1 special character</b></p>
+                <p id="space" class="invalid"><b>No Space</b></p>
+            </div>
+
+            <div id="connexion" >
+                <a href="/connection" >Vous êtes déja inscrit ?</a>
+            </div>
         </div>
-        <div class="champ">
-            <label for="Login">Login :</label>
-            <input type="email" id="Login" name="Login" placeholder="Your Login.." autocomplete="false" required>
-        </div>
-        <div class="champ">
-            <label for="Password">Password :</label>
-            <input type="password" id="Password" name="Password" placeholder="Your password.. " autocomplete="false" required>
-        </div>
-        <div class="champ">
-            <input type="submit" value="S'inscrire" id="envoi">
-        </div>
-    </form>
-    <div id="connexion" >
-        <a href="/connection" >Vous êtes déja inscrit ?</a>
-    </div>
-</div>
-</body>
+
+        <script>
+            //les champs de saisie
+            var myPasswordInput = document.getElementById("Password");
+            var myLoginInput = document.getElementById("Login");
+            var myPseudoInput = document.getElementById("Pseudo");
+
+            var letter = document.getElementById("letter");
+            var capital = document.getElementById("capital");
+            var number = document.getElementById("number");
+            var length = document.getElementById("length");
+            var space = document.getElementById("space");
+            var specialChar = document.getElementById("specialChar");
+
+
+            //Password
+            BlurField(myPasswordInput);
+            KeyUpField(myPasswordInput);
+            FocusField(myPasswordInput,"Password");
+
+            //Login
+            BlurField(myLoginInput);
+            KeyUpField(myLoginInput);
+            FocusField(myLoginInput,"Login");
+
+            //Pseudo
+            BlurField(myPseudoInput);
+            KeyUpField(myPseudoInput);
+            FocusField(myPseudoInput,"Pseudo");
+
+
+
+            // When the user clicks outside of the element field, hide the message box
+            function BlurField(elt){
+                elt.onblur = function() {
+                    document.getElementById("message").style.display = "none";
+                }
+            }
+
+            // When the user starts to type something inside the element field
+            function KeyUpField(elt){
+                elt.onkeyup = function() {
+                    validatePassword(elt);
+                }
+            }
+
+            // When the user clicks inside of the element field, show the message box with the text
+            function FocusField(elt,text){
+                elt.onfocus = function() {
+                    document.getElementById("message").style.display = "block";
+                    document.getElementById("message").getElementsByTagName("h3").item(0).innerHTML=text+" must contain the following:";
+                }
+            }
+
+
+
+
+
+            function validatePassword(elt){
+                lowerCaseLettersCheck(elt);
+                upperCaseLettersCheck(elt);
+                numbersCheck(elt);
+                lengthCheck(8,elt);
+                spaceCheck(elt);
+                specialCharCheck(elt);
+                if (letter.classList.contains("valid")&&capital.classList.contains("valid")&&number.classList.contains("valid")&&length.classList.contains("valid")&&space.classList.contains("valid")&&specialChar.classList.contains("valid")){
+                    elt.classList.remove("invalid");
+                    elt.classList.add("valid");
+                }else{
+                    letter.classList.remove("valid");
+                    letter.classList.add("invalid");
+                }
+            }
+            function validatePseudo(elt){
+                numbersCheck(elt);
+                lengthCheck(5,elt);
+                spaceCheck(elt);
+            }
+
+
+            //liste des fonctions de check individuelle
+            function lowerCaseLettersCheck(elt){
+                // Validate lowercase letters
+                var lowerCaseLetters = /[a-z]/g;
+                if(myPasswordInput.value.match(lowerCaseLetters)) {
+                    letter.classList.remove("invalid");
+                    letter.classList.add("valid");
+                } else {
+                    letter.classList.remove("valid");
+                    letter.classList.add("invalid");
+                }
+            }
+            function upperCaseLettersCheck(elt){
+                // Validate capital letters
+                var upperCaseLetters = /[A-Z]/g;
+                if(elt.value.match(upperCaseLetters)) {
+                    capital.classList.remove("invalid");
+                    capital.classList.add("valid");
+                } else {
+                    capital.classList.remove("valid");
+                    capital.classList.add("invalid");
+                }
+            }
+
+            function numbersCheck(elt){
+                // Validate numbers
+                var numbers = /[0-9]/g;
+                if(elt.value.match(numbers)) {
+                    number.classList.remove("invalid");
+                    number.classList.add("valid");
+                } else {
+                    number.classList.remove("valid");
+                    number.classList.add("invalid");
+                }
+            }
+
+            function lengthCheck(longueur,elt){
+                // Validate length
+                if(elt.value.length >= longueur) {
+                    length.classList.remove("invalid");
+                    length.classList.add("valid");
+                } else {
+                    length.classList.remove("valid");
+                    length.classList.add("invalid");
+                }
+            }
+
+            function spaceCheck(elt){
+                // Validate space
+                var spaces = /[\s]/g;
+                if(elt.value.match(spaces)) {
+                    space.classList.remove("valid");
+                    space.classList.add("invalid");
+
+                } else {
+                    space.classList.remove("invalid");
+                    space.classList.add("valid");
+                }
+            }
+            function specialCharCheck(elt){
+                // Validate space
+                var special = /[@#$%^&+!.?=]/g;
+                if(elt.value.match(special)) {
+                    specialChar.classList.remove("invalid");
+                    specialChar.classList.add("valid");
+                } else {
+                    specialChar.classList.remove("valid");
+                    specialChar.classList.add("invalid");
+                }
+            }
+
+        </script>
+    </body>
 </html>

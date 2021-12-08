@@ -117,7 +117,7 @@ body{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-/*-CSS pour le champ de recherche au click du bouton-*/
+/*-CSS pour le champ de recherche au survol du bouton-*/
 .search-dropbtn {
     background-color: #3498DB;
     color: white;
@@ -125,16 +125,6 @@ body{
     font-size: 1em;
     border: none;
     cursor: pointer;
-}
-
-.search-dropbtn:hover, .search-dropbtn:focus {
-    background-color: #2980B9;
-}
-
-.search_dropdown {
-    position: relative;
-    display: inline-block;
-    width: 100%;
 }
 
 .search-content {
@@ -145,6 +135,7 @@ body{
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    margin-top: 1em;
 }
 
 .show-searchbar,.show {display: block;}
@@ -166,9 +157,6 @@ input[type=search] {
     font-size: 1.0625em;
     cursor: pointer;
 }
-
-.search-container button:hover, .search_dropdown input:hover {border: 2px black solid;}
-
 
 /*-CSS pour le champ de recherche au click du bouton-*/
 /*permet d'aligner le menu deroulant aver le bouton*/
@@ -220,7 +208,6 @@ input[type=search] {
 .topnav-right {
     float: right;
 }
-
 
 .sticky {
     position: fixed;
@@ -509,8 +496,7 @@ aside{
 .container{
     background-color: rgb(167, 167, 167);
     border: 0.15em solid black;
-    margin: auto 25%;
-
+    margin: auto 20%;
 }
 
 .container .titre_logo a{
@@ -528,10 +514,12 @@ aside{
 .container form{
     display: flex;
     flex-direction: column;
-    margin-top: 3%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
     border-top: 2px black dotted;
     border-bottom: 2px black dotted;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 
 }
 
@@ -560,19 +548,18 @@ aside{
     align-items: center;
     margin-top: 0.5em;
     text-align: center;
-    width: 100%;
+    width: 90%;
 }
 
 .champ input{
     height: 2em;
-    width: 80%;
-
+    width: 100%;
+    height: 34px;
     text-align: center;
     border-radius: 1em;
     font-size: 1.4vw;
 }
-.champ label{
-    margin-left: 10%;
+.champ label:first-child{
     width: 80%;
     margin: 3% auto;
     font-size: 2vw;
@@ -587,6 +574,16 @@ aside{
     margin-top: 1em;
 }
 
+.champ div:last-child{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.champ div:last-child input[type="password"]{
+    margin-right: 1.7em;
+    overflow: hidden;
+}
+
 #liens_connexion{
     display: flex;
     justify-content: space-between;
@@ -598,36 +595,74 @@ aside{
 
 #body_champ #connexion{
     text-align: center;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.8em;
     font-size: 1.4vw;
 }
-/*!--CONNEXION--!*/
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 60px;
+    height: 34px;
+    max-width: 60px;
 
+}
 
-/*!--DECONNEXION--!*/
-.loader {
-    width: 50%;
-    border: 16px solid #f3f3f3;
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
     border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
 }
 
-/* Safari */
-@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-/*!--DECONNEXION--!*/
+/*!--CONNEXION--!*/
 
 
 /*---------------------------------------*/

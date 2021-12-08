@@ -54,7 +54,7 @@
                 <th:block th:if="${Connected}!=null" >
                     <div class="menuderoulant">
                         <button class="dropbtn" ><i class='fa fa-fw fa-user'></i><span th:text="${Connected}"></span> <i class="fa fa-caret-down"></i></button>
-                        <div class="menuderoulant-content">
+                        <div id="field_connected" class="menuderoulant-content">
                             <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mon Profil</a>
                             <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mes cours</a>
                             <a href="/deconnection" th:class="${ currentPage == 'deconnection' ? 'active' : ''}">Déconnexion</a>

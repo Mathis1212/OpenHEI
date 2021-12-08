@@ -26,6 +26,13 @@ window.onload=function(){
         showAllNavBarElement();
     };
 
+    //affiche le password en clair au click sur le toggle
+    password = document.getElementById("Password");
+    toggle=document.querySelector("label.switch input[type='checkbox']");
+    toggle.onclick=function (){
+        showPassword(password);
+    }
+
     //Pendant le scroll de la fenêtre, éxécute la fonction
     window.onscroll = function() {
         StickNavbarMenu();
@@ -150,6 +157,12 @@ function showListCours() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
-
+function showPassword(x) {
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
 
 

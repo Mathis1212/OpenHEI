@@ -3,12 +3,17 @@ package hei.projet.openhei.service;
 import de.mkammerer.argon2 .Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import hei.projet.openhei.dao.UserDao;
+import hei.projet.openhei.dao.impl.DataSourceProvider;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -82,5 +87,20 @@ public class UserService {
         }else{
             throw new PasswordNotChangedException();
         }
+    }
+
+    public ArrayList<String> getInformationsForSession(String login){
+        ArrayList<String> information =new ArrayList<String>();
+        if (login!=null&&!("".equals(login))){
+            if (userExist(login)){
+                User user=userDao.getUser(login);
+                information.add(user.getPseudo());
+                information.add(String.valueOf(user.getstatus()));
+            }else{
+                return information;
+            }
+        }
+        return information;
+
     }
 }

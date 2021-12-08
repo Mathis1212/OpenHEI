@@ -16,6 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet("/inscription")
 public class InscriptionServlet extends GenericServlet {
@@ -43,13 +47,32 @@ public class InscriptionServlet extends GenericServlet {
         try {
             //Vérification des champs
             if(pseudo==null||"".equals(pseudo)){
-                resp.sendRedirect("inscription");
+                //verification du pseudo en regex
+                Pattern pattern =Pattern.compile("(?=.*[0-9])(?=\\S+$).{5,}", Pattern.CASE_INSENSITIVE);
+                Matcher matcher = pattern.matcher(pseudo);
+                if (!matcher.find()){
+                    resp.sendRedirect("inscription");
+                }
             }
             if(login==null||"".equals(login)){
-                resp.sendRedirect("inscription");
+                //verification du login en regex
+                Pattern pattern =Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+                Matcher matcher = pattern.matcher(login);
+                if (!matcher.find()){
+                    resp.sendRedirect("inscription");
+                }/*
+                String pattern = "(?=.*[@])(?=\\S+$).{8,}";
+                if (!login.matches(pattern)){
+                    resp.sendRedirect("inscription");
+                }*/
             }
             if(password==null||"".equals(password)){
-                resp.sendRedirect("inscription");
+                //verification du mdp en regex (contient:1 chiffre;1 maj;1 min;1 car spé;pas d'espace;longueur>8)
+                Pattern pattern =Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!.?=])(?=\\S+$).{8,}");
+                Matcher matcher = pattern.matcher(password);
+                if (matcher.find()){
+                    resp.sendRedirect("inscription");
+                }
             }
 
             User user_champ=new User(pseudo,login,password);

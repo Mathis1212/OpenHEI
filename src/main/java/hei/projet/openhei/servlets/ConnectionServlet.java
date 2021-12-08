@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 @WebServlet("/connection")
@@ -41,8 +42,6 @@ public class ConnectionServlet extends GenericServlet {
         //on recupere le contenu des champs de la session de connexion
         String login = req.getParameter("Login");
         String password = req.getParameter("Password");
-
-
         //on peut créer un User en paramètre de la session
 
         //permet de mettre fin à la connexion sur le click du bouton déconnexion
@@ -58,12 +57,10 @@ public class ConnectionServlet extends GenericServlet {
             }
             if (UserService.getInstance().checkUser(login, password)) {
                 HttpSession session=req.getSession();
-                User userConnecter=UserDaoImpl.getInstance().getUser(login);
-                //set en session le pseudo, à récupérer
-                session.setAttribute("Pseudo",userConnecter.getPseudo());
-                session.setAttribute("Login",login);
-                session.setAttribute("Password",password);
-                session.setAttribute("Admin",userConnecter.getstatus());
+                //on stocke les informations de l'user dans la session
+                ArrayList<String> informations=UserService.getInstance().getInformationsForSession(login);
+                session.setAttribute("Pseudo",informations.get(0));
+                session.setAttribute("Admin",informations.get(1));
                 resp.sendRedirect("Accueil");
             }else{
                 throw new NullPointerException();

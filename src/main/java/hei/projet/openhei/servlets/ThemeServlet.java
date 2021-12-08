@@ -17,11 +17,6 @@ import java.io.IOException;
 public class ThemeServlet extends GenericServlet{
 
     @Override
-    public void init() throws ServletException {
-        super.init();
-    }
-
-    @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
