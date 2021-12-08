@@ -27,8 +27,8 @@ window.onload=function(){
     };
 
     //affiche le password en clair au click sur le toggle
-    password = document.getElementById("Password");
-    toggle=document.querySelector("label.switch input[type='checkbox']");
+    var password = document.getElementById("Password");
+    var toggle=document.querySelector("label.switch input[type='checkbox']");
     toggle.onclick=function (){
         showPassword(password);
     }
@@ -157,12 +157,6 @@ function showListCours() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
-function showPassword(x) {
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
-}
+
 
 

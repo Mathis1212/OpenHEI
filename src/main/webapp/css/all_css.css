@@ -547,31 +547,45 @@ aside{
     justify-content: center;
     align-items: center;
     margin-top: 0.5em;
-    text-align: center;
     width: 90%;
 }
 
 .champ input{
-    height: 2em;
     width: 100%;
     height: 34px;
     text-align: center;
     border-radius: 1em;
     font-size: 1.4vw;
 }
+
+.champ input:focus{
+    border: black 2px solid;
+}
+
 .champ label:first-child{
     width: 80%;
     margin: 3% auto;
-    font-size: 2vw;
+    font-size: 2.2vw;
     text-align: start;
     text-decoration: underline;
+    font-weight: bold;
 
 }
 
 .champ:nth-last-child(1) input{
+    background-color: #47c047;
+    box-shadow: 0 9px #999;
     width: 40%;
+    border-radius: 15px;
     margin-bottom: 1em;
     margin-top: 1em;
+    border: black 0.1em solid;
+}
+
+.champ:nth-last-child(1) input:active{
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
 }
 
 .champ div:last-child{
@@ -579,7 +593,7 @@ aside{
     width: 100%;
     justify-content: space-around;
 }
-.champ div:last-child input[type="password"]{
+.champ div:last-child input[type="password"],.champ div:last-child input[type="text"]{
     margin-right: 1.7em;
     overflow: hidden;
 }
@@ -597,6 +611,49 @@ aside{
     text-align: center;
     margin-bottom: 0.8em;
     font-size: 1.4vw;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+    display:none;
+    color: #000;
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-bottom: 2px black dotted;
+}
+
+#message p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -15px;
+    content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid,.champ span  {
+    color: #883d3d;
+}
+
+.invalid:before{
+    position: relative;
+    left: -15px;
+    content: "✖";
+}
+.champ span{
+    padding-left: 30px;
+    padding-top: 5px;
 }
 
 .switch {
