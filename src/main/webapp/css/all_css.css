@@ -630,7 +630,9 @@ aside{
 /*!--DECONNEXION--!*/
 
 /*!--THEMES ADMIN--!*/
-
+.invisible{
+    display: none;
+}
 
 /*!--THEMES ADMIN--!*/
 

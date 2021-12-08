@@ -33,7 +33,7 @@ public class ThemesAdminServlet extends GenericServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+//add cours
         String nom = req.getParameter("nom_cour");
         String url = req.getParameter("url_cour");
         String nom_mat = req.getParameter("nom_mat");

@@ -80,13 +80,17 @@ window.onload=function(){
         delbutton.onclick=function (){
             var url=getUrlValue(delbutton);
             deleteCours(url);
+            showListCours();
         }
     }
 
     var button_update_cours=document.getElementsByClassName("updatebtn");
     for (let updatebutton of button_update_cours) {
         updatebutton.onclick = function () {
-            updateCours();
+           var url_oldcours = getUpdateUrlValue(updatebutton);
+
+            updateCours(url_oldcours);
+            showListCours();
         }
 
     }
@@ -163,23 +167,19 @@ function addCour(){
     request.send("nom_cour=" + nom+ "&url_cour=" +url + "&nom_mat=" + nomM);
 }
 
-let updateCours = function () {
+let updateCours = function (url_oldcours) {
+    console.log(url_oldcours);
     let updateRequest = new XMLHttpRequest();
     updateRequest.open("POST", "/admin/ThemesAdmin", true);
     updateRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    let idcours = document.querySelectorAll("cours h5");
-    for (var id_cours of idcours){
-        id_cours=idcours.getAttribute("value");
+    let url_newcours = document.getElementsByClassName("url_update");
+    for (var url_cours of url_newcours){
+        url_cours=url_newcours.innerText;
     }
-    let nomcours = document.querySelectorAll("nom_update");
-    for (var nom_cours of nomcours){
-        nom_cours=nomcours.getValue();
+    let cours_newnom = document.getElementsByClassName("nom_update");
+    for (var nom_cours of cours_newnom){
+        nom_cours=cours_newnom.innerText;
     }
-    let urlcours = document.querySelectorAll("url_update");
-    for (var url_cours of urlcours){
-        url_cours=urlcours.getValue();
-    }
-
     updateRequest.onload = function () {
         if(this.status === 200) {
             console.log("Requete envoyé")
@@ -187,7 +187,7 @@ let updateCours = function () {
             console.log("Echec de la requete")
         }
     }
-    updateRequest.send("urlcoursToUpdate="+idcours, "NewNomcours="+nom_cours, "NewUrlcours="+url_cours);
+    updateRequest.send("urlcoursToUpdate="+url_cours, "NewNomcours="+nom_cours, "NewUrlcours="+url_oldcours);
 }
 
 
@@ -207,7 +207,13 @@ let deleteCours = function (url) {
     deleteRequest.send("urlcoursToDelete="+url);
 }
 
+
 function getUrlValue(bouton){
     var url=bouton.parentElement.previousElementSibling.previousElementSibling.getAttribute("href");
     return url;
+}
+
+function getUpdateUrlValue(bouton){
+    var url_oldcours=bouton.parentElement.parentElement.previousElementSibling.getAttribute("href");
+    return url_oldcours;
 }
