@@ -10,6 +10,7 @@ public class User {
     private java.util.Date date_creation;
     private boolean administrateur;
 
+    //Premier constructeur de la class User
     public User(String pseudo, String login, String password){
         this.id=0;
         this.pseudo=pseudo;
@@ -17,6 +18,8 @@ public class User {
         this.password=password;
         this.date_creation=new Date(System.currentTimeMillis());
     }
+
+    //Deuxième constructeur de la class User
     public User(String pseudo, String login, String password,boolean admin){
         this.id=0;
         this.pseudo=pseudo;
@@ -26,27 +29,15 @@ public class User {
         this.administrateur=admin;
     }
 
-    public String getUserlogin(){
-        return this.login;
-    }
-    public void setUserlogin(String login){
-        this.login=login;
-    }
-    public String getPseudo(){
-        return this.pseudo;
-    }
-    public void setPseudo(String pseudo){
-        this.pseudo=pseudo;
-    }
-    public String getUserpassword(){
-        return this.password;
-    }
-    public void setUserpassword(String password){
-        this.password=password;
-    }
-    public void setUserId(Integer id){
-        this.id=id;
-    }
+    //Getters
+    public String getUserlogin(){return this.login;}
     public boolean getstatus(){return this.administrateur;}
+    public String getPseudo(){return this.pseudo;}
+    public String getUserpassword(){return this.password;}
 
+    //Setters
+    public void setUserpassword(String password){this.password=password;}
+    public void setUserId(Integer id){this.id=id;}
+    public void setPseudo(String pseudo){this.pseudo=pseudo;}
+    public void setUserlogin(String login){this.login=login;}
 }
