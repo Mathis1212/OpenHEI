@@ -1,8 +1,9 @@
-package hei.projet.openhei.service;
+package hei.projet.openhei.dao.impl;
 import hei.projet.openhei.dao.CoursDao;
 import hei.projet.openhei.dao.MatiereDao;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.entities.Matiere;
+import hei.projet.openhei.service.DataSourceProvider;
 
 import javax.sql.DataSource;
 import java.sql.*;

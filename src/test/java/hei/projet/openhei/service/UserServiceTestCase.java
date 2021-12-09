@@ -2,6 +2,7 @@ package hei.projet.openhei.service;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserFoundException;
@@ -16,6 +17,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.SQLException;
+
+import static org.junit.Assert.fail;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTestCase {
@@ -135,11 +138,11 @@ public class UserServiceTestCase {
         //When
         try {
             userService.changePassword("login", "password", "newpassword");
+            fail();
             //Then
         } catch (Exception e) {
             Assertions.assertThat(e).isExactlyInstanceOf(PasswordNotChangedException.class);
         }
     }
-
 }
 

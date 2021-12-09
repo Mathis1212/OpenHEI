@@ -1,5 +1,9 @@
 package hei.projet.openhei.service;
 
+import hei.projet.openhei.dao.CoursDao;
+import hei.projet.openhei.dao.UserDao;
+import hei.projet.openhei.dao.impl.CoursDaoImpl;
+import hei.projet.openhei.dao.impl.UserDaoImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +17,7 @@ public class CoursService {
     public static CoursService getInstance() {
         return ServiceHolder.instance;
     }
-
+    private CoursDao coursDao = CoursDaoImpl.getInstance();
     static final Logger LOGGER = LogManager.getLogger();
 
 
@@ -21,21 +25,17 @@ public class CoursService {
         int deletedrows=0;
         if (url_cours == null||"".equals(url_cours)){
             LOGGER.warn("Un code cours ne peut pas etre null ou vide");
-        }else if(!CoursDaoImpl.getInstance().ExistCours(url_cours)){
+        }
+        if(!coursDao.ExistCours(url_cours)){
             LOGGER.warn("Le cours a update n'existe pas");
-        }else{
-            deletedrows=CoursDaoImpl.getInstance().deleteCoursFromDB(url_cours);
-            if(deletedrows!=0){
-                LOGGER.info("Some rows deleted");
-            }else{
-                LOGGER.info("nothing deleted");
-            }
+        }else {
+            deletedrows = coursDao.deleteCoursFromDB(url_cours);
         }
         return deletedrows;
     }
 
     public void updateCours(String urlcoursToUpdate, String nom_cours, String url_cours){
-        CoursDaoImpl.getInstance().updateCoursFromDB(urlcoursToUpdate,nom_cours,url_cours);
+        coursDao.updateCoursFromDB(urlcoursToUpdate,nom_cours,url_cours);
 
     }
 

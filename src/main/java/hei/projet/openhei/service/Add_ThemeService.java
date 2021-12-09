@@ -1,5 +1,7 @@
 package hei.projet.openhei.service;
 
+import hei.projet.openhei.dao.CoursDao;
+import hei.projet.openhei.dao.impl.CoursDaoImpl;
 import hei.projet.openhei.entities.Cours;
 
 import java.sql.SQLException;
@@ -9,6 +11,7 @@ public class Add_ThemeService {
     private static class ServiceHolder {
         private final static Add_ThemeService instance = new Add_ThemeService();
     }
+    CoursDao coursDao = CoursDaoImpl.getInstance();
 
     //Creation de la methode pour recuperer l'instance
     public static Add_ThemeService getInstance() {
@@ -25,6 +28,6 @@ public class Add_ThemeService {
         if (cours.getUrl() == null ) {
             throw new IllegalArgumentException("url is null.");
         }
-             CoursDaoImpl.getInstance().addCour(cours);
+             coursDao.addCour(cours);
     }
 }

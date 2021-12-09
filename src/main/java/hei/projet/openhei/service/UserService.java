@@ -3,6 +3,7 @@ package hei.projet.openhei.service;
 import de.mkammerer.argon2 .Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import hei.projet.openhei.dao.UserDao;
+import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.*;
 import org.apache.logging.log4j.LogManager;
@@ -65,12 +66,10 @@ public class UserService {
 
     public void changePassword(String login, String password, String newpassword) throws PasswordNotChangedException, SQLException {
         if (checkUser(login, password)){
-            try {
-                userDao.setNewPassword(login, newpassword);
-            } catch (PasswordNotChangedException e) {
-                LOGGER.warn("Le mot de passe n'a pas pu etre changer");
-                throw new PasswordNotChangedException();
-            }
+            userDao.setNewPassword(login, newpassword);
+        }else{
+            LOGGER.warn("Le mot de passe n'a pas pu etre changer");
+            throw new PasswordNotChangedException();
         }
     }
 }

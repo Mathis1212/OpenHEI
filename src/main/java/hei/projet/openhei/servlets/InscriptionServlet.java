@@ -1,6 +1,6 @@
 package hei.projet.openhei.servlets;
 
-import hei.projet.openhei.service.UserDaoImpl;
+import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.UserFoundException;
 import hei.projet.openhei.exception.UserNotAddedException;

@@ -1,6 +1,6 @@
 package hei.projet.openhei.servlets;
 
-import hei.projet.openhei.service.MatiereDaoImpl;
+import hei.projet.openhei.dao.impl.MatiereDaoImpl;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.service.Add_ThemeService;
 import hei.projet.openhei.service.CoursService;

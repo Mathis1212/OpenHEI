@@ -1,7 +1,7 @@
 package hei.projet.openhei.servlets;
 
 
-import hei.projet.openhei.service.UserDaoImpl;
+import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
