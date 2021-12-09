@@ -82,6 +82,14 @@ window.onload=function(){
             deleteCours(url);
         }
     }
+
+    var IsAdmin_button=document.getElementsByClassName("admin");
+    for (let AdminButton of IsAdmin_button){
+        AdminButton.onclick = function(){
+            var id=AdminButton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.getAttribute("id");
+            setAdmin(id);
+        }
+    }
 /* Récuperation de l'url de l'ancien cours à update + l'url du nouveau cours + le nom du nouveau cours et appel de la fonction "updateCours()*/
     var button_update_cours=document.getElementsByClassName("updatebtn");
     for (let updatebutton of button_update_cours) {
