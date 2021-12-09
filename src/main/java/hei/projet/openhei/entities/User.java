@@ -25,6 +25,15 @@ public class User {
         this.date_creation=new Date(System.currentTimeMillis());
         this.administrateur=admin;
     }
+    public User(Integer id, String pseudo, String login, String password,boolean admin){
+        this.id=id;
+        this.pseudo=pseudo;
+        this.login=login;
+        this.password=password;
+        this.date_creation=new Date(System.currentTimeMillis());
+        this.administrateur=admin;
+    }
+
 
     public String getUserlogin(){
         return this.login;

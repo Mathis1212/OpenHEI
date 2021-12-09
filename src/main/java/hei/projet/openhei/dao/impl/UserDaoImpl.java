@@ -145,9 +145,11 @@ public class UserDaoImpl implements UserDao {
                     try (ResultSet results = statement.executeQuery("select * from usager order by user_id")) {
                         while (results.next()) {
                             User user = new User(
+                                    results.getInt("user_id"),
                                     results.getString("user_pseudo"),
                                 results.getString("user_login"),
-                                results.getString("user_password"));
+                                results.getString("user_password"),
+                                results.getBoolean("user_admin"));
                             listOfUser.add(user);
                         }
                     }

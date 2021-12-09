@@ -42,9 +42,9 @@
                     <th style="width:40%;">Set Admin</th>
                 </tr>
                 <tr class="user_elements" th:each="mapItem, state:${user}">
-                    <td th:text="${mapItem.key}">id</td>
-                    <td th:text="${mapItem.value.getPseudo()}">pseudo</td>
-                    <td th:text="${mapItem.value.getstatus()}">status</td>
+                    <td id th:utext="${mapItem.key}">id</td>
+                    <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
+                    <td th:utext="${mapItem.value.getstatus()}">status</td>
                     <td><button class="delete">delete</button></td>
                     <td><button class="admin">Set Admin</button></td>
                 </tr>

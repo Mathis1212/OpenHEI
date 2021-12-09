@@ -32,7 +32,8 @@ public class GestionService {
         int taille = list.size();
         for (int i = 0; i < taille; i++) {
             int id=list.get(i).getId();
-           User user=list.get(i);
+            String nom=list.get(i).getPseudo();
+            User user=list.get(i);
             hmap.put(list.get(i).getId(), list.get(i) );
         }
         return hmap;
