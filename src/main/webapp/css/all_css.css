@@ -488,9 +488,8 @@ aside{
 
 #body_champ{
     background-color: rgb(145, 66, 66);
-    padding-top: 10%;
-    height: 700px;
-    margin: 0;
+    padding-top: 5%;
+    padding-bottom: 10%;
 }
 
 .container{
@@ -505,10 +504,11 @@ aside{
 
 .titre_logo{
     display: flex;
-    text-align: center;
     align-items: center;
     font-size: 2.5vw;
     margin-top: 1.2em;
+    justify-content: center;
+    margin-right: 3em;
 }
 
 .container form{
@@ -552,9 +552,10 @@ aside{
 
 .champ input{
     width: 100%;
-    height: 34px;
+    height: 38px;
     text-align: center;
-    border-radius: 1em;
+
+    border-radius: 0.4em;
     font-size: 1.4vw;
 }
 
@@ -576,14 +577,14 @@ aside{
     background-color: #47c047;
     box-shadow: 0 9px #999;
     width: 40%;
-    border-radius: 15px;
+    border-radius: 6px;
     margin-bottom: 1em;
     margin-top: 1em;
     border: black 0.1em solid;
 }
 
 .champ:nth-last-child(1) input:active{
-    background-color: #3e8e41;
+    background-color: rgb(62, 142, 65);
     box-shadow: 0 5px #666;
     transform: translateY(2px);
 }
@@ -593,7 +594,7 @@ aside{
     width: 100%;
     justify-content: space-around;
 }
-.champ div:last-child input[type="password"],.champ div:last-child input[type="text"]{
+.champ div:last-child input[type="password"],.champ:nth-child(3) div input[type="text"],.champ:nth-child(2) div input[type="text"]{
     margin-right: 1.7em;
     overflow: hidden;
 }
