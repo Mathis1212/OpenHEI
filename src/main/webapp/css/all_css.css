@@ -88,7 +88,12 @@ body{
     /*overflow permet que ce qui dépasse du bloc topnav ne soit pas afficher*/
     overflow: hidden;
     background-color: #333;
-    margin-bottom: 2em;
+    /*margin-bottom: 2em;*/
+    opacity:1;
+}
+
+.bloctexte{
+    padding-top: 100px;
 }
 
 .topnav a {
@@ -214,6 +219,8 @@ input[type=search] {
     background-color: #ddd;
     color: black;
 }
+
+
 
 .menuderoulant:hover .menuderoulant-content {
     display: block;
@@ -348,11 +355,52 @@ body {
 /*!--LISTE_COURS.HTML--!*/
 /*Corps de la page*/
 
-main{
-    margin-left: 5%;
+#corps{
+    /*margin-left: 5%;
     margin-right: 5%;
+    */
+    background-image: url('/images/background.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
 }
 
+li{
+    padding-top: 10px;
+    font-style:italic;
+}
+.trait-separation{
+    border: 1px solid black;
+    width:15%;
+    margin:auto;
+}
+.coming-soon{
+
+    margin-bottom: 5px;
+}
+.w3-display-middle {
+    position: relative;
+    margin-top:auto;
+    margin-bottom: auto;
+}
+.membresprojet{
+
+}
+.recensertous{
+    margin-top: 10px;
+    font-size: larger;
+}
+.q{
+    margin-top: 50px;
+    font-size: larger;
+    font-weight: bold;
+}
+.r{
+    margin-top: 50px;
+    font-size:larger;
+    font-style: italic;
+}
 .titre_page{
     text-align: center;
     margin-bottom: 30px;
@@ -362,9 +410,9 @@ main{
     font-family: Georgia, serif;
 }
 
-aside{
+/*aside{
     display: inline;
-}
+}*/
 
 
 .paragraphe{
@@ -649,7 +697,8 @@ footer{
     padding: 2vh;
     display: flex;
     justify-content: space-around;
-    background-color: brown;
+    background-color: #333;
+    color:white;
 }
 /*--FOOTER--*/
 
