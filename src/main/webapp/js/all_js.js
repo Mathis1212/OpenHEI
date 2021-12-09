@@ -82,7 +82,14 @@ window.onload=function(){
             deleteCours(url);
         }
     }
-
+    var Isdel_button=document.getElementsByClassName("delete");
+    for (let delButton of Isdel_button){
+        delButton.onclick = function(){
+            var id=delButton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.getAttribute("id");
+            supUsager(id);
+        }
+    }
+/*Recuperation de l'id du l'user associe au bouton setAdim et appel de la fonction setAdim()*/
     var IsAdmin_button=document.getElementsByClassName("admin");
     for (let AdminButton of IsAdmin_button){
         AdminButton.onclick = function(){
@@ -195,11 +202,11 @@ let setAdmin = function(id){
     setRequest.send("id_user="+id);
 }
 /*envoye le login de l'usager a supprimer*/
-let supUsager = function( login){
+let supUsager = function( id){
     let setRequest = new XMLHttpRequest();
     setRequest.open("POST","/admin/GestionAdmin")
     setRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    setRequest.send("login_user="+login);
+    setRequest.send("id_user="+id);
 }
 
 /* Fonction qui recupère l'url du cours à delete*/

@@ -203,13 +203,14 @@ public class UserDaoImpl implements UserDao {
         }
     }
     @Override
-    public void supUser(String login){
-        String sqlQuery = " DELETE FROM usager WHERE usager.user_login=?";
+    public void supUser(Integer id ){
+        String sqlQuery = " DELETE FROM usager WHERE usager.user_id=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
-                preparedStatement.setString(1, login);
+                preparedStatement.setInt(1, id);
+                preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
             LOGGER.info("Erreur SQL");
