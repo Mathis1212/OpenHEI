@@ -127,22 +127,5 @@ public class UserServiceTestCase {
         //Then
             Mockito.verify(userDao,Mockito.times(1)).setNewPassword("login","newpassword");
         }
-
-    @Test
-    public void ShouldCatchPasswordNotChangedException() throws PasswordNotChangedException, SQLException {
-        //Given
-        User user = new User("pseudo","login","password");
-        Mockito.when(userDao.checkUserbyLogin(user.getUserlogin())).thenReturn(true);
-        Mockito.when(userDao.getUser(user.getUserlogin())).thenReturn(user);
-        Mockito.when(argon2.verify(user.getUserpassword(),"password")).thenReturn(false);
-        //When
-        try {
-            userService.changePassword("login", "password", "newpassword");
-            fail();
-            //Then
-        } catch (Exception e) {
-            Assertions.assertThat(e).isExactlyInstanceOf(PasswordNotChangedException.class);
-        }
-    }
 }
 

@@ -136,6 +136,7 @@ public class MatiereDaoImpl implements MatiereDao {
             }
         } catch (SQLException e) {
             LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de l'id de la matière de nom :"+nom+ " :", e);
+
         }
         return id;
     }
