@@ -26,9 +26,9 @@ public class GestionService {
     private UserDao userDao = UserDaoImpl.getInstance();
 
     public Map<Integer, User> CourAndId() {
-        Map<Integer, User> hmap = new HashMap<Integer, User>();
+        Map<Integer, User> hmap = new HashMap<Integer,User>();
         ArrayList<User> list=new ArrayList<User>();
-        list=UserDaoImpl.getInstance().listAllUser();
+        list=userDao.listAllUser();
         int taille = list.size();
         for (int i = 0; i < taille; i++) {
             int id=list.get(i).getId();
