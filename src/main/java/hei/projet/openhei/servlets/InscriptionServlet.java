@@ -51,26 +51,21 @@ public class InscriptionServlet extends GenericServlet {
                 //verification du pseudo en regex
                 Pattern patternPs =Pattern.compile("(?=.*[0-9])(?=\\S+$).{5,}", Pattern.CASE_INSENSITIVE);
                 Matcher matcherPs = patternPs.matcher(pseudo);
-                if (!matcherPs.find()){
-                    resp.sendRedirect("inscription");
-                }
                 //verification du login en regex
                 Pattern patternLog =Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
                 Matcher matcherLog = patternLog.matcher(login);
-                if (!matcherLog.find()){
-                    resp.sendRedirect("inscription");
-                }
                 Pattern patternPas =Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!.?=])(?=\\S+$).{8,}");
                 Matcher matcherPas = patternPas.matcher(password);
-                if (!matcherPas.find()){
+                if ((!matcherPas.find())||(!matcherPs.find())||(!matcherLog.find())){
                     resp.sendRedirect("inscription");
+                }else{
+                    User user_champ=new User(pseudo,login,password);
+                    //pro
+                    User user=UserService.getInstance().CreateUser(user_champ);
+                    UserDaoImpl.getInstance().addUser(user);
+                    resp.sendRedirect("Accueil");
                 }
             }
-            User user_champ=new User(pseudo,login,password);
-            //pro
-            User user=UserService.getInstance().CreateUser(user_champ);
-            UserDaoImpl.getInstance().addUser(user);
-            resp.sendRedirect("Accueil");
         } catch (UserFoundException | UserNotAddedException e) {
             e.printStackTrace();
             resp.sendRedirect("inscription");

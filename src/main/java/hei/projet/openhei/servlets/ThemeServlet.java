@@ -19,10 +19,7 @@ public class ThemeServlet extends GenericServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-<<<<<<< HEAD
 
-=======
->>>>>>> dev
         Boolean status = (Boolean) req.getSession().getAttribute("Admin");
         if ((status!=null)&&status){
             resp.sendRedirect("/admin/ThemesAdmin");
