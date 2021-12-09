@@ -4,6 +4,8 @@ import hei.projet.openhei.dao.MatiereDao;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.entities.Matiere;
 import hei.projet.openhei.service.DataSourceProvider;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatiereDaoImpl implements MatiereDao {
+    //Appel de l'instance Log4j2
+    static final Logger LOGGER = LogManager.getLogger();
 
     //Creation de l'instance de MatiereDaoimpl
     private static class ServiceHolder {
@@ -22,17 +26,18 @@ public class MatiereDaoImpl implements MatiereDao {
         return ServiceHolder.instance;
     }
 
-    // recuperation de l'instance de CoursDaoImpl
+    //Recupération de l'instance de CoursDaoImpl
     private CoursDao coursDao = CoursDaoImpl.getInstance();
 
+    //Méthode de création d'un objet matière à la récupération des informations de la BDD
     private Matiere createMatiereFromResultSet(ResultSet resultSelect) throws SQLException {
+        LOGGER.info("Création d'un objet matière avec les informations récupérées de la BDD");
         Matiere mat=new Matiere(resultSelect.getInt("id_matiere"),resultSelect.getString("nom_matiere"));
         return mat;
-
     }
 
     @Override
-    // liste l'ensemble des matiere de la BDD
+    //Méthode qui récupère l'ensemble des matière de la BDD
     public List<Matiere> ListMatiere() {
         List<Matiere> list = new ArrayList<>();
 
@@ -46,12 +51,12 @@ public class MatiereDaoImpl implements MatiereDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de la liste des matières :", e);
         }
         return list;
     }
 
-    // recupere le nom de la matiere a partir d'un id
+    //Méthode qui récupère le nom de la matiere dans la BDD à partir de son id
     @Override
     public String getNom(Integer id) {
         String nom = "";
@@ -66,12 +71,12 @@ public class MatiereDaoImpl implements MatiereDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération du nom de la matière :", e);
         }
         return nom;
     }
 
-    // compte nb notions dans une matiere a partir de son id
+    //Méthode qui compte le nombre notions dans une matière en BDD à partir de son id
     @Override
     public int getnbCour(Integer id) {
         int nb = 0;
@@ -86,11 +91,12 @@ public class MatiereDaoImpl implements MatiereDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération du nombre de cours dans la matière :", e);
         }
         return nb;
     }
 
+    //Méthode qui récupère la liste des cours en BDD par l'id commun de la matière à laquel ils appartiennent
     @Override
     public List<Cours> getListCour(Integer matiereId) {
         List<Cours> list = new ArrayList<>();
@@ -107,10 +113,12 @@ public class MatiereDaoImpl implements MatiereDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de la liste des cours de la matière d'id :"+matiereId+ " :", e);
         }
         return list;
     }
+
+    //Méthode qui permet de récupérer l'id d'une matière en BDD à partir de son nom
     @Override
     public Integer getID(String nom) {
         Integer id=0;
@@ -127,7 +135,7 @@ public class MatiereDaoImpl implements MatiereDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de l'id de la matière de nom :"+nom+ " :", e);
         }
         return id;
     }
