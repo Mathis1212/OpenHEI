@@ -652,9 +652,9 @@ footer{
 
 /*--add cour--*/
 .addCour{
-    position: relative;
+    position: static;
     display: flex;
-    padding: 15px 0 0;
+    padding: 8px 0 0;
     margin-top: 10px;
     width: 100%;
     background-color: black ;
@@ -669,6 +669,7 @@ footer{
     display:inline-block;
     padding: 7px 0px;
     color: black;
+
 }
 #nom_add{
     font-family: inherit;
@@ -682,6 +683,7 @@ footer{
     background: transparent;
     transition: border-color 0.2s;
     display:inline-block;
+
 }
 #url_add{
 
@@ -696,6 +698,7 @@ footer{
     background: transparent;
     transition: border-color 0.2s;
 
+
 }
 #mat_add{
     font-family: inherit;
@@ -709,6 +712,7 @@ footer{
     background: transparent;
     transition: border-color 0.2s;
     margin: 4px 2px;
+
 }
 .btn_add{
     background-color: lightpink;
@@ -718,8 +722,9 @@ footer{
     font-size: 15px;
     border-radius: 8px;
     cursor: pointer;
-    margin-left: 125px;
+    margin-left: 120px;
     margin-bottom: 10px;
+    position: static;
 }
 .btn_add:hover{
     background-color: #cb4154;

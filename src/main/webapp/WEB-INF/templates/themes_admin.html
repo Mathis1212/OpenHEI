@@ -17,7 +17,7 @@
 			<article>
 				<h1 class="titre_page">Thèmes</h1>
 				<div class="addCour" >
-					<p id="textcour">Ajouter Cour</p>
+					<p id="textcour">Ajouter Cours</p>
 					<a id="form_add"><form ><input id="nom_add" type="text" placeholder="nom du cours"><input type="text" id="url_add" placeholder="url" ><select id="mat_add"><option th:each="mapItem, state:${matiere} " th:utext="${mapItem.key}"></option></select><button class="btn_add" onclick="addCour()">Ajouter</button></form></a>
 				</div>
 				<div class="liste"  >
