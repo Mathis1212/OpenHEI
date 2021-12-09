@@ -48,5 +48,5 @@ public class User {
         this.id=id;
     }
     public boolean getstatus(){return this.administrateur;}
-
+    public Integer getId(){return this.id;}
 }
