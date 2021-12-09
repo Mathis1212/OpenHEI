@@ -1,4 +1,4 @@
-package hei.projet.openhei.dao.impl;
+package hei.projet.openhei.dao;
 
 import hei.projet.openhei.dao.MatiereDao;
 import hei.projet.openhei.entities.Matiere;

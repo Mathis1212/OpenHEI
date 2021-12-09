@@ -6,37 +6,36 @@
 	<!--css pour la navbar-->
 	<link rel="stylesheet" type="text/css" href="..\..\css\all_css.css">
 	<!--js pour les évènements-->
-	<script src="..\..\js\all_js.js"></script>
 	<link rel="icon" type="image/png" href="../../images/O.png" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Thèmes - OpenHei</title>
+
 </head>
 <body>
-	<header th:replace="~{fragments :: menu('ThemesAdmin')}"></header>
-	<main>
-		<article>
-			<h1 class="titre_page">Thèmes</h1>
-			<div class="liste"  >
-				<div class="liste_block"th:each="mapItem, state:${matiere} ">
-					<h4 th:utext="${mapItem.key}">JavaEE</h4>
-					<select>
-						<option th:each="cour,state:${mapItem.value}" th:value="${cour.getUrl()}" th:utext="${cour.getnomCours()}">1 notion</option>
-					</select>
-					<input type="button" class="w3-button w3-black" value="Download">
+<header th:replace="~{fragments :: menu('admin/ThemesAdmin')}"></header>
+		<main>
+			<article>
+				<h1 class="titre_page">Thèmes</h1>
+				<div class="addCour" >
+					<p id="textcour">Ajouter Cours</p>
+					<a id="form_add"><form ><input id="nom_add" type="text" placeholder="nom du cours"><input type="text" id="url_add" placeholder="url" ><select id="mat_add"><option th:each="mapItem, state:${matiere} " th:utext="${mapItem.key}"></option></select><button class="btn_add" onclick="addCour()">Ajouter</button></form></a>
 				</div>
-			</div>
-
-			<div class="liste"  >
-				<div class="liste_block"th:each="mapItem, state:${matiere} ">
-					<h4 th:utext="${mapItem.key}">JavaEE</h4>
-					<div class="dropdown">
-						<button class="dropbtn">Dropdown</button>
-						<a><form><input class="nom_add" type="text" placeholder="nom du cours"><input type="text" class="url_add" placeholder="url" ><input type="submit" value="Ajouter"></form></a>
-						<div id="myDropdown" class="dropdown-content">
-							<div class="cours" th:each="cour,state:${mapItem.value}"><h5 th:value="${cour.getId()}" th:utext="${cour.getnomCours()}">Cours</h5>
-								<a><form><input class="nom_update" type="text" placeholder="nom du cours"><input type="text" class="url_update" placeholder="url" ><input class="updatebtn" type="submit" value="Update"></form></a>
-								<a><button class="btn" >&times; Delete</button></a>
+				<div class="liste"  >
+					<div class="liste_block"th:each="mapItem, state:${matiere} ">
+						<h4 th:utext="${mapItem.key}">JavaEE</h4>
+						<div class="dropdown" >
+							<button  class="dropbtn" th:attr="onclick=|showListCours('${mapItem.key}')|" >Cours</button>
+							<div th:id="${mapItem.key}" class="dropdown-content">
+								<div class="cours"th:each="cour,state:${mapItem.value}" ><h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5>
+									<a download targert="_blank" th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
+								<a><form>
+									<input id="nomupdate" class="nom_update" type="text" placeholder="nom du cours">
+									<input id="urlupdate" type="text" class="url_update" placeholder="url" >
+									<input class="updatebtn" type="submit" value="Update">
+								</form></a>
+								<a><button class="deletebtn" >&times; Delete</button></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -44,27 +43,27 @@
 			</div>
 
 		</article>
-
 	</main>
 	<footer>
 		<div>
-			<h4>Qui sommes nous ?</h4>
+			<h4>Qui sommes-nous ?</h4>
 			<ul>
-				<li>Un groupe d'étudiants</li>
+				<li>• Un groupe d'étudiants.</li>
 			</ul>
 		</div>
 		<div>
-			<h4>Où nous trouver</h4>
+			<h4>Où nous trouver ?</h4>
 			<ul>
-				<li>à HEI</li>
+				<li>• À HEI (ou à La Faluche, ça dépend des heures).</li>
 			</ul>
 		</div>
 		<div>
 			<h4>Détails</h4>
 			<ul>
-				<li> Creéation du site</li>
+				<li>• Création du site : lors du premier semestre de l'année 2021-2022</li>
 			</ul>
 		</div>
 	</footer>
 </body>
+<script src="..\..\js\all_js.js"></script>
 </html>

@@ -3,6 +3,7 @@ import hei.projet.openhei.dao.CoursDao;
 import hei.projet.openhei.dao.MatiereDao;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.entities.Matiere;
+import hei.projet.openhei.service.DataSourceProvider;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -110,7 +111,26 @@ public class MatiereDaoImpl implements MatiereDao {
         }
         return list;
     }
-
+    @Override
+    public Integer getID(String nom) {
+        Integer id=0;
+        String sql = "SELECT id_matiere FROM matiere  WHERE nom_matiere=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setString(1, nom);
+                try (ResultSet result = preparedStatement.executeQuery()) {
+                    while(result.next()) {
+                        id = result.getInt("id_matiere");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 }
 
 

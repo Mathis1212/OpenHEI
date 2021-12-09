@@ -6,9 +6,14 @@ public class Cours {
     private Integer id;
     private String nomCours;
     private String url;
+    private Integer id_mat;
 
 
-
+    public Cours( String nomCours,String url,Integer id){
+        this.nomCours=nomCours;
+        this.url=url;
+        this.id=id;
+    }
     public Cours( String nomCours,String url){
         this.nomCours=nomCours;
         this.url=url;
@@ -28,7 +33,9 @@ public class Cours {
     public void setNomCours(String nomCours){
         this.nomCours=nomCours;
     }
-
-
+    public void setIdMat(Integer id){this.id_mat=id;};
+    public Integer getId_mat() {
+        return id_mat;
+    }
 }
 

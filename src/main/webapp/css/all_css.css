@@ -88,7 +88,12 @@ body{
     /*overflow permet que ce qui dépasse du bloc topnav ne soit pas afficher*/
     overflow: hidden;
     background-color: #333;
-    margin-bottom: 2em;
+    /*margin-bottom: 2em;*/
+    opacity:1;
+}
+
+.bloctexte{
+    padding-top: 100px;
 }
 
 .topnav a {
@@ -117,7 +122,9 @@ body{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+
 /*-CSS pour le champ de recherche au survol du bouton-*/
+
 .search-dropbtn {
     background-color: #3498DB;
     color: white;
@@ -200,6 +207,8 @@ input[type=search] {
     background-color: #ddd;
     color: black;
 }
+
+
 
 .menuderoulant:hover .menuderoulant-content {
     display: block;
@@ -333,11 +342,52 @@ body {
 /*!--LISTE_COURS.HTML--!*/
 /*Corps de la page*/
 
-main{
-    margin-left: 5%;
+#corps{
+    /*margin-left: 5%;
     margin-right: 5%;
+    */
+    background-image: url('/images/background.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
 }
 
+li{
+    padding-top: 10px;
+    font-style:italic;
+}
+.trait-separation{
+    border: 1px solid black;
+    width:15%;
+    margin:auto;
+}
+.coming-soon{
+
+    margin-bottom: 5px;
+}
+.w3-display-middle {
+    position: relative;
+    margin-top:auto;
+    margin-bottom: auto;
+}
+.membresprojet{
+
+}
+.recensertous{
+    margin-top: 10px;
+    font-size: larger;
+}
+.q{
+    margin-top: 50px;
+    font-size: larger;
+    font-weight: bold;
+}
+.r{
+    margin-top: 50px;
+    font-size:larger;
+    font-style: italic;
+}
 .titre_page{
     text-align: center;
     margin-bottom: 30px;
@@ -347,9 +397,9 @@ main{
     font-family: Georgia, serif;
 }
 
-aside{
+/*aside{
     display: inline;
-}
+}*/
 
 
 .paragraphe{
@@ -374,7 +424,8 @@ aside{
     max-height: 20vh;
     margin:2vh auto;
     padding:1vw;
-    background-color: red;
+    background-color:#cb4154 ;
+    background-image: linear-gradient(to bottom right, ghostwhite,#cb4154);
     border: 0.4vw solid black;
     border-radius: 2vw;
     text-align: center;
@@ -397,16 +448,18 @@ aside{
 
 /*css du bouton de liste de cours*/
 .dropbtn {
-    background-color: #3498DB;
-    color: white;
+    background-color: mistyrose;
+    color: darkred;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-radius: 25px;
 }
 
 .dropbtn:hover, .dropbtn:focus {
-    background-color: #2980B9;
+
+    background-color: #cb4154 ;
 }
 
 /*classe qui permmet d'afficher le bouton+div des cours*/
@@ -722,6 +775,13 @@ input:checked + .slider:before {
 
 /*!--CONNEXION--!*/
 
+/*!--THEMES ADMIN--!*/
+.invisible{
+    display: none;
+}
+
+/*!--THEMES ADMIN--!*/
+
 
 /*---------------------------------------*/
 
@@ -733,7 +793,96 @@ footer{
     padding: 2vh;
     display: flex;
     justify-content: space-around;
-    background-color: brown;
+    background-color: #333;
+    color:white;
 }
+/*--FOOTER--*/
+
+
 
 /*--FOOTER--*/
+
+/*--add cour--*/
+.addCour{
+    position: static;
+    display: flex;
+    padding: 8px 0 0;
+    margin-top: 10px;
+    width: 100%;
+    background-color: black ;
+    border-radius: 8px;
+    background-image: linear-gradient(to bottom right, ghostwhite,#cb4154);
+}
+#textcour{
+
+    width: 20%;
+    font-size: 1.3rem;
+    text-align: center;
+    display:inline-block;
+    padding: 7px 0px;
+    color: black;
+
+}
+#nom_add{
+    font-family: inherit;
+    width: 20%;
+    border: 0;
+    border-inline: 2px solid white;
+    outline: 0;
+    font-size: 1.3rem;
+    color: white;
+    padding: 7px 8px;
+    background: transparent;
+    transition: border-color 0.2s;
+    display:inline-block;
+
+}
+#url_add{
+
+    font-family: inherit;
+    width: 35%;
+    border: 0;
+    border-right: 2px solid white;
+    outline: 0;
+    font-size: 1.3rem;
+    color: white;
+    padding: 7px 8px;
+    background: transparent;
+    transition: border-color 0.2s;
+
+
+}
+#mat_add{
+    font-family: inherit;
+    width: 22%;
+    border: 0;
+    border-right: 2px solid white;
+    outline: 0;
+    font-size: 1.3rem;
+    color: white ;
+    padding: 7px 8px;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin: 4px 2px;
+
+}
+.btn_add{
+    background-color: lightpink;
+    color: black;
+    border: 2px solid #cb4154;
+    padding: 1em;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 120px;
+    margin-bottom: 10px;
+    position: static;
+}
+.btn_add:hover{
+    background-color: #cb4154;
+    color: white;
+}
+#form_add{
+    width:80%
+}
+

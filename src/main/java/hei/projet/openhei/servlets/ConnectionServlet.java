@@ -11,16 +11,13 @@ import org.thymeleaf.context.WebContext;
 import hei.projet.openhei.service.UserService;
 
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
+
 
 @WebServlet("/connection")
 public class ConnectionServlet extends GenericServlet {

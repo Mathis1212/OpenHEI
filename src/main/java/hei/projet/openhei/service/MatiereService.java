@@ -1,5 +1,6 @@
 package hei.projet.openhei.service;
 
+import hei.projet.openhei.dao.MatiereDao;
 import hei.projet.openhei.dao.impl.MatiereDaoImpl;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.entities.Matiere;
@@ -22,12 +23,14 @@ public class MatiereService {
         return MatiereService.ServiceHolder.instance;
     }
 
+    private MatiereDao matiereDao = MatiereDaoImpl.getInstance();
+
     public List<Matiere> recupMatiereAvecListCour() {
         List<Matiere> list = new ArrayList<>();
         List<Cours> listCour = new ArrayList<>();
-        list=MatiereDaoImpl.getInstance().ListMatiere();
+        list= matiereDao.ListMatiere();
         for (Matiere matiere : list) {
-            listCour = MatiereDaoImpl.getInstance().getListCour(matiere.getId());
+            listCour = matiereDao.getListCour(matiere.getId());
             for (Cours cours : listCour) {
                 matiere.ajouterCour(cours);
             }
@@ -42,15 +45,12 @@ public class MatiereService {
         for (int i = 0; i < taille; i++) {
             String nom =recupMatiereAvecListCour().get(i).getNomMatiere();
             List<Cours> list = new ArrayList<>();
-
                 for(int e=0;e<recupMatiereAvecListCour().get(i).recupCour().size();e++){
                    list.add(recupMatiereAvecListCour().get(i).recupCour().get(e));
                 }
-
             hmap.put(nom, list);
         }
         return hmap;
     }
-
 }
 

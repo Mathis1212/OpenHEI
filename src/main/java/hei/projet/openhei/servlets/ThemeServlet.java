@@ -1,7 +1,5 @@
 package hei.projet.openhei.servlets;
 
-import hei.projet.openhei.dao.impl.CoursDaoImpl;
-import hei.projet.openhei.dao.impl.MatiereDaoImpl;
 import hei.projet.openhei.service.MatiereService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -21,7 +19,10 @@ public class ThemeServlet extends GenericServlet{
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
         Boolean status = (Boolean) req.getSession().getAttribute("Admin");
         if ((status!=null)&&status){
             resp.sendRedirect("/admin/ThemesAdmin");

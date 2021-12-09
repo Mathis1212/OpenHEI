@@ -15,4 +15,9 @@ public interface CoursDao {
     public String getNom(Integer id);
 
     public Matiere getMatiere(Integer id);
+    public void addCour(Cours cours) throws SQLException;
+    public Integer deleteCoursFromDB(String url_cours);
+    public Integer updateCoursFromDB(String urlcoursToUpdate, String nom_cours, String url_cours);
+    public boolean ExistCours(String url_cours) throws SQLException;
+
 }

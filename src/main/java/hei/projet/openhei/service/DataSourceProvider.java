@@ -1,4 +1,4 @@
-package hei.projet.openhei.dao.impl;
+package hei.projet.openhei.service;
 
 import org.mariadb.jdbc.MariaDbDataSource;
 

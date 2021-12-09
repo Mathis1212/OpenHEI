@@ -3,17 +3,11 @@ package hei.projet.openhei.service;
 import de.mkammerer.argon2 .Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import hei.projet.openhei.dao.UserDao;
-import hei.projet.openhei.dao.impl.DataSourceProvider;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -35,9 +29,8 @@ public class UserService {
     //Vérifie si un utilisateur existe déja dans la bdd avec ce login
     //enlever l'exception UserNotFoundException
     public boolean userExist(String login){
-        User user=userDao.getUser(login);
         boolean rep;
-        if(user!=null){
+        if(userDao.getUser(login)!=null){
             rep=true;
         }else{
             rep=false;
@@ -71,20 +64,11 @@ public class UserService {
         return result;
     }
 
-    public boolean isAdmin(String login){
-        boolean result=false;
-        User user=userDao.getUser(login);
-        if(user.getstatus()){
-            result=true;
-        }
-        return result;
-    }
-
-
     public void changePassword(String login, String password, String newpassword) throws PasswordNotChangedException, SQLException {
         if (checkUser(login, password)){
-            userDao.setNewPassword(login,newpassword);
+            userDao.setNewPassword(login, newpassword);
         }else{
+            LOGGER.warn("Le mot de passe n'a pas pu etre changer");
             throw new PasswordNotChangedException();
         }
     }

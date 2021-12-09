@@ -4,6 +4,7 @@ import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserNotAddedException;
+import hei.projet.openhei.service.DataSourceProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import de.mkammerer.argon2.Argon2;
