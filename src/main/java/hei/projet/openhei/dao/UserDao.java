@@ -23,6 +23,8 @@ public interface UserDao {
     public ArrayList<User> listAllUser();
 
     public ArrayList<String> listAllLogin();
+    public void setAdmin(Integer id);
+    public void supUser(String login);
 
 
 }

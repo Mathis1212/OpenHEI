@@ -1,6 +1,8 @@
 package hei.projet.openhei.servlets;
 
+import hei.projet.openhei.dao.impl.CoursDaoImpl;
 import hei.projet.openhei.dao.impl.MatiereDaoImpl;
+import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.Cours;
 import hei.projet.openhei.service.Add_ThemeService;
 import hei.projet.openhei.service.CoursService;
@@ -21,6 +23,7 @@ import java.sql.SQLException;
 @WebServlet("/admin/GestionAdmin")
 public class GestionUserServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -30,36 +33,21 @@ public class GestionUserServlet extends GenericServlet {
         context.setVariable("Pseudo", pseudo);
         templateEngine.process("gestion_user_admin", context, resp.getWriter());
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//add user
-        String nom = req.getParameter("nom_cour");
-        String url = req.getParameter("url_cour");
-        String nom_mat = req.getParameter("nom_mat");
-        if ((nom != null)&&(url != null)&&(nom_mat != null)) {
-            if((!"".equals(nom))&&(!"".equals(url))&&!"".equals(nom_mat)) {
-                Integer id_mat = MatiereDaoImpl.getInstance().getID(nom_mat);
-                Cours c = new Cours(nom, url);
-                c.setIdMat(id_mat);
-                try {
-                    Add_ThemeService.getInstance().addCour(c);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+//set Admin
+       Integer id = Integer.parseInt(req.getParameter("id_user"));
+        if (id != null) {
+            UserDaoImpl.getInstance().setAdmin(id);
         }
-//delete un cours
-
-        String coursurl = req.getParameter("urlcoursToDelete");
-        if (coursurl != null&&!"".equals(coursurl)) {
-            LOGGER.info("coursid to delete : " + coursurl);
-            try {
-                CoursService.getInstance().deleteCours(coursurl);
-            } catch (SQLException e) {
-                LOGGER.warn("Erreur SQL", e);
-            }
-        }else{
-            LOGGER.warn("Le cours n'a pas pu etre supprimé");
+//delete user
+        String nom =req.getParameter("login_user");
+        if (nom != null) {
+            LOGGER.info("usersid to delete : " + nom);
+                UserDaoImpl.getInstance().supUser(nom);
+        } else {
+            LOGGER.warn("L'usager n'a pas pu etre supprimé");
         }
     }
 }

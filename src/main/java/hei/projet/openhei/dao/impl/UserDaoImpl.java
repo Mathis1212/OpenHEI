@@ -184,4 +184,36 @@ public class UserDaoImpl implements UserDao {
         }
         return listOfLogin;
     }
+    //update l'attribut admin de l'usager avec son id
+    @Override
+    public void setAdmin(Integer id) {
+
+        String sql = "UPDATE usager SET user_admin=? WHERE user_id=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                //paramètres de la requete sql
+                preparedStatement.setInt(2, id);
+                preparedStatement.setInt(1,1 );
+                preparedStatement.executeUpdate();
+                preparedStatement.getGeneratedKeys();
+            }
+        }catch (SQLException e){
+        }
+    }
+    @Override
+    public void supUser(String login){
+        String sqlQuery = " DELETE FROM usager WHERE usager.user_login=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
+                preparedStatement.setString(1, login);
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Erreur SQL");
+        }
+
+    }
 }

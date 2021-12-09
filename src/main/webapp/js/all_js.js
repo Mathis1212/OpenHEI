@@ -179,6 +179,20 @@ let deleteCours = function (url) {
     }
     deleteRequest.send("urlcoursToDelete="+url);
 }
+/*envoye l'id de l'user a change status */
+let setAdmin = function(id){
+    let setRequest = new XMLHttpRequest();
+    setRequest.open("POST","/admin/GestionAdmin")
+    setRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    setRequest.send("id_user="+id);
+}
+/*envoye le login de l'usager a supprimer*/
+let supUsager = function( login){
+    let setRequest = new XMLHttpRequest();
+    setRequest.open("POST","/admin/GestionAdmin")
+    setRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    setRequest.send("login_user="+login);
+}
 
 /* Fonction qui recupère l'url du cours à delete*/
 function getUrlValue(bouton){
