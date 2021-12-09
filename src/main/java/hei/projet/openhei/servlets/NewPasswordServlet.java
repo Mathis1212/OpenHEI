@@ -13,18 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet("/newpassword")
 public class NewPasswordServlet extends GenericServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        if(req.getSession()!=null) {
-            resp.sendRedirect("Accueil");
-        }else{
+        if(req.getSession().getAttribute("Pseudo")!=null) {
             templateEngine.process("changepassword", context, resp.getWriter());
+        }else{
+            resp.sendRedirect("Accueil");
         }
     }
 
@@ -36,9 +39,17 @@ public class NewPasswordServlet extends GenericServlet{
         String password = req.getParameter("Password");
         String newPassword = req.getParameter("newPassword");
         //on essaie de changer le mdp
+
         try{
-            UserService.getInstance().changePassword(login,password,newPassword);
-            resp.sendRedirect("connection");
+            //Si le nouveau mdp correspond au bon pattern
+            Pattern patternPas =Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!.?=])(?=\\S+$).{8,}");
+            Matcher matcherPas = patternPas.matcher(newPassword);
+            if (!matcherPas.find()) {
+                resp.sendRedirect("newpassword");
+            }else{
+                UserService.getInstance().changePassword(login,password,newPassword);
+                resp.sendRedirect("connection");
+            }
         } catch (PasswordNotChangedException e) {
             LOGGER.error("Fail to change password", new PasswordNotChangedException());
             resp.sendRedirect("newpassword");

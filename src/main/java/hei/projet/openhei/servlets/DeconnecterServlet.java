@@ -12,8 +12,9 @@ import java.io.IOException;
 public class DeconnecterServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        if(req.getSession()==null) {
+        if(req.getSession().getAttribute("Pseudo")==null) {
             resp.sendRedirect("Accueil");
+            LOGGER.trace("L'utilisateur n'est pas connecter pour se deconnecter");
         }else{
             req.getSession().removeAttribute("Pseudo");
             req.getSession().removeAttribute("Login");

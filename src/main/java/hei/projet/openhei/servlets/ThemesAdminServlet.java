@@ -9,8 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,19 +20,18 @@ import java.sql.SQLException;
 public class ThemesAdminServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
-        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
 
         String pseudo = (String) req.getSession().getAttribute("Pseudo");
-        context.setVariable("Pseudo", pseudo);
+        context.setVariable("Connected", pseudo);
         templateEngine.process("themes_admin", context, resp.getWriter());
     }
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//add cours
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+    //add cours
         String nom = req.getParameter("nom_cour");
         String url = req.getParameter("url_cour");
         String nom_mat = req.getParameter("nom_mat");
@@ -50,7 +47,7 @@ public class ThemesAdminServlet extends GenericServlet {
                 }
             }
         }
-//update d'un cours
+    //update d'un cours
         String urlcoursToUpdate = req.getParameter("urlcoursToUpdate");
         String nom_cours = req.getParameter("NewNomcours");
         String url_cours = req.getParameter("NewUrlcours");
@@ -70,8 +67,7 @@ public class ThemesAdminServlet extends GenericServlet {
 
             }
 
-//delete un cours
-
+    //delete un cours
         String coursurl = req.getParameter("urlcoursToDelete");
         if (coursurl != null&&!"".equals(coursurl)) {
             LOGGER.info("coursid to delete : " + coursurl);
