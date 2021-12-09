@@ -20,6 +20,9 @@
 				</div>
 			</div>
 		</article>
+		<th:block th:if="${Connected}!=null">
+			<span class="add"></span>
+		</th:block>
 	</main>
 	<footer th:replace="~{fragments::footer('Themes')}"></footer>
 </body>

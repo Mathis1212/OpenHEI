@@ -45,45 +45,33 @@ public class InscriptionServlet extends GenericServlet {
         String password = req.getParameter("Password");
 
         try {
-            //Vérification des champs
-            if(pseudo==null||"".equals(pseudo)){
+            if ((pseudo==null||("".equals(pseudo)))||(login==null||("".equals(login)))||(password==null||("".equals(password)))){
+                resp.sendRedirect("inscription");
+            }else{
                 //verification du pseudo en regex
-                Pattern pattern =Pattern.compile("(?=.*[0-9])(?=\\S+$).{5,}", Pattern.CASE_INSENSITIVE);
-                Matcher matcher = pattern.matcher(pseudo);
-                if (!matcher.find()){
+                Pattern patternPs =Pattern.compile("(?=.*[0-9])(?=\\S+$).{5,}", Pattern.CASE_INSENSITIVE);
+                Matcher matcherPs = patternPs.matcher(pseudo);
+                if (!matcherPs.find()){
                     resp.sendRedirect("inscription");
                 }
-            }
-            if(login==null||"".equals(login)){
                 //verification du login en regex
-                Pattern pattern =Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-                Matcher matcher = pattern.matcher(login);
-                if (!matcher.find()){
+                Pattern patternLog =Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+                Matcher matcherLog = patternLog.matcher(login);
+                if (!matcherLog.find()){
                     resp.sendRedirect("inscription");
-                }/*
-                String pattern = "(?=.*[@])(?=\\S+$).{8,}";
-                if (!login.matches(pattern)){
-                    resp.sendRedirect("inscription");
-                }*/
-            }
-            if(password==null||"".equals(password)){
-                //verification du mdp en regex (contient:1 chiffre;1 maj;1 min;1 car spé;pas d'espace;longueur>8)
-                Pattern pattern =Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!.?=])(?=\\S+$).{8,}");
-                Matcher matcher = pattern.matcher(password);
-                if (matcher.find()){
+                }
+                Pattern patternPas =Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!.?=])(?=\\S+$).{8,}");
+                Matcher matcherPas = patternPas.matcher(password);
+                if (!matcherPas.find()){
                     resp.sendRedirect("inscription");
                 }
             }
-
             User user_champ=new User(pseudo,login,password);
             //pro
             User user=UserService.getInstance().CreateUser(user_champ);
             UserDaoImpl.getInstance().addUser(user);
             resp.sendRedirect("Accueil");
-        } catch (UserFoundException e) {
-            e.printStackTrace();
-            resp.sendRedirect("inscription");
-        } catch (UserNotAddedException e) {
+        } catch (UserFoundException | UserNotAddedException e) {
             e.printStackTrace();
             resp.sendRedirect("inscription");
         } catch (UserNullException e) {
