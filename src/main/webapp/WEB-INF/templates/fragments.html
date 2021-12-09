@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <!--librairie css pour les icons-->
@@ -13,82 +13,75 @@
     <title th:text="${title}+' - OpenHei'">Fragments</title>
 </head>
 <body>
-    <header th:fragment="menu(currentPage)">
-        <div id="haut_page_header">
-            <img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
-            <h1 class="titre">OpenHei</h1>
-        </div>
-        <!--Code pour la navbar-->
-        <div class="topnav" id="myTopnav">
-
+<header th:fragment="menu(currentPage)">
+    <div id="haut_page_header">
+        <img id="logo" src="../../images/O.png" alt="Logo OpenHei" width="100px">
+        <h1 class="titre">OpenHei</h1>
+    </div>
+    <!--Code pour la navbar-->
+    <div class="topnav" id="myTopnav">
             <!--les classes des balises i sont chargés depuis le css en ligne-->
-            <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Home</a>
+            <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Accueil</a>
 
 
             <!--Code à compléter champ de recherche-->
             <div class="menuderoulant">
-              <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Search</button>
+              <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Rechercher</button>
               <div id="myDropdown" class="menuderoulant-content">
                 <div class="search-container" id="testid">
                     <form action="">
                       <input type="text" onkeyup="filterThemes()" placeholder="Search..." name="search" id="site-search">
-
                     </form>
-                  </div>
-              </div>
-            </div>
-
-
-            <!--bloc pour faire apparaitre un menu déroulant au survol-->
-            <div class="menuderoulant">
-                <button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
-                <div class="menuderoulant-content">
-                    <a href="/Themes" th:class="${currentPage == 'Themes' ? 'active' : ''}">Matieres</a>
                 </div>
             </div>
-            <!--blog pour les champs a mettre à droite sur la topnav-->
-            <div class="topnav-right">
-
-                <!--remplacer par le bouton avec affichage des champs au click-->
-                <th:block th:if="${Connected}!=null" >
-                    <div class="menuderoulant">
-                        <button class="dropbtn" ><i class='fa fa-fw fa-user'></i><span th:text="${Connected}"></span> <i class="fa fa-caret-down"></i></button>
-                        <div class="menuderoulant-content">
-                            <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mon Profil</a>
-                            <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mes cours</a>
-                            <a href="/deconnection" th:class="${ currentPage == 'deconnection' ? 'active' : ''}">Déconnexion</a>
-                        </div>
-                    </div>
-                </th:block>
-                <th:block th:if="${Connected}==null">
-                    <a href="/connection" ><i class="fa fa-fw fa-user"></i>Login</a>
-                    <a href="/inscription">Sign In</a>
-                </th:block>
+        </div>
+        <!--bloc pour faire apparaitre un menu déroulant au survol-->
+        <div class="menuderoulant">
+            <button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
+            <div class="menuderoulant-content">
+                <a href="/Themes" th:class="${currentPage == 'Themes' ? 'active' : ''}">Matieres</a>
             </div>
-
-            <!--icone pour afficher tous les champs de la topnav-->
-            <a href="javascript:void(0);" class="menu" id="menuBar">&#9776;</a>
         </div>
-        <!--Code pour la navbar-->
-    </header>
 
+        <!--blog pour les champs a mettre à droite sur la topnav-->
+        <div class="topnav-right">
 
-    <footer th:fragment="footer(currentPage)">
-        <div>
-            <h5>Qui sommes nous ?</h5>
-            <ul>
-                <li></li>
-            </ul>
+            <!--remplacer par le bouton avec affichage des champs au click-->
+            <th:block th:if="${Connected}!=null" >
+                <div class="menuderoulant">
+                    <button class="dropbtn" ><i class='fa fa-fw fa-user'></i><span th:text="${Connected}"></span> <i class="fa fa-caret-down"></i></button>
+                    <div id="field_connected" class="menuderoulant-content">
+                        <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mon Profil</a>
+                        <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mes cours</a>
+                        <a href="/deconnection" th:class="${ currentPage == 'deconnection' ? 'active' : ''}">Déconnexion</a>
+                    </div>
+                </div>
+            </th:block>
+            <th:block th:if="${Connected}==null">
+                <a href="/connection" ><i class="fa fa-fw fa-user"></i>Login</a>
+                <a href="/inscription">Sign In</a>
+            </th:block>
         </div>
-        <div>
-            <h5>Où nous trouver</h5>
-            <ul>
-                <li><a>Facebook</a></li>
-                <li><a href="">Instagram</a></li>
-            </ul>
-        </div>
-    </footer>
 
-
+        <!--icone pour afficher tous les champs de la topnav-->
+        <a href="javascript:void(0);" class="menu" id="menuBar">&#9776;</a>
+    </div>
+    <!--Code pour la navbar-->
+</header>
+<footer th:fragment="footer(currentPage)">
+    <div>
+        <h4>Qui sommes nous ?</h4>
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+    <div>
+        <h4>Où nous trouver</h4>
+        <ul>
+            <li><a>Facebook</a></li>
+            <li><a href="">Instagram</a></li>
+        </ul>
+    </div>
+</footer>
 </body>
 </html>

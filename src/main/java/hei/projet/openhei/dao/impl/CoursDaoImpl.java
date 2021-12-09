@@ -13,6 +13,7 @@ import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
 
+    static final Logger LOGGER = LogManager.getLogger();
 
     //creattion de l'instance
     private static class ServiceHolder {
@@ -117,9 +118,65 @@ public class CoursDaoImpl implements CoursDao {
                 preparedStatement.setString(1, nom);
                 preparedStatement.setString(3, url);
                 preparedStatement.setInt(2, id_mat);
-                preparedStatement.executeUpdate();            }
+                preparedStatement.executeUpdate();
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public Integer deleteCoursFromDB(String url_cours) {
+        String sqlQuery = "DELETE FROM cours WHERE cours.url_cours=?";
+        int row = 0;
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
+                preparedStatement.setString(1, url_cours);
+                row = preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Erreur SQL");
+        }
+        return row;
+    }
+
+    @Override
+    public Integer updateCoursFromDB(String urlcoursToUpdate, String nom_cours, String url_cours) {
+        String sqlQuery = "UPDATE projet_OpenHEI.cours SET nom_cours=?, url_cours=? WHERE cours.url_cours=?";
+        int row = 0;
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
+                preparedStatement.setString(1, nom_cours);
+                preparedStatement.setString(2, url_cours);
+                preparedStatement.setString(3, urlcoursToUpdate);
+                row = preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Erreur SQL");
+        }
+        return row;
+    }
+
+    @Override
+    public boolean ExistCours(String url_cours) throws SQLException {
+        boolean resultat = false;
+        String sql = "SELECT * FROM cours WHERE cours.url_cours=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setString(1, url_cours);
+                try (ResultSet result = preparedStatement.executeQuery()) {
+                    if (result.next()) {
+                        resultat = true;
+                    }
+                }}} catch (SQLException e) {
+                    LOGGER.info("Erreur SQL");
+                }
+                return resultat;
     }
 }
