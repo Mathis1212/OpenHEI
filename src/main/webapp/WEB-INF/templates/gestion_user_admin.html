@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Themes')}">
+</head>
+<body>
+<header th:replace="~{fragments :: menu('Themes')}"></header>
+<style>
+
+
+    #myTable {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    #myTable tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
+<main>
+    <article>
+        <h1 class="titre_page">Thèmes</h1>
+
+        <div class="liste" >
+            <table id="myTable">
+                <tr class="header">
+                    <th style="width:60%;">Id</th>
+                    <th style="width:40%;">Pseudo</th>
+                    <th style="width:40%;">Is Admin</th>
+                    <th style="width:40%;">Delete</th>
+                    <th style="width:40%;">Set Admin</th>
+                </tr>
+                <tr class="user_elements" th:each="mapItem, state:${matiere}">
+                    <td>id</td>
+                    <td>pseudo</td>
+                    <td>status</td>
+                    <td><button class="delete">delete</button></td>
+                    <td><button class="admin">Set Admin</button></td>
+                </tr>
+            </table>
+        </div>
+
+
+    </article>
+</main>
+<footer th:replace="~{fragments::footer('Themes')}"></footer>
+</body>
+</html>
