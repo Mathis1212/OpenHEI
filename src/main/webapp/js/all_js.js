@@ -83,6 +83,7 @@ window.onload=function(){
         }
     }
 
+
     var IsAdmin_button=document.getElementsByClassName("admin");
     for (let AdminButton of IsAdmin_button){
         AdminButton.onclick = function(){
@@ -97,7 +98,7 @@ window.onload=function(){
             var url_oldcours = getUpdateUrlValue(updatebutton);
             var url_newcours = updatebutton.previousElementSibling.previousElementSibling.value;
             let nom_newcours = updatebutton.previousElementSibling.value;
-        if(verif()==true) {
+        if(verif1()==true) {
             updateCours(url_oldcours, url_newcours, nom_newcours);
         }else{
             alert("Veuillez remplir tout les champs pour mettre à jour un cours");
@@ -215,7 +216,7 @@ function getUpdateUrlValue(bouton){
 }
 
 /* Fonction qui verifie que les champs pour l'update d'un cours ne sont pas vident*/
-function verif()
+function verif1()
 {
     result=false;
     var newnomcours = document.getElementById("nomupdate").value;
