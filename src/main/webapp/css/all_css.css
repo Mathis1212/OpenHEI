@@ -392,9 +392,11 @@ li{
 .q{
     margin-top: 50px;
     font-size: larger;
+    font-weight: bold;
 }
 .r{
     margin-top: 50px;
+    font-size:larger;
     font-style: italic;
 }
 .titre_page{
