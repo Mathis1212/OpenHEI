@@ -73,6 +73,7 @@ public class ThemesAdminServlet extends GenericServlet {
             }
 
 //delete un cours
+
         String coursurl = req.getParameter("urlcoursToDelete");
         if (coursurl != null&&!"".equals(coursurl)) {
             LOGGER.info("coursid to delete : " + coursurl);
