@@ -42,7 +42,7 @@ public class ThemesAdminServlet extends GenericServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
-    //add cours
+        //Recupération des information du front pour l'ajout d'un cours
         String nom = req.getParameter("nom_cour");
         String url = req.getParameter("url_cour");
         String nom_mat = req.getParameter("nom_mat");
@@ -61,7 +61,7 @@ public class ThemesAdminServlet extends GenericServlet {
             }
         }
 
-    //update d'un cours
+        //Recupération des information du front pour l'update d'un cours
         String urlcoursToUpdate = req.getParameter("urlcoursToUpdate");
         String nom_cours = req.getParameter("NewNomcours");
         String url_cours = req.getParameter("NewUrlcours");
@@ -81,8 +81,7 @@ public class ThemesAdminServlet extends GenericServlet {
 
             }
 
-//delete un cours
-
+        //Recupération des information du front pour delete un cours
         String coursurl = req.getParameter("urlcoursToDelete");
         if (coursurl != null&&!"".equals(coursurl)) {
             LOGGER.info("coursid to delete : " + coursurl);

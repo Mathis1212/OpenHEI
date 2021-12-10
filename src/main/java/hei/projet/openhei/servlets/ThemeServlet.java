@@ -17,13 +17,14 @@ public class ThemeServlet extends GenericServlet{
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        //Vérification pour l'accès aux pages privés
         if (req.getSession().getAttribute("Pseudo")!=null){
 
             context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
 
             String pseudo = (String) req.getSession().getAttribute("Pseudo");
             context.setVariable("Connected", pseudo);
-
+            //Verfification pour savoir si l'user est un admin
             String status = (String) req.getSession().getAttribute("Admin");
             if ("true".equals(status)){
                 resp.sendRedirect("/admin/ThemesAdmin");
@@ -31,6 +32,7 @@ public class ThemeServlet extends GenericServlet{
                 context.setVariable("Admin",status);
             }
         }
+        //Si l'user n'est pas admin
         templateEngine.process("themes", context, resp.getWriter());
 
     }

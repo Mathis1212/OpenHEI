@@ -77,6 +77,7 @@ public class UserService {
         }
     }
 
+    //Méthode qui permet de récuperer les informations de sessions
     public ArrayList<String> getInformationsForSession(String login){
         ArrayList<String> information =new ArrayList<String>();
         if (login!=null&&!("".equals(login))){
