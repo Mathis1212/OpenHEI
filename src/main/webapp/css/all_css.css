@@ -510,6 +510,24 @@ li{
     position: relative;
     display: inline-block;
 }
+/*classe bouton update*/
+.updatebtn{
+    background-color: #c2c0c1;
+    color: black;
+    border: 2px solid white;
+    padding: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.deletebtn{
+    background-color: #c2c0c1;
+    color: black;
+    border: 2px solid white;
+    padding: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
 /*block qui s'affiche au click et qui contient la liste des cours*/
 .dropdown-content {
@@ -877,6 +895,12 @@ input:checked + .slider:before {
 /*!--THEMES ADMIN--!*/
 .invisible{
     display: none;
+}
+
+.form_update{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 /*!--THEMES ADMIN--!*/
