@@ -232,7 +232,7 @@ let supUsager = function(id){
 //Requete AJAX pour le suivi d'un cours
 let addMatiereToUser = function (nom_mat) {
     let addMatiereRequest = new XMLHttpRequest();
-    addMatiereRequest.open("POST", "/Themes", true);
+    addMatiereRequest.open("POST", "/Profil", true);
     addMatiereRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     console.log("id de la matiere :" +id);
     addMatiereRequest.onload = function () {

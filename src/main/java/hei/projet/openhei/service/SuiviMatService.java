@@ -10,6 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 public class SuiviMatService {
+
+    private static class ServiceHolder {
+        private final static SuiviMatService instance = new SuiviMatService();
+    }
+
+    //Creation de la methode pour recuperer l'instance
+    public static SuiviMatService getInstance() {
+        return SuiviMatService.ServiceHolder.instance;
+    }
+
     public void AjouterMat(Integer id, String nom) {
        Integer idMat= MatiereDaoImpl.getInstance().getID(nom);
         UserDaoImpl.getInstance().joinIdMatiereToUser(id,idMat);
@@ -30,5 +40,10 @@ public class SuiviMatService {
             hmap.put(userid,nomSuivie);
         }
         return hmap;
+    }
+    public List<String> listMat(Integer id){
+        Map<Integer, List<String>>map=UserandMat();
+        List<String> mat=map.get(id);
+        return mat;
     }
 }
