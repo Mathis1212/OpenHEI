@@ -30,7 +30,7 @@ public class UserService {
     //enlever l'exception UserNotFoundException
     public boolean userExist(String login){
         boolean rep;
-        if(userDao.getUser(login)!=null){
+        if(userDao.getUser(login).getId()!=null){
             rep=true;
         }else{
             rep=false;

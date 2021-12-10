@@ -40,7 +40,6 @@ public class UserDaoImpl implements UserDao {
         String string=login;
         String sql ="SELECT * FROM usager WHERE user_login=?";
         User user=new User();
-        user.setUserlogin(login);
         try {
             DataSource datasource = DataSourceProvider.getDataSource();
             try(Connection cnx =datasource.getConnection();
@@ -56,6 +55,7 @@ public class UserDaoImpl implements UserDao {
                         user.setUserpassword(mdp);
                         Boolean admin=result.getBoolean("user_admin");
                         user.setUserAdmin(admin);
+                        user.setUserlogin(login);
 
                     }
                 }
@@ -212,7 +212,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void joinIdMatiereToUser(Integer id, Integer id_matiere) {
-        String sql = "INSERT INTO Projet_openHEI.suivi (id_user,id_matiere_suivi) values(?,?)";
+        String sql = "INSERT INTO Projet_openHEI.suivi (user_id,id_matiere_suivi) values(?,?)";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
