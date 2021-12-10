@@ -84,6 +84,8 @@ public class UserService {
                 User user=userDao.getUser(login);
                 information.add(user.getPseudo());
                 information.add(String.valueOf(user.getstatus()));
+                information.add(String.valueOf(user.getId()));
+                information.add(String.valueOf(user.getUserlogin()));
             }else{
                 return information;
             }

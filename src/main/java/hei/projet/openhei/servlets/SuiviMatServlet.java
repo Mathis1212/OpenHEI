@@ -1,7 +1,9 @@
 package hei.projet.openhei.servlets;
 
+import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.Matiere;
 import hei.projet.openhei.service.MatiereService;
+import hei.projet.openhei.service.UserService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -9,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/Themes")
 public class SuiviMatServlet extends GenericServlet {
@@ -26,8 +29,8 @@ public class SuiviMatServlet extends GenericServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
         //add cours
-        Integer id_user;
-        Integer idMat = Integer.parseInt( req.getParameter("id_mat"));
+        int id= Integer.parseInt(String.valueOf(req.getSession().getAttribute("Id")));
+        Integer Mat = Integer.parseInt( req.getParameter("nom_mat"));
 
         //
     }

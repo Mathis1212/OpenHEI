@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
     //Méthode qui permet de récuperer depuis son login un user inscrit dans la BDD
     @Override
     public User getUser(String login){
-        User user = null;
+        User user =null;
         String sql ="SELECT * FROM usager WHERE user_login=?";
         try {
             DataSource datasource = DataSourceProvider.getDataSource();
@@ -46,7 +46,11 @@ public class UserDaoImpl implements UserDao {
                 preparedStatement.setString(1,login);
                 try(ResultSet result = preparedStatement.executeQuery()){
                     if(result.next()){
-                        user= createUserFromResultSet(result);
+                        user.setUserId(result.getInt("user_id"));
+                        user.setPseudo(result.getString("user_pseudo"));
+                        user.setUserlogin(result.getString("user_login"));
+                        user.setUserpassword(result.getString("user_password"));
+                        user.setUserAdmin(result.getBoolean("user_admin"));
                     }
                 }
             }

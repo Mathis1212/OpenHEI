@@ -1,6 +1,8 @@
 package hei.projet.openhei.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Integer id;
@@ -9,6 +11,7 @@ public class User {
     private String password;
     private java.util.Date date_creation;
     private boolean administrateur;
+    private List<String> matsuivie;
 
     //Premier constructeur de la class User
     public User(String pseudo, String login, String password){
@@ -17,6 +20,7 @@ public class User {
         this.login=login;
         this.password=password;
         this.date_creation=new Date(System.currentTimeMillis());
+        this.matsuivie=new ArrayList<>();
     }
 
     //Deuxième constructeur de la class User
@@ -27,6 +31,7 @@ public class User {
         this.password=password;
         this.date_creation=new Date(System.currentTimeMillis());
         this.administrateur=admin;
+        this.matsuivie=new ArrayList<>();
     }
     public User(Integer id, String pseudo, String login, String password,boolean admin){
         this.id=id;
@@ -35,6 +40,7 @@ public class User {
         this.password=password;
         this.date_creation=new Date(System.currentTimeMillis());
         this.administrateur=admin;
+        this.matsuivie=new ArrayList<>();
     }
 
 
@@ -50,5 +56,6 @@ public class User {
     public void setUserId(Integer id){this.id=id;}
     public void setPseudo(String pseudo){this.pseudo=pseudo;}
     public void setUserlogin(String login){this.login=login;}
+    public void setUserAdmin(boolean admin){this.administrateur=admin;}
 
 }
