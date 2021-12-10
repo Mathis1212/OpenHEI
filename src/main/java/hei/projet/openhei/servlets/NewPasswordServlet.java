@@ -23,12 +23,7 @@ public class NewPasswordServlet extends GenericServlet{
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-
-        if(req.getSession().getAttribute("Pseudo")==null) {
-            templateEngine.process("changepassword", context, resp.getWriter());
-        }else{
-            resp.sendRedirect("Accueil");
-        }
+        templateEngine.process("changepassword", context, resp.getWriter());
     }
 
     @Override
