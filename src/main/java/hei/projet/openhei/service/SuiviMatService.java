@@ -1,5 +1,7 @@
 package hei.projet.openhei.service;
 
+import hei.projet.openhei.dao.MatiereDao;
+import hei.projet.openhei.dao.UserDao;
 import hei.projet.openhei.dao.impl.MatiereDaoImpl;
 import hei.projet.openhei.dao.impl.UserDaoImpl;
 import hei.projet.openhei.entities.Cours;
@@ -22,9 +24,16 @@ public class SuiviMatService {
         return SuiviMatService.ServiceHolder.instance;
     }
 
+    UserDao userDao = UserDaoImpl.getInstance();
+
+    MatiereDao matiereDao = MatiereDaoImpl.getInstance();
+
+    MatiereService matiereService = MatiereService.getInstance();
+
+
     public void AjouterMat(Integer id, String nom) {
-       Integer idMat= MatiereDaoImpl.getInstance().getID(nom);
-        UserDaoImpl.getInstance().joinIdMatiereToUser(id,idMat);
+       Integer idMat= matiereDao.getID(nom);
+        userDao.joinIdMatiereToUser(id,idMat);
 
     }
     public Map<Integer, List<String>> UserandMat(){
@@ -32,13 +41,12 @@ public class SuiviMatService {
         List<Integer> matsuivie=new ArrayList<Integer>();
         ArrayList<String> nomSuivie=new ArrayList<>();
         ArrayList<User> listuser=new ArrayList<>();
-        listuser=UserDaoImpl.getInstance().listAllUser();
+        listuser=userDao.listAllUser();
         for(int i=0;i<listuser.size();i++){
             Integer userid=listuser.get(i).getId();
-            matsuivie = UserDaoImpl.getInstance().getListIdMatiereOfUser(userid);
+            matsuivie = userDao.getListIdMatiereOfUser(userid);
             for(int e=0;e< matsuivie.size();e++){
-                nomSuivie.add(MatiereDaoImpl.getInstance().getNom(matsuivie.get(e)));
-                String string = MatiereDaoImpl.getInstance().getNom(matsuivie.get(e));
+                nomSuivie.add(matiereDao.getNom(matsuivie.get(e)));
             }
             hmap.put(userid,nomSuivie);
         }
@@ -49,7 +57,7 @@ public class SuiviMatService {
         Map<String, List<Cours>> hmap = new HashMap<String, List<Cours>>();
         Map<Integer, List<String>>map=UserandMat();
         List<String> listNom=map.get(id);
-        List<Matiere> comparaison=MatiereService.getInstance().recupMatiereAvecListCour();
+        List<Matiere> comparaison=matiereService.recupMatiereAvecListCour();
         List<Matiere> mat=new ArrayList<>();
         for(int i=0;i< comparaison.size();i++) {
             for(int e=0;e<listNom.size() ;e++){
