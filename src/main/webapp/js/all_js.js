@@ -26,12 +26,6 @@ window.onload=function(){
         showAllNavBarElement();
     };
 
-    //affiche le password en clair au click sur le toggle
-    var password = document.getElementById("Password");
-    var toggle=document.querySelector("label.switch input[type='checkbox']");
-    toggle.onclick=function (){
-        showPassword(password);
-    }
 
     //Pendant le scroll de la fenêtre, éxécute la fonction
     window.onscroll = function() {

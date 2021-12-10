@@ -29,12 +29,16 @@ public class ThemesAdminServlet extends GenericServlet {
         context.setVariable("Connected", pseudo);
         templateEngine.process("themes_admin", context, resp.getWriter());
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+
     //add cours
         String nom = req.getParameter("nom_cour");
         String url = req.getParameter("url_cour");
         String nom_mat = req.getParameter("nom_mat");
+
+        //
         if ((nom != null)&&(url != null)&&(nom_mat != null)) {
             if((!"".equals(nom))&&(!"".equals(url))&&!"".equals(nom_mat)) {
                 Integer id_mat = MatiereDaoImpl.getInstance().getID(nom_mat);
@@ -47,6 +51,7 @@ public class ThemesAdminServlet extends GenericServlet {
                 }
             }
         }
+
     //update d'un cours
         String urlcoursToUpdate = req.getParameter("urlcoursToUpdate");
         String nom_cours = req.getParameter("NewNomcours");
