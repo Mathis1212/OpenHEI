@@ -1,6 +1,8 @@
 package hei.projet.openhei.dao.impl;
 
 import hei.projet.openhei.dao.UserDao;
+import hei.projet.openhei.entities.Cours;
+import hei.projet.openhei.entities.Matiere;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserNotAddedException;
@@ -13,6 +15,7 @@ import de.mkammerer.argon2.Argon2Factory.Argon2Types;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     static final Logger LOGGER = LogManager.getLogger();
@@ -62,7 +65,6 @@ public class UserDaoImpl implements UserDao {
         User user=new User(resultSelect.getString("user_pseudo"), resultSelect.getString("user_login"), resultSelect.getString("user_password"),resultSelect.getBoolean("user_admin"));
         return user;
     }
-
 
     //méthode qui renvoie true si un user est crée par la méthode "getUser()", false si la méthode "getUser()" renvoie une exception
     @Override
@@ -183,4 +185,42 @@ public class UserDaoImpl implements UserDao {
         return listOfLogin;
     }
 
+    @Override
+    public List<Integer> getListIdMatiereOfUser(Integer id_user) {
+        List<Integer> list = new ArrayList<>();
+        String sql = "SELECT id_matiere_suivi FROM suivi WHERE user_id=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id_user);
+                try (ResultSet resultSelect = preparedStatement.executeQuery()) {
+                    while(resultSelect.next()){
+                        int id=resultSelect.getInt("id_matiere_suivi");
+                        list.add(id);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public void joinIdMatiereToUser(Integer id, Integer id_matiere) {
+        String sql = "INSERT INTO Projet_openHEI.suivi (id_user,id_matiere_suivi) values(?,?)";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                preparedStatement.setInt(2, id_matiere);
+                try (ResultSet resultSelect = preparedStatement.executeQuery()) {
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
