@@ -206,9 +206,9 @@ let supUsager = function(id){
 //Requete AJAX pour le suivi d'un cours
 let addMatiereToUser = function (nom_mat) {
     let addMatiereRequest = new XMLHttpRequest();
-    addMatiereRequest.open("POST", "/Themes", true);
+    addMatiereRequest.open("POST", "/Profil", true);
     addMatiereRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    console.log("id de la matiere :" +id);
+    console.log("nom de la matiere :" +nom_mat);
     addMatiereRequest.onload = function () {
         if(this.status === 200) {
             console.log("Requete envoyé")
@@ -216,7 +216,7 @@ let addMatiereToUser = function (nom_mat) {
             console.log("Echec de la requete")
         }
     }
-    addMatiereRequest.send("id_mat="+id);
+    addMatiereRequest.send("nom_mat="+nom_mat);
 }
 
 

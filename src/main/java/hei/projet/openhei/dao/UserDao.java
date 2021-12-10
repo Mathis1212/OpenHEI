@@ -7,6 +7,7 @@ import hei.projet.openhei.exception.UserNotAddedException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface UserDao {
 
@@ -20,7 +21,12 @@ public interface UserDao {
     //Méthodes pour lister tout les utilisateurs, lister tout les logins
     public ArrayList<User> listAllUser();
     public ArrayList<String> listAllLogin();
+
+
+    public List<Integer> getListIdMatiereOfUser(Integer id_user);
+    public void joinIdMatiereToUser(Integer id, Integer id_matiere);
     public void setAdmin(Integer id);
     public void supUser(Integer id);
+
 
 }

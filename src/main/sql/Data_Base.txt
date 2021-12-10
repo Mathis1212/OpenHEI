@@ -27,3 +27,10 @@ CREATE TABLE projet_OpenHEI.cours (
 	FOREIGN KEY (id_matiere_cours) REFERENCES projet_OpenHEI.matiere(id_matiere),
 	UNIQUE(url_cours)
 	)engine=innodb;
+
+CREATE TABLE Projet_openHEI.suivi(
+	user_id INT NOT NULL,
+	id_matiere_suivi INT NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES Projet_openHEI.usager(user_id),
+	FOREIGN KEY(id_matiere_suivi) REFERENCES Projet_openHEI.matiere(id_matiere)
+	)ENGINE=innodb;

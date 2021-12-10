@@ -1,6 +1,8 @@
 package hei.projet.openhei.dao.impl;
 
 import hei.projet.openhei.dao.UserDao;
+import hei.projet.openhei.entities.Cours;
+import hei.projet.openhei.entities.Matiere;
 import hei.projet.openhei.entities.User;
 import hei.projet.openhei.exception.PasswordNotChangedException;
 import hei.projet.openhei.exception.UserNotAddedException;
@@ -13,6 +15,7 @@ import de.mkammerer.argon2.Argon2Factory.Argon2Types;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     //Récupération de l'instance Log4j2
@@ -34,8 +37,9 @@ public class UserDaoImpl implements UserDao {
     //Méthode qui permet de récuperer depuis son login un user inscrit dans la BDD
     @Override
     public User getUser(String login){
-        User user = null;
+        String string=login;
         String sql ="SELECT * FROM usager WHERE user_login=?";
+        User user=new User();
         try {
             DataSource datasource = DataSourceProvider.getDataSource();
             try(Connection cnx =datasource.getConnection();
@@ -43,13 +47,23 @@ public class UserDaoImpl implements UserDao {
                 preparedStatement.setString(1,login);
                 try(ResultSet result = preparedStatement.executeQuery()){
                     if(result.next()){
-                        user= createUserFromResultSet(result);
+                        int id=result.getInt("user_id");
+                        user.setUserId(id);
+                        String pseudo=result.getString("user_pseudo");
+                        user.setPseudo(pseudo);
+                        String mdp=result.getString("user_password");
+                        user.setUserpassword(mdp);
+                        Boolean admin=result.getBoolean("user_admin");
+                        user.setUserAdmin(admin);
+                        user.setUserlogin(login);
+
                     }
                 }
             }
         }catch (SQLException e){
             LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de l'user de login :"+ login+ " :", e);
         }
+
         return user;
     }
 
@@ -61,11 +75,13 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-
     //Méthode qui vérifie si un utilisateur existe dans la bdd grace à son login
+
     @Override
     public Boolean checkUserbyLogin(String login){
         boolean result=false;
+        String test=getUser(login).getUserlogin();
+        String logine=login;
         if(getUser(login).getUserlogin().equals(login)){
             result=true;
         }else if(login==null||"".equals(login)){
@@ -171,6 +187,44 @@ public class UserDaoImpl implements UserDao {
             LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de la liste des logins :", e);
         }
         return listOfLogin;
+    }
+    @Override
+    public List<Integer> getListIdMatiereOfUser(Integer id_user) {
+        List<Integer> list = new ArrayList<>();
+        String sql = "SELECT id_matiere_suivi FROM suivi WHERE user_id=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id_user);
+                try (ResultSet resultSelect = preparedStatement.executeQuery()) {
+                    while(resultSelect.next()){
+                        int id=resultSelect.getInt("id_matiere_suivi");
+                        list.add(id);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public void joinIdMatiereToUser(Integer id, Integer id_matiere) {
+        String sql = "INSERT INTO Projet_openHEI.suivi (user_id,id_matiere_suivi) values(?,?)";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
+                preparedStatement.setInt(1, id);
+                preparedStatement.setInt(2, id_matiere);
+                try (ResultSet resultSelect = preparedStatement.executeQuery()) {
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     //update l'attribut admin de l'usager avec son id
