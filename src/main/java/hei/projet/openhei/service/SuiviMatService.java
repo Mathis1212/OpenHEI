@@ -50,6 +50,7 @@ public class SuiviMatService {
                 nomSuivie.add(matiereDao.getNom(matsuivie.get(e)));
             }
             hmap.put(userid,nomSuivie);
+
         }
         return hmap;
     }

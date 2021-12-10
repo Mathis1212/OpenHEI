@@ -66,6 +66,7 @@ Maj+F10
 Étape n°7 : Connectez-vous sur votre profil via la page "Login".
 
 Vous pouvez à présent profiter du statut Administrateur !  
+
 NB : un Administrateur avec un login/mdp est ajouté de base à la BDD. Vous pouvez utiliser celui-ci aussi.  
 Les identifiants sont les suivants :  
 Login : admin000@admin.com   
@@ -77,11 +78,21 @@ Mdp : Autorité1@
 
 Vous venez de supprimer un utilisateur de la BDD !
 ### Supprimer un utilisateur
+
 Étape n°1 : Connectez-vous sur un profil Administrateur.  
 Étape n°2 : Rendez-vous sur la page "Gestion User". Sur cette page est renseigné l'ensemble des utilisateurs du site.  
 Étape n°3 : Cliquez sur le bouton "Set Admin" à la ligne de l'utilisateur à qui vous voulez donner le statut Administrateur.
 
 Bravo, vous avez créé un nouveau Administrateur !
+
+
+### Supprimer un utilisateur
+Étape n°1 : Connectez-vous sur un profil Administrateur.  
+Étape n°2 : Rendez-vous sur la page "Gestion User". Sur cette page est renseigné l'ensemble des utilisateurs du site.  
+Étape n°3 : Cliquez sur le bouton "Delete" à la ligne de l'utilisateur que vous voulez supprimer.
+
+Vous venez de supprimer un utilisateur de la BDD !
+
 ## Tutoriels : ajouter, supprimer, mettre à jour et suivre un cours
 
 Prérequis : Avoir le statut Administrateur sur le site ; veuillez consulter la rubrique ci-dessus avant de continuer.
