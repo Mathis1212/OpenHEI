@@ -20,17 +20,19 @@
     </div>
     <!--Code pour la navbar-->
     <div class="topnav" id="myTopnav">
-            <!--les classes des balises i sont chargés depuis le css en ligne-->
-            <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Accueil</a>
+        <!--les classes des balises i sont chargés depuis le css en ligne-->
+        <a href="/Accueil" th:class="${ currentPage == 'Accueil' ? 'active' : ''}"><i class="fa fa-fw fa-home"></i> Accueil</a>
 
 
-            <!--Code à compléter champ de recherche-->
-            <div class="menuderoulant">
-              <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Rechercher</button>
-              <div id="myDropdown" class="menuderoulant-content">
+        <!--Code à compléter champ de recherche-->
+        <div class="menuderoulant">
+            <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Rechercher</button>
+            <div id="myDropdown" class="menuderoulant-content">
                 <div class="search-container" id="testid">
                     <form action="">
-                      <input type="text" onkeyup="filterThemes()" placeholder="Search..." name="search" id="site-search">
+                        <input type="text" onkeyup="filterThemes()" placeholder="Search..." name="search" id="site-search">
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
                     </form>
                 </div>
             </div>
