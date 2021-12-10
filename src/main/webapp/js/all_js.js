@@ -209,6 +209,7 @@ let deleteCours = function (url) {
     }
     deleteRequest.send("urlcoursToDelete="+url);
 }
+
 /*envoye l'id de l'user a change status */
 let setAdmin = function(id){
     let setRequest = new XMLHttpRequest();
@@ -218,6 +219,7 @@ let setAdmin = function(id){
     console.log(id);
     setRequest.send("id_user="+id);
 }
+
 /*envoye le login de l'usager a supprimer*/
 let supUsager = function(id){
     let setRequest = new XMLHttpRequest();

@@ -1,62 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments :: head('Gestion Admin')}">
-</head>
-<body>
-<header th:replace="~{fragments :: menu('GestionAdmin')}"></header>
+    <head th:replace="~{fragments :: head('Gestion Admin')}">
+    </head>
+    <body>
+        <header th:replace="~{fragments :: menu('GestionAdmin')}"></header>
+        <main>
+            <article>
 
-<style>
+                <h1 class="titre_page">Gestion</h1>
 
-    #myTable {
-        border-collapse: collapse;
-        width: 100%;
-        border: 1px solid #ddd;
-        font-size: 18px;
-    }
-
-    #myTable th, #myTable td {
-        text-align: left;
-        padding: 12px;
-    }
-
-    #myTable tr {
-        border-bottom: 1px solid #ddd;
-    }
-
-    #myTable tr.header, #myTable tr:hover {
-        background-color: #f1f1f1;
-    }
-</style>
-
-<main>
-    <article>
-
-        <h1 class="titre_page">Gestion</h1>
-
-        <div class="liste_user" >
-            <table id="myTable">
-                <tr class="header">
-                    <th style="width:60%;">Id</th>
-                    <th style="width:40%;">Pseudo</th>
-                    <th style="width:40%;">Is Admin</th>
-                    <th style="width:40%;">Delete</th>
-                    <th style="width:40%;">Set Admin</th>
-                </tr>
-                <tr class="user_elements" th:each="mapItem, state:${user}">
-                    <td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>
-                    <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
-                    <td th:utext="${mapItem.value.getstatus()}">status</td>
-                    <td><input type="submit" class="delete" value="Delete"></td>
-                    <td><input type="submit" class="admin" value="Set Admin"></td>
-                </tr>
-            </table>
-        </div>
+                <div class="liste_user" >
+                    <table id="myTable">
+                        <tr class="header">
+                            <th style="width:60%;">Id</th>
+                            <th style="width:40%;">Pseudo</th>
+                            <th style="width:40%;">Is Admin</th>
+                            <th style="width:40%;">Delete</th>
+                            <th style="width:40%;">Set Admin</th>
+                        </tr>
+                        <tr class="user_elements" th:each="mapItem, state:${user}">
+                            <td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>
+                            <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
+                            <td th:utext="${mapItem.value.getstatus()}">status</td>
+                            <td><form><input type="submit" class="delete" value="Delete"></form></td>
+                            <td><form><input type="submit" class="admin" value="Set Admin"></form></td>
+                        </tr>
+                    </table>
+                </div>
 
 
-    </article>
-</main>
+            </article>
+        </main>
+        <footer th:replace="~{fragments::footer('GestionAdmin')}"></footer>
 
-<footer th:replace="~{fragments::footer('GestionAdmin')}"></footer>
-
-</body>
+    </body>
 </html>
