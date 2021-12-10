@@ -97,6 +97,15 @@ window.onload=function(){
         }
         }
     }
+
+    /* Récuperation de l'id de la matiere à ajouter à a l'utilisateur et appel de la fonction addMatiereToUser()*/
+    var button_add_Matiere=document.getElementsByClassName("suivit");
+    for (let Bouton of button_add_Matiere) {
+        Bouton.onclick=function (){
+            var idMat=;
+
+        }
+    }
 }
 
 
@@ -180,6 +189,23 @@ let deleteCours = function (url) {
     }
     deleteRequest.send("urlcoursToDelete="+url);
 }
+
+
+let addMatiereToUser = function (id) {
+    let addMatiereRequest = new XMLHttpRequest();
+    addMatiereRequest.open("POST", "/Themes", true);
+    addMatiereRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    console.log("id de la matiere :" +id);
+    addMatiereRequest.onload = function () {
+        if(this.status === 200) {
+            console.log("Requete envoyé")
+        } else {
+            console.log("Echec de la requete")
+        }
+    }
+    addMatiereRequest.send("id_mat="+id);
+}
+
 
 /* Fonction qui recupère l'url du cours à delete*/
 function getUrlValue(bouton){
