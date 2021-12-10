@@ -18,68 +18,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
+    //Récupération de l'instance Log4j2
     static final Logger LOGGER = LogManager.getLogger();
-    //récupération de l'instance Argon2
+
+    //Récupération de l'instance Argon2
     Argon2 argon2 = Argon2Factory.create(Argon2Types.ARGON2id);
 
-    //création de l'instance de UserDao
+    //Création de l'instance de UserDao
     private static class ServiceHolder {
         private final static UserDao instance = new UserDaoImpl();
     }
-    //création de la méthode getInstance pour récupérer les méthodes de UserDaoImpl
+    //Création de la méthode getInstance pour récupérer les méthodes de UserDaoImpl
     public static UserDao getInstance() {
         UserDao instance = ServiceHolder.instance;
         return instance;
     }
 
-    //méthode qui permet de récuperer depuis son login un user inscrit dans la bdd
+    //Méthode qui permet de récuperer depuis son login un user inscrit dans la BDD
     @Override
     public User getUser(String login){
         User user = null;
-        //requete sql
         String sql ="SELECT * FROM usager WHERE user_login=?";
         try {
             DataSource datasource = DataSourceProvider.getDataSource();
             try(Connection cnx =datasource.getConnection();
                 PreparedStatement preparedStatement = cnx.prepareStatement(sql)){
-                //paramètre de la requete sql (login)
                 preparedStatement.setString(1,login);
                 try(ResultSet result = preparedStatement.executeQuery()){
                     if(result.next()){
-                        //si un user corespond au login on crée un objet user avec ses informations grace à la méthode "createUserFromResultSet()"
                         user= createUserFromResultSet(result);
                     }
                 }
             }
         }catch (SQLException e){
-            //envoi d'une exception si on ne trouve pas d'user corespondant au login
-            e.printStackTrace();
-            LOGGER.error("Exception : !");
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de l'user de login :"+ login+ " :", e);
         }
         return user;
     }
 
-    //méthode qui crée un objet user depuis la requete faite dans la méthode "getUser()"
+    //Méthode de création d'un objet user à la récupération des informations de la BDD
     @Override
     public User createUserFromResultSet(ResultSet resultSelect) throws SQLException {
+        LOGGER.info("Création d'un objet user avec les informations récupérées de la BDD");
         User user=new User(resultSelect.getString("user_pseudo"), resultSelect.getString("user_login"), resultSelect.getString("user_password"),resultSelect.getBoolean("user_admin"));
         return user;
     }
 
-    //méthode qui renvoie true si un user est crée par la méthode "getUser()", false si la méthode "getUser()" renvoie une exception
+    //Méthode qui vérifie si un utilisateur existe dans la bdd grace à son login
+
     @Override
     public Boolean checkUserbyLogin(String login){
         boolean result=false;
         if(getUser(login).getUserlogin().equals(login)){
             result=true;
-        }else if(login==null){
+        }else if(login==null||"".equals(login)){
             result=false;
+            LOGGER.info("Aucun utilisateur trouvé car le champ login est vide ou null");
         }
         return result;
     }
 
 
-    //retourne la liste de tous les logins d'ultisateurs présent dans la bdd
+    //Méthode qui ajoute un utilisateur dans la BDD
     @Override
     public void addUser(User user) throws UserNotAddedException {
         //Hashage du mdp
@@ -89,33 +89,24 @@ public class UserDaoImpl implements UserDao {
         //Si le hashage est verifié on ajoute l'user
         if (VerifyEncrypte) {
             User Encrypteduser = new User(user.getPseudo(), user.getUserlogin(), Encryptedmdp);
-            //requete sql
             try {
                 DataSource dataSource = DataSourceProvider.getDataSource();
                 try (Connection cnx = dataSource.getConnection()) {
                     String sql = "INSERT INTO usager(user_pseudo, user_login, user_password) VALUES (?,?,?)";
                     try (PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                        //paramètres de la requete sql
                         preparedStatement.setString(1, Encrypteduser.getPseudo());
                         preparedStatement.setString(2, Encrypteduser.getUserlogin());
                         preparedStatement.setString(3, Encrypteduser.getUserpassword());
-
-                        //Le problème est à cette ligne
-
                         preparedStatement.executeUpdate();
                     }
-                } catch (SQLException e) {
-                    //envoi d'une exception si il y a une erreur dans l'ajout de l'user à la bdd
-                    LOGGER.error("Exception : !",e);
-                    throw new UserNotAddedException();
                 }
-           } catch (SQLException throwables) {
-                LOGGER.error("Exception : !",throwables);
-                throw new RuntimeException("Erreur lors de l'inscription");
+           } catch (SQLException e) {
+                LOGGER.error("Erreur dans la transmission avec la BDD lors de l'ajout de l'utilisateur :", e);
             }
         }
     }
 
+    //Méthode qui permet à l'utilisateur de changer son mot de passe en BDD
     @Override
     public void setNewPassword(String login, String newPassword) throws PasswordNotChangedException {
         //Hashage du nouveau password
@@ -132,11 +123,11 @@ public class UserDaoImpl implements UserDao {
                 preparedStatement.getGeneratedKeys();
             }
         }catch (SQLException e){
-            throw new PasswordNotChangedException();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors du changement de mot de passe :", e);
         }
     }
 
-    //retourne la liste de tous les Users présent dans la bdd
+    //Méthode qui retourne la liste de tous les utilisateurs présent en BDD
     @Override
     public ArrayList<User> listAllUser() {
         ArrayList<User> listOfUser = new ArrayList<>();
@@ -147,22 +138,23 @@ public class UserDaoImpl implements UserDao {
                     try (ResultSet results = statement.executeQuery("select * from usager order by user_id")) {
                         while (results.next()) {
                             User user = new User(
+                                    results.getInt("user_id"),
                                     results.getString("user_pseudo"),
                                 results.getString("user_login"),
-                                results.getString("user_password"));
+                                results.getString("user_password"),
+                                results.getBoolean("user_admin"));
                             listOfUser.add(user);
                         }
                     }
                 }
             }
         }catch (SQLException e) {
-            // Gestion des erreurs
-            LOGGER.error("Exception : !",e);
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de la liste des utilisateurs :", e);
         }
         return listOfUser;
     }
 
-    //retourne la liste de tous les logins d'ultisateurs présent dans la bdd
+    //Méthode qui retourne la liste de tous les logins d'ultisateurs présent dans la BDD
     @Override
     public ArrayList<String> listAllLogin() {
         ArrayList<String> listOfLogin = new ArrayList<>();
@@ -179,12 +171,10 @@ public class UserDaoImpl implements UserDao {
                 }
             }
         }catch (SQLException e) {
-            // Gestion des erreurs
-            LOGGER.error("Exception : !",e);
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de la liste des logins :", e);
         }
         return listOfLogin;
     }
-
     @Override
     public List<Integer> getListIdMatiereOfUser(Integer id_user) {
         List<Integer> list = new ArrayList<>();
@@ -222,5 +212,39 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    //update l'attribut admin de l'usager avec son id
+    @Override
+    public void setAdmin(Integer id) {
+
+        String sql = "UPDATE usager SET user_admin=? WHERE user_id=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                //paramètres de la requete sql
+                preparedStatement.setInt(2, id);
+                preparedStatement.setInt(1,1 );
+                preparedStatement.executeUpdate();
+                preparedStatement.getGeneratedKeys();
+            }
+        }catch (SQLException e){
+        }
+    }
+    @Override
+    public void supUser(Integer id ){
+        String sqlQuery = " DELETE FROM usager WHERE usager.user_id=?";
+        try {
+            DataSource dataSource = DataSourceProvider.getDataSource();
+            try (Connection cnx = dataSource.getConnection();
+                 PreparedStatement preparedStatement = cnx.prepareStatement(sqlQuery)) {
+                preparedStatement.setInt(1, id);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            LOGGER.info("Erreur SQL");
+        }
+
     }
 }

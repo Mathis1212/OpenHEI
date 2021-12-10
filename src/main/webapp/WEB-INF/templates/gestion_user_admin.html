@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<<<<<<< HEAD
 <head th:replace="~{fragments :: head('Themes')}">
 </head>
 <body>
 <header th:replace="~{fragments :: menu('Themes')}"></header>
+=======
+<head th:replace="~{fragments :: head('admin/GestionAdmin')}">
+</head>
+<body>
+<header th:replace="~{fragments :: menu('admin/GestionAdmin')}"></header>
+>>>>>>> dev
 <style>
 
 
@@ -30,7 +37,7 @@
 
 <main>
     <article>
-        <h1 class="titre_page">Thèmes</h1>
+        <h1 class="titre_page">Gestion</h1>
 
         <div class="liste" >
             <table id="myTable">
@@ -41,11 +48,11 @@
                     <th style="width:40%;">Delete</th>
                     <th style="width:40%;">Set Admin</th>
                 </tr>
-                <tr class="user_elements" th:each="mapItem, state:${matiere}">
-                    <td>id</td>
-                    <td>pseudo</td>
-                    <td>status</td>
-                    <td><button class="delete">✖</button></td>
+                <tr class="user_elements" th:each="mapItem, state:${user}">
+                    <td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>
+                    <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
+                    <td th:utext="${mapItem.value.getstatus()}">status</td>
+                    <td><button class="delete">delete</button></td>
                     <td><button class="admin">Set Admin</button></td>
                 </tr>
             </table>
@@ -54,6 +61,6 @@
 
     </article>
 </main>
-<footer th:replace="~{fragments::footer('Themes')}"></footer>
+<footer th:replace="~{fragments::footer('admin/GestionAdmin')}"></footer>
 </body>
 </html>
