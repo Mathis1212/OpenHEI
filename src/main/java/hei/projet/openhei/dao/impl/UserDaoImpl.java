@@ -37,8 +37,10 @@ public class UserDaoImpl implements UserDao {
     //Méthode qui permet de récuperer depuis son login un user inscrit dans la BDD
     @Override
     public User getUser(String login){
-        User user =null;
+        String string=login;
         String sql ="SELECT * FROM usager WHERE user_login=?";
+        User user=new User();
+        user.setUserlogin(login);
         try {
             DataSource datasource = DataSourceProvider.getDataSource();
             try(Connection cnx =datasource.getConnection();
@@ -46,17 +48,22 @@ public class UserDaoImpl implements UserDao {
                 preparedStatement.setString(1,login);
                 try(ResultSet result = preparedStatement.executeQuery()){
                     if(result.next()){
-                        user.setUserId(result.getInt("user_id"));
-                        user.setPseudo(result.getString("user_pseudo"));
-                        user.setUserlogin(result.getString("user_login"));
-                        user.setUserpassword(result.getString("user_password"));
-                        //user.setUserAdmin(result.getBoolean("user_admin"));
+                        int id=result.getInt("user_id");
+                        user.setUserId(id);
+                        String pseudo=result.getString("user_pseudo");
+                        user.setPseudo(pseudo);
+                        String mdp=result.getString("user_password");
+                        user.setUserpassword(mdp);
+                        Boolean admin=result.getBoolean("user_admin");
+                        user.setUserAdmin(admin);
+
                     }
                 }
             }
         }catch (SQLException e){
             LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de l'user de login :"+ login+ " :", e);
         }
+
         return user;
     }
 
@@ -73,6 +80,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Boolean checkUserbyLogin(String login){
         boolean result=false;
+        String test=getUser(login).getUserlogin();
+        String logine=login;
         if(getUser(login).getUserlogin().equals(login)){
             result=true;
         }else if(login==null||"".equals(login)){

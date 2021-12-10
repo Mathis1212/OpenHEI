@@ -22,6 +22,9 @@ public class User {
         this.date_creation=new Date(System.currentTimeMillis());
         this.matsuivie=new ArrayList<>();
     }
+    public User(){
+        this.matsuivie=new ArrayList<>();
+    }
 
     //Deuxième constructeur de la class User
     public User(String pseudo, String login, String password,boolean admin){
