@@ -59,7 +59,7 @@
             <button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
             <div class="menuderoulant-content">
                 <a href="/Themes" th:class="${currentPage == (('Themes')||('ThemesAdmin')) ? 'active' : ''}">Matieres</a>
-                <th:block th:if="${Admin}!=null">
+                <th:block th:if="${Admin}=='true'">
                     <a href="/admin/GestionAdmin" th:class="${currentPage == 'GestionAdmin' ? 'active' : ''}">Gestion User</a>
                 </th:block>
             </div>
@@ -74,7 +74,9 @@
                 <div class="menuderoulant">
                     <button class="dropbtn" ><i class='fa fa-fw fa-user'></i><span th:text="${Connected}"></span> <i class="fa fa-caret-down"></i></button>
                     <div id="field_connected" class="menuderoulant-content">
-                        <a href="/Profil" th:class="${ currentPage == 'MonProfil' ? 'active' : ''}">Mon Profil</a>
+                        <th:block th:if="${Admin}=='false'">
+                            <a href="/Profil" th:class="${ currentPage == 'MonProfil' ? 'active' : ''}">Mon Profil</a>
+                        </th:block>
                         <!-- Prochaine Update pour avoir une page de suivi des cours
                          <a href="#" th:class="${ currentPage == 'SuiviCours' ? 'active' : ''}">Mes cours</a>-->
                         <a href="/deconnection" th:class="${ currentPage == 'deconnection' ? 'active' : ''}">Déconnexion</a>

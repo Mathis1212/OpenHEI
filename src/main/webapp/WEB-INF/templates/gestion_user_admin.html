@@ -18,7 +18,7 @@
                         </tr>
                         <tr class="user_elements" th:each="mapItem, state:${user}">
                             <th:block th:if="${mapItem.value.getPseudo()}!=${Connected}">
-                                <!--<td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>-->
+                                <td th:utext="${state.index}">index</td>
                                 <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
                                 <th:block th:if="${mapItem.value.getstatus()}==true">
                                     <td th:utext="oui">status</td>

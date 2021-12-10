@@ -30,13 +30,20 @@ public class GestionUserServlet extends GenericServlet {
         context.setVariable("user", GestionService.getInstance().CourAndId());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
-        String pseudo = (String) req.getSession().getAttribute("Pseudo");
-        context.setVariable("Connected", pseudo);
 
-        String status = (String) req.getSession().getAttribute("Admin");
-        context.setVariable("Admin",status);
+        if (req.getSession().getAttribute("Pseudo")!=null){
+            String pseudo = (String) req.getSession().getAttribute("Pseudo");
+            context.setVariable("Connected", pseudo);
 
-        templateEngine.process("gestion_user_admin", context, resp.getWriter());
+            //récupère le paramètre de status de l'user
+            String status = (String) req.getSession().getAttribute("Admin");
+            context.setVariable("Admin",status);
+
+            templateEngine.process("gestion_user_admin", context, resp.getWriter());
+        }else{
+            resp.sendRedirect("Accueil");
+        }
+
     }
 
     @Override

@@ -25,6 +25,8 @@ public class ThemeServlet extends GenericServlet{
             String status = (String) req.getSession().getAttribute("Admin");
             if ("true".equals(status)){
                 resp.sendRedirect("/admin/ThemesAdmin");
+            }else if ("false".equals(status)){
+                context.setVariable("Admin",status);
             }
         }
         templateEngine.process("themes", context, resp.getWriter());

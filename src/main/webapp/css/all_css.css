@@ -450,11 +450,13 @@ li{
 }
 
 .admin{
+    background-color: #c9c1c1;
     padding: 4px;
     border-radius: 25%;
 }
 
 .delete{
+    background-color: #c9c1c1;
     font-size: 1.5em;
     border-radius: 50%;
     width: 30px;

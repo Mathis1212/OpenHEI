@@ -18,15 +18,28 @@ import java.util.ArrayList;
 public class SuiviMatServlet extends GenericServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    WebContext context = new WebContext(req, resp, req.getServletContext());
-    TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         int id= Integer.parseInt(String.valueOf(req.getSession().getAttribute("Id")));
-        context.setVariable("matiere", SuiviMatService.getInstance().listMat(id));
 
-    String pseudo = (String) req.getSession().getAttribute("Pseudo");
-        context.setVariable("Connected", pseudo);
-        templateEngine.process("profil", context, resp.getWriter());
-}
+        if (req.getSession().getAttribute("Pseudo")!=null){
+            String status = (String) req.getSession().getAttribute("Admin");
+            context.setVariable("matiere", SuiviMatService.getInstance().listMat(id));
+            if ("true".equals(status)||status==null){
+                resp.sendRedirect("/Accueil");
+            }else if ("false".equals(status)){
+                context.setVariable("Admin",status);
+            }
+
+            String pseudo = (String) req.getSession().getAttribute("Pseudo");
+            context.setVariable("Connected", pseudo);
+            templateEngine.process("profil", context, resp.getWriter());
+        }else{
+            resp.sendRedirect("Accueil");
+        }
+
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
