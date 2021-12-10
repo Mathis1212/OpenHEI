@@ -121,9 +121,11 @@ window.onload=function(){
     for (let suivit of suivit_cours) {
         //clique de chaque élément de follow
         suivit.onclick=function (){
-            suiviCours(suivit);
+            var nom_mat=suivit.previousElementSibling.innerText;
+            suiviCours(suivit,nom_mat);
         }
     }
+
 }
 
 
@@ -226,6 +228,25 @@ let supUsager = function(id){
     setRequest.send("id_sup="+id);
 }
 
+
+//Requete AJAX pour le suivi d'un cours
+let addMatiereToUser = function (nom_mat) {
+    let addMatiereRequest = new XMLHttpRequest();
+    addMatiereRequest.open("POST", "/Themes", true);
+    addMatiereRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    console.log("id de la matiere :" +id);
+    addMatiereRequest.onload = function () {
+        if(this.status === 200) {
+            console.log("Requete envoyé")
+        } else {
+            console.log("Echec de la requete")
+        }
+    }
+    addMatiereRequest.send("id_mat="+id);
+}
+
+
+
 /* Fonction qui recupère l'url du cours à delete*/
 function getUrlValue(bouton){
     var url=bouton.parentElement.previousElementSibling.previousElementSibling.getAttribute("href");
@@ -277,12 +298,13 @@ function filterThemes() {
 
 
 /*Fonction de follow et d'unfollow des cours*/
-
-function suiviCours(elt){
+function suiviCours(elt, nom_mat){
     if (elt.classList.contains("follow")){
         elt.classList.remove("follow");
         elt.classList.add("unfollow");
+        console.log("matiere a ajouter : " +nom_mat);
         //requete AJAX de suivi de cours
+        addMatiereToUser(nom_mat);
     }else if (elt.classList.contains("unfollow")) {
         elt.classList.remove("unfollow");
         elt.classList.add("follow");
