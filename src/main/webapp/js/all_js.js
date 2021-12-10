@@ -86,8 +86,9 @@ window.onload=function(){
     var Isdel_button=document.getElementsByClassName("delete");
     for (let delButton of Isdel_button){
         delButton.onclick = function(){
-            var login=delButton.parentElement.previousElementSibling.previousElementSibling.getAttribute("id");
-            supUsager(login);
+            var idS=delButton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.getAttribute("id");
+            console.log(idS);
+            supUsager(idS);
         }
     }
 /*Recuperation de l'id du l'user associe au bouton setAdim et appel de la fonction setAdim()*/
@@ -96,6 +97,7 @@ window.onload=function(){
     for (let AdminButton of IsAdmin_button){
         AdminButton.onclick = function(){
             var id=AdminButton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.getAttribute("id");
+            console.log(id);
             setAdmin(id);
         }
     }
@@ -199,16 +201,20 @@ let deleteCours = function (url) {
 /*envoye l'id de l'user a change status */
 let setAdmin = function(id){
     let setRequest = new XMLHttpRequest();
-    setRequest.open("POST","/admin/GestionAdmin")
+    setRequest.open("POST","/admin/GestionAdmin",true);
     setRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    console.log("id set:");
+    console.log(id);
     setRequest.send("id_user="+id);
 }
 /*envoye le login de l'usager a supprimer*/
-let supUsager = function( login){
+let supUsager = function(id){
     let setRequest = new XMLHttpRequest();
-    setRequest.open("POST","/admin/GestionAdmin")
+    setRequest.open("POST","/admin/Gestiondel",true);
     setRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    setRequest.send("login_user="+login);
+    console.log("id sup:");
+    console.log(id);
+    setRequest.send("id_sup="+id);
 }
 
 /* Fonction qui recupère l'url du cours à delete*/
