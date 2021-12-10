@@ -51,20 +51,28 @@ Maj+F10
 ```
 Le site OpenHEI est maintenant opérationnel, bonne utilisation !
 
-## Tutoriel : obtenir le statut Administrateur
+## Tutoriels : obtenir le statut Administrateur et l'accorder à d'autres utilisateurs
 
-Étape n°1 : Exécuter le projet (cf Étape n°3 de la rubrique ci-dessus).
-Étape n°2 : Créez un compte sur le site via la page "Sign In".
-Étape n°3 : Après avoir créé votre compte, rendez-vous sur la page de PHPMyAdmin avec votre BDD.
-Étape n°4 : Allez sur la table "usager" de la BDD.
-Étape n°5 : Modifiez la propriété "user_admin" en modifiant le champ à "1".
+### Obtenir le statut Administrateur
+Étape n°1 : Exécuter le projet (cf Étape n°3 de la rubrique ci-dessus).  
+Étape n°2 : Créez un compte sur le site via la page "Sign In".  
+Étape n°3 : Après avoir créé votre compte, rendez-vous sur la page de PHPMyAdmin avec votre BDD.  
+Étape n°4 : Allez sur la table "usager" de la BDD.  
+Étape n°5 : Modifiez la propriété "user_admin" en modifiant le champ à "1".  
 Étape n°6 : Redémarrez le site en exécutant le raccourci suivant :
 ```sh
 Maj+F10
 ```
 Étape n°7 : Connectez-vous sur votre profil via la page "Login".
 
-Vous pouvez à présent profiter du statut Administrateur !
+Vous pouvez à présent profiter du statut Administrateur !  
+NB : un Administrateur avec un login/mdp est ajouté de base à la BDD. Vous pouvez utiliser celui-ci aussi.
+### Accorder le statut Administrateur 
+Étape n°1 : Connectez-vous sur un profil Administrateur.  
+Étape n°2 : Rendez-vous sur la page "Gestion User". Sur cette page est renseigné l'ensemble des utilisateurs du site.  
+Étape n°3 : Cliquez sur le bouton "Set Admin" à la ligne de l'utilisateur à qui vous voulez donner le statut Administrateur.  
+
+Bravo, vous avez créé un nouveau Administrateur !
 ## Tutoriels : ajouter, supprimer et mettre à jour un cours
 
 Prérequis : Avoir le statut Administrateur sur le site ; veuillez consulter la rubrique ci-dessus avant de continuer.
@@ -72,15 +80,15 @@ NB : l'ensemble de ces fonctionnalités sont disponibles en se rendant sur la pa
 
 ### Ajouter un cours
 
-Étape n°1 : Remplissez les champs nécessaires juste en-dessous du texte "Thèmes".
-Étape n°2 : Choisissez la matière dans laquelle vous ajouterez le cours via la liste déroulante.
-Étape n°3 : Cliquez sur le bouton au bout de la ligne.
+Étape n°1 : Remplissez les champs nécessaires juste en-dessous du texte "Thèmes".  
+Étape n°2 : Choisissez la matière dans laquelle vous ajouterez le cours via la liste déroulante.  
+Étape n°3 : Cliquez sur le bouton "Ajouter" au bout de la ligne.  
 
 Vous avez ajouté un cours à la BDD !
 
 ### Supprimer un cours
 
-Étape n°1 : Cliquez sur le bouton "Cours" de la matière que vous voulez.
+Étape n°1 : Cliquez sur le bouton "Cours" de la matière que vous voulez.  
 Étape n°2 : Parcourez la liste jusqu'à trouver le cours que vous voulez supprimer.
 Étape n°3 : Cliquez sur le bouton "Delete" sur la ligne du cours que vous souhaitez supprimer.
 
@@ -88,8 +96,8 @@ Vous avez supprimé un cours de la BDD !
 
 ### Mettre à jour un cours
 
-Étape n°1 : Cliquez sur le bouton "Cours" de la matière que vous voulez.
-Étape n°2 : Remplissez les champs nécessaires sur la ligne du cours que vous souhaitez mettre à jour.
+Étape n°1 : Cliquez sur le bouton "Cours" de la matière que vous voulez.  
+Étape n°2 : Remplissez les champs nécessaires sur la ligne du cours que vous souhaitez mettre à jour.  
 Étape n°3 : Cliquez sur le bouton "Update" en-dessous des champs que vous venez de remplir.
 
 Vous avez mis à jour un cours de la BDD !
