@@ -19,11 +19,23 @@
                             <th style="width:40%;">Set Admin</th>
                         </tr>
                         <tr class="user_elements" th:each="mapItem, state:${user}">
-                            <td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>
-                            <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
-                            <td th:utext="${mapItem.value.getstatus()}">status</td>
-                            <td><form><input type="submit" class="delete" value="Delete"></form></td>
-                            <td><form><input type="submit" class="admin" value="Set Admin"></form></td>
+                            <th:block th:if="${mapItem.value.getPseudo()}!=${Connected}">
+                                <!--<td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>-->
+                                <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
+                                <th:block th:if="${mapItem.value.getstatus()}==true">
+                                    <td th:utext="oui">status</td>
+                                </th:block>
+                                <th:block th:if="${mapItem.value.getstatus()}==false">
+                                    <td th:utext="non">status</td>
+                                </th:block>
+                                <!--<td th:if="${mapItem.value.getstatus()}=='true'" th:utext="oui">status</td>-->
+                                <td><!--<form><input type="submit" class="delete" value="Delete"></form>-->
+                                    <button class="delete">+</button>
+                                </td>
+                                <td><!--<form><input type="submit" class="admin" value="Set Admin"></form>-->
+                                    <button class="admin">Admin</button>
+                                </td>
+                            </th:block>
                         </tr>
                     </table>
                 </div>

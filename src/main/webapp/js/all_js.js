@@ -3,7 +3,7 @@ window.onload=function(){
     //prend pour élément la navbar d'id "myTopnav"
     navbar = document.getElementById("myTopnav");
     /*sticky indique la position de l'élément navbar par rapport au haut de la page */
-    //sticky = navbar.offsetTop;
+    sticky = navbar.offsetTop;
 
     //Permet de récuper un Array de tous les liens de la navbar
     lien_navbar=navbar.querySelectorAll("a");
@@ -31,34 +31,6 @@ window.onload=function(){
     window.onscroll = function() {
         StickNavbarMenu();
     };
-    /*
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.search-dropbtn')) {
-                var dropdowns = document.getElementsByClassName("search-content");
-                var openDropdown = dropdowns[0];
-                if (openDropdown.classList.contains('show-searchbar')&&!document.getElementById("testid")) {
-                    openDropdown.classList.remove('show-searchbar');
-                }
-            }
-        }
-
-        //Permet d'afficher le champ de recherche au click sur le bouton
-        search_button=document.getElementsByClassName("search-dropbtn");
-        search_button.onclick = function() {
-            ShowingSearchBarOnClick();
-        }
-
-        //Permet de récuper la search bar
-        searchbar=navbar.querySelector("input");
-        //Sur le click gagne la classe "active"
-        searchbar.onclick=function(){
-            searchbar.classList.add("active");
-        }
-        //Qd perd le focus perd la classe "active"
-        searchbar.onblur=function(){
-            searchbar.classList.remove("active");
-        }*/
 
 
     //liste cours
