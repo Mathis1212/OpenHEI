@@ -47,11 +47,6 @@ public class GestionUserServlet extends GenericServlet {
         if (id != null) {
             UserDaoImpl.getInstance().setAdmin(id);
         }
-        //delete user
-        //Integer idSup= Integer.parseInt(req.getParameter("id_sup"));
-        //if(idSup !=null ){
-         //   UserDaoImpl.getInstance().supUser(idSup);
-        //}
 
     }
 }
