@@ -36,6 +36,7 @@ public class SuiviMatService {
         userDao.joinIdMatiereToUser(id,idMat);
 
     }
+    //revoir une hashmap contenant en cle l'id de touts les users et le nom des cours qu'ils suivent
     public Map<Integer, List<String>> UserandMat(){
         Map<Integer, List<String>> hmap = new HashMap<Integer, List<String>>();
         List<Integer> matsuivie=new ArrayList<Integer>();
@@ -46,13 +47,17 @@ public class SuiviMatService {
             Integer userid=listuser.get(i).getId();
             matsuivie = userDao.getListIdMatiereOfUser(userid);
             for(int e=0;e< matsuivie.size();e++){
+<<<<<<< HEAD
                 nomSuivie.add(matiereDao.getNom(matsuivie.get(e)));
+=======
+                nomSuivie.add(MatiereDaoImpl.getInstance().getNom(matsuivie.get(e)));
+>>>>>>> 1ad7f56b5a4af351551c040f1d64670a6cdeddb8
             }
             hmap.put(userid,nomSuivie);
         }
         return hmap;
     }
-
+// renvoie une hash map avec le nom des Matieres ajoute pour un user en cle et en valeur les cours qui lui sont associes
     public Map<String, List<Cours>> listMat(Integer id){
         Map<String, List<Cours>> hmap = new HashMap<String, List<Cours>>();
         Map<Integer, List<String>>map=UserandMat();
