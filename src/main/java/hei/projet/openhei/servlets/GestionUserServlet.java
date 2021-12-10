@@ -38,9 +38,12 @@ public class GestionUserServlet extends GenericServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //set Admin
        Integer id = Integer.parseInt(req.getParameter("id_user"));
+        String login = req.getParameter("login_user");
         if (id != null) {
             UserDaoImpl.getInstance().setAdmin(id);
-            UserDaoImpl.getInstance().supUser(id);
+        }
+        if(login !=null ){
+            UserDaoImpl.getInstance().supUser(login);
         }
     }
 }

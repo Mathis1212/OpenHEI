@@ -30,7 +30,7 @@
 
 <main>
     <article>
-        <h1 class="titre_page">Thèmes</h1>
+        <h1 class="titre_page">Gestion</h1>
 
         <div class="liste" >
             <table id="myTable">
@@ -43,7 +43,7 @@
                 </tr>
                 <tr class="user_elements" th:each="mapItem, state:${user}">
                     <td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>
-                    <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
+                    <td th:id="${mapItem.value.getUserlogin()}" th:utext="${mapItem.value.getPseudo()}">pseudo</td>
                     <td th:utext="${mapItem.value.getstatus()}">status</td>
                     <td><button class="delete">delete</button></td>
                     <td><button class="admin">Set Admin</button></td>
