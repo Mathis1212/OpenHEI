@@ -42,17 +42,17 @@ VALUES
 ( 'Normalisation', 7,'https://drive.google.com/file/d/1q8Ukm6kQVjK6fgZzo4oi13Tvn6xHuyRU/view?usp=sharing'),
 ( 'CRUD sql', 7,'https://drive.google.com/file/d/1fOaoJqL-9uqkXIBP-j72h5k9mewpr8xB/view?usp=sharing'),
 ( 'Compléments', 7,'https://drive.google.com/file/d/1dad36vuJ6f_UCnZC2ZoQO7-z6R3iuoS0/view?usp=sharing');
-( 'Agile Cours 1', 8,'https://docs.google.com/presentation/d/1J1xGDTlpTqC2b8u4dPTC_E96yFPR_rGP/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true');
-( 'Agile Cours 2', 8,'https://docs.google.com/presentation/d/1JbbuC61KpSFsniaXalP8kMlKAsJ2ZMNn/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true');
-( 'Agile Cours 3', 8,'https://docs.google.com/presentation/d/109nMTor7bYwAa6vZg5bprKLmbPYhN-1M/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true');
-( 'Agile Cours 4', 8,'https://docs.google.com/presentation/d/1j2gZoLC2q1qqD0Vr91EkXVhG2BJoN2Qc/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true');
-('noSQL Cours 1', 9, 'https://docs.google.com/presentation/d/1mkzpygaIuSNGET5HQezQU4CwPPUwEDPf/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true');
-('noSQL Cours 1', 9, 'https://docs.google.com/presentation/d/1IPzCILVu1wCWhxjBZyt1yINVB-y5nIQ4/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true');
-('noSQL Cours 1', 9, 'https://docs.google.com/presentation/d/1Kq_EQhSYw2L12-jvgMQxfCUUwHk6gSqm/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true');
-('Arduino Fiche 1', 10, 'https://drive.google.com/file/d/1-jh5_8LyddvlkjUhkJuzJgOeLZMfOFF3/view?usp=sharing');
-('Arduino Fiche 2', 10, 'https://drive.google.com/file/d/1j-BgLseid3WiU25_fCSusxn9g2HEIhob/view?usp=sharing');
-('Arduino Fiche 3', 10, 'https://drive.google.com/file/d/1SPQB9_cRebSkYPzLwsahBGOWs2tNU7Ps/view?usp=sharing');
-('Data Science Cours Clustering', 11, 'https://drive.google.com/file/d/1PmW1e4dBvAnia0IS2H6VY5DkHqop5T0S/view?usp=sharing');
-('Data Science TD Clustering', 11, 'https://drive.google.com/file/d/1mlwSwOvOTGh2jY2-SdP03ngM13gE5cAs/view?usp=sharing');
-('anglais gerund or infinitive', 12,'https://drive.google.com/file/d/19V6k3HezhH87TP88NGadHDnMBAJ2hw6D/view?usp=sharing');
+( 'Agile Cours 1', 8,'https://docs.google.com/presentation/d/1J1xGDTlpTqC2b8u4dPTC_E96yFPR_rGP/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true'),
+( 'Agile Cours 2', 8,'https://docs.google.com/presentation/d/1JbbuC61KpSFsniaXalP8kMlKAsJ2ZMNn/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true'),
+( 'Agile Cours 3', 8,'https://docs.google.com/presentation/d/109nMTor7bYwAa6vZg5bprKLmbPYhN-1M/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true'),
+( 'Agile Cours 4', 8,'https://docs.google.com/presentation/d/1j2gZoLC2q1qqD0Vr91EkXVhG2BJoN2Qc/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true'),
+('noSQL Cours 1', 9, 'https://docs.google.com/presentation/d/1mkzpygaIuSNGET5HQezQU4CwPPUwEDPf/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true'),
+('noSQL Cours 1', 9, 'https://docs.google.com/presentation/d/1IPzCILVu1wCWhxjBZyt1yINVB-y5nIQ4/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true'),
+('noSQL Cours 1', 9, 'https://docs.google.com/presentation/d/1Kq_EQhSYw2L12-jvgMQxfCUUwHk6gSqm/edit?usp=sharing&ouid=105874456890195013872&rtpof=true&sd=true'),
+('Arduino Fiche 1', 10, 'https://drive.google.com/file/d/1-jh5_8LyddvlkjUhkJuzJgOeLZMfOFF3/view?usp=sharing'),
+('Arduino Fiche 2', 10, 'https://drive.google.com/file/d/1j-BgLseid3WiU25_fCSusxn9g2HEIhob/view?usp=sharing'),
+('Arduino Fiche 3', 10, 'https://drive.google.com/file/d/1SPQB9_cRebSkYPzLwsahBGOWs2tNU7Ps/view?usp=sharing'),
+('Data Science Cours Clustering', 11, 'https://drive.google.com/file/d/1PmW1e4dBvAnia0IS2H6VY5DkHqop5T0S/view?usp=sharing'),
+('Data Science TD Clustering', 11, 'https://drive.google.com/file/d/1mlwSwOvOTGh2jY2-SdP03ngM13gE5cAs/view?usp=sharing'),
+('anglais gerund or infinitive', 12,'https://drive.google.com/file/d/19V6k3HezhH87TP88NGadHDnMBAJ2hw6D/view?usp=sharing'),
 ('anglais idiomatic language', 12,'https://drive.google.com/file/d/1kcgrdKQBoWJSJknHs--iUyPyuCPWBmjf/view?usp=sharing');

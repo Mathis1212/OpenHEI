@@ -52,24 +52,28 @@ public class UserService {
         return user;
     }
 
+    //Méthode qui verifie si l'utilisateur est inscrit dans la BDD et qu'il à bien saisi les bonnes informations pour se connecter
     public boolean checkUser(String login, String password){
         boolean result=false;
         if(userDao.checkUserbyLogin(login)){
+            LOGGER.info("Un utilisateur existe avec ce login");
             User user=userDao.getUser(login);
             String findedPassword = user.getUserpassword();
             if(argon2.verify(findedPassword,password)){
+                LOGGER.info("Le bon mot de passe à été saisie");
                 result=true;
             }
         }
         return result;
     }
 
+
+    //Méthode qui permet de verifier si l'utilisateur existe dans la BDD avant de changer son mot de passe
     public void changePassword(String login, String password, String newpassword) throws PasswordNotChangedException, SQLException {
         if (checkUser(login, password)){
             userDao.setNewPassword(login, newpassword);
         }else{
             LOGGER.warn("Le mot de passe n'a pas pu etre changer");
-            throw new PasswordNotChangedException();
         }
     }
 }
