@@ -27,11 +27,12 @@ public class GestionUserServlet extends GenericServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("user", GestionService.getInstance().CourAndId());
+
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
 
         if (req.getSession().getAttribute("Pseudo")!=null){
+            context.setVariable("user", GestionService.getInstance().CourAndId());
             String pseudo = (String) req.getSession().getAttribute("Pseudo");
             context.setVariable("Connected", pseudo);
 

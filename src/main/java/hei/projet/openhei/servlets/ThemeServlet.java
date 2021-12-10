@@ -14,11 +14,13 @@ public class ThemeServlet extends GenericServlet{
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
 
         if (req.getSession().getAttribute("Pseudo")!=null){
+
+            context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
+
             String pseudo = (String) req.getSession().getAttribute("Pseudo");
             context.setVariable("Connected", pseudo);
 

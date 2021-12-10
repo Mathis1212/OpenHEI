@@ -21,19 +21,20 @@ public class ThemesAdminServlet extends GenericServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
-
 
         if (req.getSession().getAttribute("Pseudo")==null){
             resp.sendRedirect("Accueil");
         }else{
+            WebContext context = new WebContext(req, resp, req.getServletContext());
+            TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+            context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
+
             String status = (String) req.getSession().getAttribute("Admin");
             context.setVariable("Admin",status);
 
             String pseudo = (String) req.getSession().getAttribute("Pseudo");
             context.setVariable("Connected", pseudo);
+
             templateEngine.process("themes_admin", context, resp.getWriter());
         }
     }
