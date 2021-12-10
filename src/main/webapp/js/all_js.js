@@ -83,6 +83,25 @@ window.onload=function(){
             deleteCours(url);
         }
     }
+
+    var Isdel_button=document.getElementsByClassName("delete");
+    for (let delButton of Isdel_button){
+        delButton.onclick = function(){
+            var idS=delButton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.getAttribute("id");
+            console.log(idS);
+            supUsager(idS);
+        }
+    }
+/*Recuperation de l'id du l'user associe au bouton setAdim et appel de la fonction setAdim()*/
+
+    var IsAdmin_button=document.getElementsByClassName("admin");
+    for (let AdminButton of IsAdmin_button){
+        AdminButton.onclick = function(){
+            var id=AdminButton.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.getAttribute("id");
+            console.log(id);
+            setAdmin(id);
+        }
+    }
 /* Récuperation de l'url de l'ancien cours à update + l'url du nouveau cours + le nom du nouveau cours et appel de la fonction "updateCours()*/
     var button_update_cours=document.getElementsByClassName("updatebtn");
     for (let updatebutton of button_update_cours) {
@@ -90,7 +109,7 @@ window.onload=function(){
             var url_oldcours = getUpdateUrlValue(updatebutton);
             var url_newcours = updatebutton.previousElementSibling.previousElementSibling.value;
             let nom_newcours = updatebutton.previousElementSibling.value;
-        if(verif()==true) {
+        if(verif1()==true) {
             updateCours(url_oldcours, url_newcours, nom_newcours);
         }else{
             alert("Veuillez remplir tout les champs pour mettre à jour un cours");
@@ -201,6 +220,24 @@ let deleteCours = function (url) {
     }
     deleteRequest.send("urlcoursToDelete="+url);
 }
+/*envoye l'id de l'user a change status */
+let setAdmin = function(id){
+    let setRequest = new XMLHttpRequest();
+    setRequest.open("POST","/admin/GestionAdmin",true);
+    setRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    console.log("id set:");
+    console.log(id);
+    setRequest.send("id_user="+id);
+}
+/*envoye le login de l'usager a supprimer*/
+let supUsager = function(id){
+    let setRequest = new XMLHttpRequest();
+    setRequest.open("POST","/admin/Gestiondel",true);
+    setRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    console.log("id sup:");
+    console.log(id);
+    setRequest.send("id_sup="+id);
+}
 
 
 let addMatiereToUser = function (id) {
@@ -232,7 +269,7 @@ function getUpdateUrlValue(bouton){
 }
 
 /* Fonction qui verifie que les champs pour l'update d'un cours ne sont pas vident*/
-function verif()
+function verif1()
 {
     result=false;
     var newnomcours = document.getElementById("nomupdate").value;

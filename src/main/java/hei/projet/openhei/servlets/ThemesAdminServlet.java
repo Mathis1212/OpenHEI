@@ -1,8 +1,6 @@
 package hei.projet.openhei.servlets;
 
-import hei.projet.openhei.dao.impl.MatiereDaoImpl;
 import hei.projet.openhei.entities.Cours;
-import hei.projet.openhei.service.Add_ThemeService;
 import hei.projet.openhei.service.CoursService;
 import hei.projet.openhei.service.MatiereService;
 import org.apache.logging.log4j.LogManager;
@@ -19,6 +17,8 @@ import java.sql.SQLException;
 @WebServlet("/admin/ThemesAdmin")
 public class ThemesAdminServlet extends GenericServlet {
     static final Logger LOGGER = LogManager.getLogger();
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -41,11 +41,11 @@ public class ThemesAdminServlet extends GenericServlet {
         //
         if ((nom != null)&&(url != null)&&(nom_mat != null)) {
             if((!"".equals(nom))&&(!"".equals(url))&&!"".equals(nom_mat)) {
-                Integer id_mat = MatiereDaoImpl.getInstance().getID(nom_mat);
+                Integer id_mat = CoursService.getInstance().getIDToAdd(nom_mat);
                 Cours c = new Cours(nom, url);
                 c.setIdMat(id_mat);
                 try {
-                    Add_ThemeService.getInstance().addCour(c);
+                    CoursService.getInstance().addCour(c);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -72,7 +72,9 @@ public class ThemesAdminServlet extends GenericServlet {
 
             }
 
+
     //delete un cours
+
         String coursurl = req.getParameter("urlcoursToDelete");
         if (coursurl != null&&!"".equals(coursurl)) {
             LOGGER.info("coursid to delete : " + coursurl);
