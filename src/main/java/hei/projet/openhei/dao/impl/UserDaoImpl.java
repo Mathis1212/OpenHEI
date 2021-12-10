@@ -50,7 +50,7 @@ public class UserDaoImpl implements UserDao {
                         user.setPseudo(result.getString("user_pseudo"));
                         user.setUserlogin(result.getString("user_login"));
                         user.setUserpassword(result.getString("user_password"));
-                        user.setUserAdmin(result.getBoolean("user_admin"));
+                        //user.setUserAdmin(result.getBoolean("user_admin"));
                     }
                 }
             }

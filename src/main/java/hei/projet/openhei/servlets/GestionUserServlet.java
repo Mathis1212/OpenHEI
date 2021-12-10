@@ -29,8 +29,13 @@ public class GestionUserServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("user", GestionService.getInstance().CourAndId());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
+
         String pseudo = (String) req.getSession().getAttribute("Pseudo");
-        context.setVariable("Pseudo", pseudo);
+        context.setVariable("Connected", pseudo);
+
+        String status = (String) req.getSession().getAttribute("Admin");
+        context.setVariable("Admin",status);
+
         templateEngine.process("gestion_user_admin", context, resp.getWriter());
     }
 

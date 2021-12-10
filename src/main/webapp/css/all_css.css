@@ -444,6 +444,22 @@ li{
     margin-bottom: 3em;
 }
 
+.liste_user{
+    padding: 0.8em;
+    margin-bottom: 3em;
+}
+
+.admin,.delete{
+    padding: 4px;
+    border-radius: 25%;
+}
+.delete:hover,.admin:hover{
+    background-color: white;
+}
+.admin:active,.delete:active{
+    transform: translateY(2px);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 .liste_block{
     width: 80%;
     max-height: 80%;
@@ -493,6 +509,24 @@ li{
 .dropdown {
     position: relative;
     display: inline-block;
+}
+/*classe bouton update*/
+.updatebtn{
+    background-color: #c2c0c1;
+    color: black;
+    border: 2px solid white;
+    padding: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.deletebtn{
+    background-color: #c2c0c1;
+    color: black;
+    border: 2px solid white;
+    padding: 1em;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 /*block qui s'affiche au click et qui contient la liste des cours*/
@@ -863,6 +897,12 @@ input:checked + .slider:before {
     display: none;
 }
 
+.form_update{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
 /*!--THEMES ADMIN--!*/
 
 
@@ -880,6 +920,11 @@ footer{
     color:white;
 
 }
+
+footer li a{
+    color: white;
+    text-decoration: none;
+}
 /*--FOOTER--*/
 
 
@@ -888,85 +933,56 @@ footer{
 
 /*--add cour--*/
 .addCour{
-    position: static;
     display: flex;
     color: white;
-    padding: 8px 0 0;
-    margin-top: 10px;
-    width: 100%;
+    margin: 1em auto;
+    width: 80%;
     background-color: #423fe9 ;
     border-radius: 8px;
-}
-#textcour{
-
-    width: 20%;
-    font-size: 1.3rem;
-    text-align: center;
-    display:inline-block;
-    padding: 7px 0px;
-    color: black;
-
-}
-#nom_add{
-    font-family: inherit;
-    width: 20%;
-    border: 0;
-    border-inline: 2px solid white;
-    outline: 0;
-    font-size: 1.3rem;
-    color: white;
-    padding: 7px 8px;
-    background: transparent;
-    transition: border-color 0.2s;
-    display:inline-block;
-
-}
-#url_add{
-
-    font-family: inherit;
-    width: 35%;
-    border: 0;
-    border-right: 2px solid white;
-    outline: 0;
-    font-size: 1.3rem;
-    color: white;
-    padding: 7px 8px;
-    background: transparent;
-    transition: border-color 0.2s;
-
-
-}
-#mat_add{
-    font-family: inherit;
-    width: 22%;
-    border: 0;
-    border-right: 2px solid white;
-    outline: 0;
-    font-size: 1.3rem;
-    color: white ;
-    padding: 7px 8px;
-    background: transparent;
-    transition: border-color 0.2s;
-    margin: 4px 2px;
-
-}
-.btn_add{
-    background-color: lightpink;
-    color: black;
-    border: 2px solid #cb4154;
-    padding: 1em;
-    font-size: 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-left: 120px;
-    margin-bottom: 10px;
-    position: static;
-}
-.btn_add:hover{
-    background-color: #cb4154;
-    color: white;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    justify-content:center;
+    flex-direction: row;
 }
 #form_add{
-    width:80%
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+    padding: 8px 8px;
+}
+#textcour{
+    text-align: center;
+    margin: auto 0;
+}
+
+.champ_add{
+    font-family: inherit;
+    min-width: 10%;
+    max-width: 20%;
+    padding-left: 2%;
+    padding-right: 1%;
+    border: 0;
+}
+.champ_add:focus{
+    transition: border-color 0.2s;
+    border: black 2px solid;
+}
+
+.btn_add{
+    background-color: #c2c0c1;
+    color: black;
+    border: 2px solid white;
+    padding: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn_add:hover{
+    background-color: white;
+}
+.btn_add:active{
+    transform: translateY(2px);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 

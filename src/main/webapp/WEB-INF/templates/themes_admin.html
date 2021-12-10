@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<!--librairie css pour les icons-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!--css pour la navbar-->
-	<link rel="stylesheet" type="text/css" href="..\..\css\all_css.css">
-	<!--js pour les évènements-->
-	<link rel="icon" type="image/png" href="../../images/O.png" />
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Thèmes - OpenHei</title>
-
-</head>
-<body>
-<header th:replace="~{fragments :: menu('admin/ThemesAdmin')}"></header>
+	<head th:replace="~{fragments :: head('Thèmes Admin')}">
+	</head>
+	<body>
+		<header th:replace="~{fragments :: menu('ThemesAdmin')}"></header>
 		<main>
 			<article>
 				<h1 class="titre_page">Thèmes</h1>
 				<div class="addCour" >
-					<p id="textcour">Ajouter Cours</p>
-					<a id="form_add"><form ><input id="nom_add" type="text" placeholder="nom du cours"><input type="text" id="url_add" placeholder="url" ><select id="mat_add"><option th:each="mapItem, state:${matiere} " th:utext="${mapItem.key}"></option></select><button class="btn_add" onclick="addCour()">Ajouter</button></form></a>
+					<form id="form_add">
+						<label id="textcour">Ajouter Cours :</label>
+						<input class="champ_add" id="nom_add" type="text" placeholder="nom du cours">
+						<input type="text" class="champ_add" id="url_add" placeholder="url" >
+						<select id="mat_add" class="champ_add">
+							<option th:each="mapItem, state:${matiere} " th:utext="${mapItem.key}"></option>
+						</select>
+						<button class="btn_add" onclick="addCour()">Ajouter</button>
+					</form>
 				</div>
 				<div class="liste"  >
 					<div class="liste_block"th:each="mapItem, state:${matiere} ">
@@ -28,42 +25,21 @@
 							<button  class="dropbtn" th:attr="onclick=|showListCours('${mapItem.key}')|" >Cours</button>
 							<div th:id="${mapItem.key}" class="dropdown-content">
 								<div class="cours"th:each="cour,state:${mapItem.value}" ><h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5>
-									<a download targert="_blank" th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
-								<a><form>
+									<a  target="_blank" th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
+
+								<a><form class="form_update">
 									<input id="nomupdate" class="nom_update" type="text" placeholder="nom du cours">
 									<input id="urlupdate" type="text" class="url_update" placeholder="url" >
 									<input class="updatebtn" type="submit" value="Update">
 								</form></a>
-								<a><button class="deletebtn" >&times; Delete</button></a>
+								<a><input type="submit" class="deletebtn" value="&times; Delete"/></a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
-		</article>
-	</main>
-	<footer>
-		<div>
-			<h4>Qui sommes-nous ?</h4>
-			<ul>
-				<li>• Un groupe d'étudiants.</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Où nous trouver ?</h4>
-			<ul>
-				<li>• À HEI (ou à La Faluche, ça dépend des heures).</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Détails</h4>
-			<ul>
-				<li>• Création du site : lors du premier semestre de l'année 2021-2022</li>
-			</ul>
-		</div>
-	</footer>
-</body>
-<script src="..\..\js\all_js.js"></script>
+			</article>
+		</main>
+		<footer th:replace="~{fragments::footer('ThemesAdmin')}"></footer>
+	</body>
 </html>
