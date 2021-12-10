@@ -84,6 +84,7 @@ NB : l'ensemble de ces fonctionnalités sont disponibles en se rendant sur la pa
 Étape n°2 : Choisissez la matière dans laquelle vous ajouterez le cours via la liste déroulante.  
 Étape n°3 : Cliquez sur le bouton "Ajouter" au bout de la ligne.  
 
+/ ! \ ATTENTION : Veillez à bien renseigner l'URL du cours, sinon ça ne marchera pas !!  
 Vous avez ajouté un cours à la BDD !
 
 ### Supprimer un cours
@@ -98,7 +99,8 @@ Vous avez supprimé un cours de la BDD !
 
 Étape n°1 : Cliquez sur le bouton "Cours" de la matière que vous voulez.  
 Étape n°2 : Remplissez les champs nécessaires sur la ligne du cours que vous souhaitez mettre à jour.  
-Étape n°3 : Cliquez sur le bouton "Update" en-dessous des champs que vous venez de remplir.
+Étape n°3 : Cliquez sur le bouton "Update" en-dessous des champs que vous venez de remplir.  
+/ ! \ ATTENTION : Veillez à bien renseigner l'URL du cours, sinon ça ne marchera pas !!  
 
 Vous avez mis à jour un cours de la BDD !
 
