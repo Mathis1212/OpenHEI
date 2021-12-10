@@ -117,26 +117,15 @@ window.onload=function(){
         }
     }
 
-<<<<<<< HEAD
-    /* Récuperation de l'id de la matiere à ajouter à a l'utilisateur et appel de la fonction addMatiereToUser()*/
-    var button_add_Matiere=document.getElementsByClassName("suivit");
-    for (let Bouton of button_add_Matiere) {
-        Bouton.onclick=function (){
-            var idMat=;
-
-        }
-    }
-=======
     var suivit_cours=document.getElementsByClassName("suivit");
     for (let suivit of suivit_cours) {
         //clique de chaque élément de follow
         suivit.onclick=function (){
-            suiviCours(suivit);
+            var nom_mat=suivit.previousElementSibling.innerText;
+            suiviCours(suivit,nom_mat);
         }
     }
 
-
->>>>>>> 8c89fc3f5743d804bf925c05734748e15ae88304
 }
 
 
@@ -240,7 +229,8 @@ let supUsager = function(id){
 }
 
 
-let addMatiereToUser = function (id) {
+//Requete AJAX pour le suivi d'un cours
+let addMatiereToUser = function (nom_mat) {
     let addMatiereRequest = new XMLHttpRequest();
     addMatiereRequest.open("POST", "/Themes", true);
     addMatiereRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -254,6 +244,7 @@ let addMatiereToUser = function (id) {
     }
     addMatiereRequest.send("id_mat="+id);
 }
+
 
 
 /* Fonction qui recupère l'url du cours à delete*/
@@ -307,12 +298,13 @@ function filterThemes() {
 
 
 /*Fonction de follow et d'unfollow des cours*/
-
-function suiviCours(elt){
+function suiviCours(elt, nom_mat){
     if (elt.classList.contains("follow")){
         elt.classList.remove("follow");
         elt.classList.add("unfollow");
+        console.log("matiere a ajouter : " +nom_mat);
         //requete AJAX de suivi de cours
+        addMatiereToUser(nom_mat);
     }else if (elt.classList.contains("unfollow")) {
         elt.classList.remove("unfollow");
         elt.classList.add("follow");
