@@ -547,7 +547,7 @@ li{
     align-items: center;
 }
 
-.add{
+.follow{
     border-radius: 50%;
     width: 37px;
     height: 37px;
@@ -557,11 +557,11 @@ li{
     margin: 1em;
 }
 
-.add:hover,.unfollow:hover{
+.follow:hover,.unfollow:hover{
     background-color: #9f9898;
     transition: 0.5s;
 }
-.add:active,.unfollow:active{
+.follow:active,.unfollow:active{
     border: black 1px solid;
     box-sizing: border-box;
     transition: 0.5s;

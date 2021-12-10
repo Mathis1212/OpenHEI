@@ -98,6 +98,7 @@ window.onload=function(){
         }
     }
 
+<<<<<<< HEAD
     /* Récuperation de l'id de la matiere à ajouter à a l'utilisateur et appel de la fonction addMatiereToUser()*/
     var button_add_Matiere=document.getElementsByClassName("suivit");
     for (let Bouton of button_add_Matiere) {
@@ -106,6 +107,17 @@ window.onload=function(){
 
         }
     }
+=======
+    var suivit_cours=document.getElementsByClassName("suivit");
+    for (let suivit of suivit_cours) {
+        //clique de chaque élément de follow
+        suivit.onclick=function (){
+            suiviCours(suivit);
+        }
+    }
+
+
+>>>>>>> 8c89fc3f5743d804bf925c05734748e15ae88304
 }
 
 
@@ -253,4 +265,23 @@ function filterThemes() {
         }
     }
 }
+
+
+
+
+/*Fonction de follow et d'unfollow des cours*/
+
+function suiviCours(elt){
+    if (elt.classList.contains("follow")){
+        elt.classList.remove("follow");
+        elt.classList.add("unfollow");
+        //requete AJAX de suivi de cours
+    }else if (elt.classList.contains("unfollow")) {
+        elt.classList.remove("unfollow");
+        elt.classList.add("follow");
+        //requete AJAX d'unfollow de cours
+    }
+}
+
+
 
