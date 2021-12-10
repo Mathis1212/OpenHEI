@@ -919,8 +919,10 @@ footer li a{
 
 .champ_add{
     font-family: inherit;
-    max-width: 25%;
-    padding-left:2%;
+    min-width: 10%;
+    max-width: 20%;
+    padding-left: 2%;
+    padding-right: 1%;
     border: 0;
 }
 .champ_add:focus{

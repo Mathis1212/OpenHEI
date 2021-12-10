@@ -19,6 +19,7 @@ public class DeconnecterServlet extends GenericServlet {
             req.getSession().removeAttribute("Pseudo");
             req.getSession().removeAttribute("Login");
             req.getSession().removeAttribute("Password");
+            req.getSession().invalidate();
             resp.sendRedirect("Accueil");
         }
     }

@@ -1,61 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head th:replace="~{fragments :: head('Thèmes Admin')}">
-
-		<style>
-			.addCour{
-				display: flex;
-				color: white;
-				margin: 1em auto;
-				width: 80%;
-				background-color: #423fe9 ;
-				border-radius: 8px;
-				flex-wrap: nowrap;
-				overflow: hidden;
-				justify-content:center;
-				flex-direction: row;
-			}
-			#form_add{
-				display: flex;
-				flex-wrap: nowrap;
-				justify-content: space-around;
-				flex-direction: row;
-				width: 100%;
-				padding: 8px 8px;
-			}
-			#textcour{
-				text-align: center;
-				margin: auto 0;
-			}
-
-			.champ_add{
-				font-family: inherit;
-				max-width: 25%;
-				padding-left:2%;
-				border: 0;
-			}
-			.champ_add:focus{
-				transition: border-color 0.2s;
-				border: black 2px solid;
-			}
-
-			.btn_add{
-				background-color: #c2c0c1;
-				color: black;
-				border: 2px solid white;
-				padding: 1em;
-				border-radius: 8px;
-				cursor: pointer;
-			}
-			.btn_add:hover{
-				background-color: white;
-			}
-			.btn_add:active{
-				transform: translateY(2px);
-				box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-			}
-
-		</style>
 	</head>
 	<body>
 		<header th:replace="~{fragments :: menu('ThemesAdmin')}"></header>
@@ -80,13 +25,13 @@
 							<button  class="dropbtn" th:attr="onclick=|showListCours('${mapItem.key}')|" >Cours</button>
 							<div th:id="${mapItem.key}" class="dropdown-content">
 								<div class="cours"th:each="cour,state:${mapItem.value}" ><h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5>
-									<a download targert="_blank" th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
+									<a target="_blank" th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
 								<a><form>
 									<input id="nomupdate" class="nom_update" type="text" placeholder="nom du cours">
 									<input id="urlupdate" type="text" class="url_update" placeholder="url" >
 									<input class="updatebtn" type="submit" value="Update">
 								</form></a>
-								<a><button class="deletebtn" >&times; Delete</button></a>
+								<a><input type="submit" class="deletebtn" value="&times; Delete"/></a>
 								</div>
 							</div>
 						</div>

@@ -74,9 +74,9 @@
                 <div class="menuderoulant">
                     <button class="dropbtn" ><i class='fa fa-fw fa-user'></i><span th:text="${Connected}"></span> <i class="fa fa-caret-down"></i></button>
                     <div id="field_connected" class="menuderoulant-content">
-                        <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mon Profil</a>
-                        <a href="#" th:class="${ currentPage == 'Themes' ? 'active' : ''}">Mes cours</a>
-                        <a href="/newpassword" th:class="${ currentPage == 'newpassword' ? 'active' : ''}">Changer mon MDP</a>
+                        <!--<a href="#" th:class="${ currentPage == 'MonProfil' ? 'active' : ''}">Mon Profil</a>
+                        Prochaine Update pour avoir une page de suivi des cours
+                        <a href="#" th:class="${ currentPage == 'SuiviCours' ? 'active' : ''}">Mes cours</a>-->
                         <a href="/deconnection" th:class="${ currentPage == 'deconnection' ? 'active' : ''}">Déconnexion</a>
                     </div>
                 </div>
