@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Profil')}">
+</head>
+<body>
+<header th:replace="~{fragments :: menu('Profil')}"></header>
+<main>
+    <article>
+        <h1 class="titre_page">Vos Matieres</h1>
+        <div class="liste"  >
+            <div class="liste_block"th:each="mapItem, state:${matiere} ">
+                <div class="suivi_section">
+                    <h4 th:utext="${mapItem.key}">JavaEE</h4>
+                </div>
+                <div class="dropdown" >
+                    <button  class="dropbtn" th:attr="onclick=|showListCours('${mapItem.key}')|" >Cours</button>
+                    <div th:id="${mapItem.key}" class="dropdown-content">
+
+                        <div class="cours"  th:each="cour,state:${mapItem.value}" >
+                            <h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5>
+                            <a target="_blank" th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+<footer th:replace="~{fragments::footer('Profil')}"></footer>
+</body>
+</html>

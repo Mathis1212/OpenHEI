@@ -21,7 +21,6 @@ public class Matiere {
     public Matiere(){
     }
 
-
     //Getters
     public String getNomMatiere(){
         return NomMatiere;

@@ -48,6 +48,9 @@ public class ConnectionServlet extends GenericServlet {
                     ArrayList<String> informations=UserService.getInstance().getInformationsForSession(login);
                     session.setAttribute("Pseudo",informations.get(0));
                     session.setAttribute("Admin",informations.get(1));
+                    session.setAttribute("Id",informations.get(2));
+                    session.setAttribute("Login",informations.get(3));
+
                     resp.sendRedirect("Accueil");
                 }else{
                     throw new NullPointerException();

@@ -11,7 +11,7 @@
 				<div class="liste_block"th:each="mapItem, state:${matiere} ">
 					<div class="suivi_section">
 						<h4 th:utext="${mapItem.key}">JavaEE</h4>
-						<!--<th:block th:if="${Connected}!=null"><button class="follow suivit">+</button></th:block>-->
+						<th:block th:if="${Connected}!=null"><button class="follow suivit">+</button></th:block>
 					</div>
 					<div class="dropdown" >
 						<button  class="dropbtn" th:attr="onclick=|showListCours('${mapItem.key}')|" >Cours</button>
