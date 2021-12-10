@@ -97,6 +97,16 @@ window.onload=function(){
         }
         }
     }
+
+    var suivit_cours=document.getElementsByClassName("suivit");
+    for (let suivit of suivit_cours) {
+        //clique de chaque élément de follow
+        suivit.onclick=function (){
+            suiviCours(suivit);
+        }
+    }
+
+
 }
 
 
@@ -227,4 +237,23 @@ function filterThemes() {
         }
     }
 }
+
+
+
+
+/*Fonction de follow et d'unfollow des cours*/
+
+function suiviCours(elt){
+    if (elt.classList.contains("follow")){
+        elt.classList.remove("follow");
+        elt.classList.add("unfollow");
+        //requete AJAX de suivi de cours
+    }else if (elt.classList.contains("unfollow")) {
+        elt.classList.remove("unfollow");
+        elt.classList.add("follow");
+        //requete AJAX d'unfollow de cours
+    }
+}
+
+
 
