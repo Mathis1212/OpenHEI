@@ -444,6 +444,22 @@ li{
     margin-bottom: 3em;
 }
 
+.liste_user{
+    padding: 0.8em;
+    margin-bottom: 3em;
+}
+
+.admin,.delete{
+    padding: 4px;
+    border-radius: 25%;
+}
+.delete:hover,.admin:hover{
+    background-color: white;
+}
+.admin:active,.delete:active{
+    transform: translateY(2px);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 .liste_block{
     width: 80%;
     max-height: 80%;

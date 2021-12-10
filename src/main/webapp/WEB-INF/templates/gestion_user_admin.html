@@ -7,7 +7,6 @@
 
 <style>
 
-
     #myTable {
         border-collapse: collapse;
         width: 100%;
@@ -34,7 +33,7 @@
 
         <h1 class="titre_page">Gestion</h1>
 
-        <div class="liste" >
+        <div class="liste_user" >
             <table id="myTable">
                 <tr class="header">
                     <th style="width:60%;">Id</th>
@@ -47,9 +46,8 @@
                     <td th:id="${mapItem.key}" th:utext="${mapItem.key}">id</td>
                     <td th:utext="${mapItem.value.getPseudo()}">pseudo</td>
                     <td th:utext="${mapItem.value.getstatus()}">status</td>
-                    <td><button class="delete">delete</button></td>
-
-                    <td><button class="admin">Set Admin</button></td>
+                    <td><input type="submit" class="delete" value="Delete"></td>
+                    <td><input type="submit" class="admin" value="Set Admin"></td>
                 </tr>
             </table>
         </div>
