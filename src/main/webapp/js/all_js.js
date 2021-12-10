@@ -124,8 +124,6 @@ window.onload=function(){
             suiviCours(suivit);
         }
     }
-
-
 }
 
 

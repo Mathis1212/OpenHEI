@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<!--librairie css pour les icons-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!--css pour la navbar-->
-	<link rel="stylesheet" type="text/css" href="..\..\css\all_css.css">
-	<!--js pour les évènements-->
-	<link rel="icon" type="image/png" href="../../images/O.png" />
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Thèmes - OpenHei</title>
+	<head th:replace="~{fragments :: head('Thèmes Admin')}">
 
-</head>
-<body>
-<header th:replace="~{fragments :: menu('admin/ThemesAdmin')}"></header>
+		<style>
+			.addCour{
+				display: flex;
+				color: white;
+				margin: 1em auto;
+				width: 80%;
+				background-color: #423fe9 ;
+				border-radius: 8px;
+				flex-wrap: nowrap;
+				overflow: hidden;
+				justify-content:center;
+				flex-direction: row;
+			}
+			#form_add{
+				display: flex;
+				flex-wrap: nowrap;
+				justify-content: space-around;
+				flex-direction: row;
+				width: 100%;
+				padding: 8px 8px;
+			}
+			#textcour{
+				text-align: center;
+				margin: auto 0;
+			}
+
+			.champ_add{
+				font-family: inherit;
+				max-width: 25%;
+				padding-left:2%;
+				border: 0;
+			}
+			.champ_add:focus{
+				transition: border-color 0.2s;
+				border: black 2px solid;
+			}
+
+			.btn_add{
+				background-color: #c2c0c1;
+				color: black;
+				border: 2px solid white;
+				padding: 1em;
+				border-radius: 8px;
+				cursor: pointer;
+			}
+			.btn_add:hover{
+				background-color: white;
+			}
+			.btn_add:active{
+				transform: translateY(2px);
+				box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+			}
+
+		</style>
+	</head>
+	<body>
+		<header th:replace="~{fragments :: menu('ThemesAdmin')}"></header>
 		<main>
 			<article>
 				<h1 class="titre_page">Thèmes</h1>
 				<div class="addCour" >
-					<p id="textcour">Ajouter Cours</p>
-					<a id="form_add"><form ><input id="nom_add" type="text" placeholder="nom du cours"><input type="text" id="url_add" placeholder="url" ><select id="mat_add"><option th:each="mapItem, state:${matiere} " th:utext="${mapItem.key}"></option></select><button class="btn_add" onclick="addCour()">Ajouter</button></form></a>
+					<form id="form_add">
+						<label id="textcour">Ajouter Cours :</label>
+						<input class="champ_add" id="nom_add" type="text" placeholder="nom du cours">
+						<input type="text" class="champ_add" id="url_add" placeholder="url" >
+						<select id="mat_add" class="champ_add">
+							<option th:each="mapItem, state:${matiere} " th:utext="${mapItem.key}"></option>
+						</select>
+						<button class="btn_add" onclick="addCour()">Ajouter</button>
+					</form>
 				</div>
 				<div class="liste"  >
 					<div class="liste_block"th:each="mapItem, state:${matiere} ">
@@ -40,30 +92,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-		</article>
-	</main>
-	<footer>
-		<div>
-			<h4>Qui sommes-nous ?</h4>
-			<ul>
-				<li>• Un groupe d'étudiants.</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Où nous trouver ?</h4>
-			<ul>
-				<li>• À HEI (ou à La Faluche, ça dépend des heures).</li>
-			</ul>
-		</div>
-		<div>
-			<h4>Détails</h4>
-			<ul>
-				<li>• Création du site : lors du premier semestre de l'année 2021-2022</li>
-			</ul>
-		</div>
-	</footer>
-</body>
-<script src="..\..\js\all_js.js"></script>
+			</article>
+		</main>
+		<footer th:replace="~{fragments::footer('ThemesAdmin')}"></footer>
+	</body>
 </html>

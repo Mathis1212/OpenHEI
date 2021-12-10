@@ -25,6 +25,9 @@ public class ThemesAdminServlet extends GenericServlet {
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
 
+        String status = (String) req.getSession().getAttribute("Admin");
+        context.setVariable("Admin",status);
+
         String pseudo = (String) req.getSession().getAttribute("Pseudo");
         context.setVariable("Connected", pseudo);
         templateEngine.process("themes_admin", context, resp.getWriter());

@@ -25,23 +25,43 @@
 
 
         <!--Code à compléter champ de recherche-->
-        <div class="menuderoulant">
-            <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Rechercher</button>
-            <div id="myDropdown" class="menuderoulant-content">
-                <div class="search-container" id="testid">
-                    <form action="">
-                        <input type="text" onkeyup="filterThemes()" placeholder="Search..." name="search" id="site-search">
+        <th:block th:if="${currentPage}=='Themes'">
+            <div class="menuderoulant">
+                <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Rechercher</button>
+                <div id="myDropdown" class="menuderoulant-content">
+                    <div class="search-container" id="testid">
+                        <form action="">
+                            <input type="text" onkeyup="filterThemes()" placeholder="Search..." name="search" id="site-search">
                             <i class="loupe-search"></i>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </th:block>
+
+        <!--Code à compléter champ de recherche-->
+        <th:block th:if="${currentPage}=='ThemesAdmin'">
+            <div class="menuderoulant">
+                <button id="search_bar" class="dropbtn"><i class="fa fa-fw fa-search"></i> Rechercher</button>
+                <div id="myDropdown" class="menuderoulant-content">
+                    <div class="search-container" id="testid">
+                        <form action="">
+                            <input type="text" onkeyup="filterThemes()" placeholder="Search..." name="search" id="site-search">
+                            <i class="loupe-search"></i>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+
         <!--bloc pour faire apparaitre un menu déroulant au survol-->
         <div class="menuderoulant">
             <button class="dropbtn">Liste<i class="fa fa-caret-down"></i></button>
             <div class="menuderoulant-content">
-                <a href="/Themes" th:class="${currentPage == 'Themes' ? 'active' : ''}">Matieres</a>
-                <a href="/admin/GestionAdmin">Gestion User</a>
+                <a href="/Themes" th:class="${currentPage == (('Themes')||('ThemesAdmin')) ? 'active' : ''}">Matieres</a>
+                <th:block th:if="${Admin}!=null">
+                    <a href="/admin/GestionAdmin" th:class="${currentPage == 'GestionAdmin' ? 'active' : ''}">Gestion User</a>
+                </th:block>
             </div>
         </div>
 
