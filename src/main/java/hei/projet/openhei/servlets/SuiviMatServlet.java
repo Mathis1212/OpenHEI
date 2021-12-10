@@ -30,11 +30,9 @@ public class SuiviMatServlet extends GenericServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
-        //add cours
+        //Recupération des informations pour afficher les cours suivient par un user
         int id= Integer.parseInt(String.valueOf(req.getSession().getAttribute("Id")));
         String Mat = req.getParameter("nom_mat");
         SuiviMatService.getInstance().AjouterMat(id,Mat);
-
-        //
     }
 }

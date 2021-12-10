@@ -25,6 +25,7 @@ public class InscriptionServlet extends GenericServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
 
+        //Verification de sécurité pour l'accès a la page d'accueil
         if(req.getSession().getAttribute("Pseudo")!=null) {
             resp.sendRedirect("Accueil");
         }else{
