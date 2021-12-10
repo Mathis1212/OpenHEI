@@ -27,7 +27,7 @@
 								<div class="cours"th:each="cour,state:${mapItem.value}" ><h5 th:utext="${cour.getnomCours()}" th:value="${cour.getId()}" >Cours</h5>
 									<a  target="_blank" th:href="@{${cour.getUrl()}}"><button class="btn"><i class="fa fa-download"></i> Download</button></a>
 
-								<a><form>
+								<a><form class="form_update">
 									<input id="nomupdate" class="nom_update" type="text" placeholder="nom du cours">
 									<input id="urlupdate" type="text" class="url_update" placeholder="url" >
 									<input class="updatebtn" type="submit" value="Update">
