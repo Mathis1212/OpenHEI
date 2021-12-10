@@ -13,50 +13,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursDaoImpl implements CoursDao {
-
+    //Appel de l'instance Log4j2
     static final Logger LOGGER = LogManager.getLogger();
 
-    //creattion de l'instance
+    //Création de l'instance CoursDao
     private static class ServiceHolder {
         private final static CoursDao instance = new CoursDaoImpl();
     }
 
-    //creation de la methode getInstance pour recuperer les methodes de CoursDaoImpl
+    //Création de la methode getInstance pour récuperer les méthodes de CoursDaoImpl
     public static CoursDao getInstance() {
         CoursDao instance = ServiceHolder.instance;
         return instance;
     }
 
-    // sert a creer un cour depuis un ResultSet
+    //Méthode de création d'un objet cours à la récupération des informations de la BDD
     @Override
     public Cours createCoursFromResultSet(ResultSet resultSelect) throws SQLException {
+        LOGGER.info("Création d'un objet cours avec les informations récupérées de la BDD");
         return new Cours(resultSelect.getString("nom_cours"), resultSelect.getString("url_cours"));
     }
 
-    // recupere l'ensemble de la liste des cours de la BDD
+    //Méthode qui récupère l'ensemble de la liste des cours de la BDD
     @Override
     public List<Cours> ListCour() {
-
         List<Cours> list = new ArrayList<>();
-        final Logger LOGGER = LogManager.getLogger();
-
-
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
             try (Connection cnx = dataSource.getConnection();
                  Statement statement = cnx.createStatement();
-                 ResultSet resultSelect = statement.executeQuery("SELECT*FROM cours ")) {
+                 ResultSet resultSelect = statement.executeQuery("SELECT * FROM cours ")) {
                 while (resultSelect.next()) {
                     list.add(createCoursFromResultSet(resultSelect));
                 }
             }
         } catch (SQLException e) {
-            LOGGER.info("Exception : {}", e);
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de la liste des cours :", e);
         }
         return list;
     }
 
-    // recupere le nom du cour
+    //Méthode qui récupère le nom du cours depuis la BDD en fonction de son id
     @Override
     public String getNom(Integer id) {
         String nom = "";
@@ -71,18 +68,17 @@ public class CoursDaoImpl implements CoursDao {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération du nom du cours :", e);
         }
         return nom;
     }
 
-    //recupere le nom de la matiere auxquelle le cour apartient
+    //Méthode qui récupère le nom de la matière auxquelle le cours appartient
     @Override
     public Matiere getMatiere(Integer id) {
         String nom = "";
         Integer id_mat;
         Matiere mat = new Matiere();
-
         String sql = "SELECT matiere.nom_matiere, matiere.id_matiere FROM matiere join cours on matiere.id_matiere=cours.id_matiere_cours  WHERE cours.id_cours=?";
         try {
             DataSource dataSource = DataSourceProvider.getDataSource();
@@ -98,14 +94,14 @@ public class CoursDaoImpl implements CoursDao {
                         mat.setId(id_mat);
                     }
                 }
-
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la récupération de la matière :", e);
         }
         return mat;
     }
 
+    //Méthode qui permet à l'admin d'ajouter un cours à la BDD
     @Override
     public void addCour(Cours cours) throws SQLException {
         String nom = cours.getnomCours();
@@ -121,11 +117,12 @@ public class CoursDaoImpl implements CoursDao {
                 preparedStatement.setInt(2, id_mat);
                 preparedStatement.executeUpdate();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de l'ajout du cours :", e);
         }
     }
 
+    //Méthode qui permet à l'admin de supprimer un cours de la BDD
     @Override
     public Integer deleteCoursFromDB(String url_cours) {
         String sqlQuery = "DELETE FROM cours WHERE cours.url_cours=?";
@@ -138,11 +135,12 @@ public class CoursDaoImpl implements CoursDao {
                 row = preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            LOGGER.info("Erreur SQL");
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la suppression du cours :", e);
         }
         return row;
     }
 
+    //Méthode qui permet à l'admin de mettre un jours un cours
     @Override
     public Integer updateCoursFromDB(String urlcoursToUpdate, String nom_cours, String url_cours) {
         String sqlQuery = "UPDATE projet_OpenHEI.cours SET nom_cours=?, url_cours=? WHERE cours.url_cours=?";
@@ -157,11 +155,12 @@ public class CoursDaoImpl implements CoursDao {
                 row = preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            LOGGER.info("Erreur SQL");
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la mise à jour du cours :", e);
         }
         return row;
     }
 
+    //Méthode qui permet de vérifier si un cours éxiste dans la BDD grâce à son url (contrainte unique en BDD)
     @Override
     public boolean ExistCours(String url_cours) throws SQLException {
         boolean resultat = false;
@@ -175,9 +174,11 @@ public class CoursDaoImpl implements CoursDao {
                     if (result.next()) {
                         resultat = true;
                     }
-                }}} catch (SQLException e) {
-                    LOGGER.info("Erreur SQL");
                 }
-                return resultat;
+            }
+        }catch (SQLException e) {
+            LOGGER.error("Erreur dans la transmission avec la BDD lors de la recherche du cours :", e);
+        }
+        return resultat;
     }
 }

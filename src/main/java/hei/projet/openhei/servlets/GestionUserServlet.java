@@ -1,8 +1,17 @@
 package hei.projet.openhei.servlets;
 
-import hei.projet.openhei.service.MatiereService;
+
+
+import hei.projet.openhei.dao.impl.UserDaoImpl;
+
+import hei.projet.openhei.service.GestionService;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,18 +20,33 @@ import java.io.IOException;
 
 
 
-@WebServlet("/admin/GestionUser")
+@WebServlet("/admin/GestionAdmin")
 public class GestionUserServlet extends GenericServlet {
+    static final Logger LOGGER = LogManager.getLogger();
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
+        context.setVariable("user", GestionService.getInstance().CourAndId());
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
-
-        context.setVariable("matiere", MatiereService.getInstance().AssociationMatCour());
-
         String pseudo = (String) req.getSession().getAttribute("Pseudo");
         context.setVariable("Pseudo", pseudo);
-        templateEngine.process("themes_admin", context, resp.getWriter());
+        templateEngine.process("gestion_user_admin", context, resp.getWriter());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//set Admin
+       Integer id = Integer.parseInt(req.getParameter("id_user"));
+
+        if (id != null) {
+            UserDaoImpl.getInstance().setAdmin(id);
+        }
+        //delete user
+        //Integer idSup= Integer.parseInt(req.getParameter("id_sup"));
+        //if(idSup !=null ){
+         //   UserDaoImpl.getInstance().supUser(idSup);
+        //}
+
     }
 }

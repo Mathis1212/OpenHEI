@@ -14,17 +14,20 @@ import java.util.Map;
 
 public class MatiereService {
     static final Logger LOGGER = LogManager.getLogger();
-    //création de l'insatance du service
+    //Création de l'insatance du service
     private static class ServiceHolder {
         private final static MatiereService instance = new MatiereService();
     }
-    //création de la méthode pour récupérer l'instance
+    //Création de la méthode pour récupérer l'instance
     public static MatiereService getInstance() {
         return MatiereService.ServiceHolder.instance;
     }
 
+    //Récupération de l'instance de MatiereDaoImpl
     private MatiereDao matiereDao = MatiereDaoImpl.getInstance();
 
+
+    //Méthode qui récupère les cours et qui les ajoute à une matière
     public List<Matiere> recupMatiereAvecListCour() {
         List<Matiere> list = new ArrayList<>();
         List<Cours> listCour = new ArrayList<>();
@@ -38,7 +41,7 @@ public class MatiereService {
         return list;
     }
 
-    // recupere l'ensemble des matieres de la BDD et associe chaques matiere au cours qu'elle possede
+    //Méthode qui recupere l'ensemble des matieres de la BDD et associe chaques matiere au cours qu'elle possede
     public Map<String,List<Cours>> AssociationMatCour() {
         Map<String, List<Cours>> hmap = new HashMap<String, List<Cours>>();
         int taille = recupMatiereAvecListCour().size();
