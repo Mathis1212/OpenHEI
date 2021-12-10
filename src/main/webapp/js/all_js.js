@@ -109,7 +109,7 @@ window.onload=function(){
             var url_oldcours = getUpdateUrlValue(updatebutton);
             var url_newcours = updatebutton.previousElementSibling.previousElementSibling.value;
             let nom_newcours = updatebutton.previousElementSibling.value;
-        if(verif1()==true) {
+        if(verif1(url_newcours,nom_newcours)==true) {
             updateCours(url_oldcours, url_newcours, nom_newcours);
         }else{
             alert("Veuillez remplir tout les champs pour mettre à jour un cours");
@@ -260,13 +260,10 @@ function getUpdateUrlValue(bouton){
 }
 
 /* Fonction qui verifie que les champs pour l'update d'un cours ne sont pas vident*/
-function verif1()
+function verif1(url,nom)
 {
     result=false;
-    var newnomcours = document.getElementById("nomupdate").value;
-    var url    = document.getElementById("urlupdate").value;
-
-    if((newnomcours!="")&&(url!="")){
+    if((url!="")&&(nom!="")){
         result=true;
     }else{
         result= false;
