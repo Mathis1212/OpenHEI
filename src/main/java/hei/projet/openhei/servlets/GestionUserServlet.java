@@ -1,13 +1,10 @@
 package hei.projet.openhei.servlets;
 
-import hei.projet.openhei.dao.impl.CoursDaoImpl;
-import hei.projet.openhei.dao.impl.MatiereDaoImpl;
+
 import hei.projet.openhei.dao.impl.UserDaoImpl;
-import hei.projet.openhei.entities.Cours;
-import hei.projet.openhei.service.Add_ThemeService;
-import hei.projet.openhei.service.CoursService;
+
 import hei.projet.openhei.service.GestionService;
-import hei.projet.openhei.service.MatiereService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.thymeleaf.TemplateEngine;
@@ -18,7 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
+
 
 @WebServlet("/admin/GestionAdmin")
 public class GestionUserServlet extends GenericServlet {
