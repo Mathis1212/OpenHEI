@@ -46,7 +46,7 @@ public class SuiviMatService {
         for(int i=0;i<listuser.size();i++){
             Integer userid=listuser.get(i).getId();
             matsuivie = userDao.getListIdMatiereOfUser(userid);
-            for(int e=0;e< matsuivie.size();e++){git add
+            for(int e=0;e< matsuivie.size();e++){
                 nomSuivie.add(matiereDao.getNom(matsuivie.get(e)));
             }
             hmap.put(userid,nomSuivie);
