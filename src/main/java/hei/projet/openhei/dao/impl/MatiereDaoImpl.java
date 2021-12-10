@@ -67,7 +67,9 @@ public class MatiereDaoImpl implements MatiereDao {
                  PreparedStatement preparedStatement = cnx.prepareStatement(sql)) {
                 preparedStatement.setInt(1, id);
                 try (ResultSet result = preparedStatement.executeQuery()) {
-                    nom = result.getString("nom_matiere");
+                    while(result.next()) {
+                        nom = result.getString("nom_matiere");
+                    }
                 }
             }
         } catch (SQLException e) {

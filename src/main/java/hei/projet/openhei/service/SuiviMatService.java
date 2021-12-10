@@ -38,12 +38,13 @@ public class SuiviMatService {
             matsuivie = UserDaoImpl.getInstance().getListIdMatiereOfUser(userid);
             for(int e=0;e< matsuivie.size();e++){
                 nomSuivie.add(MatiereDaoImpl.getInstance().getNom(matsuivie.get(e)));
-                System.out.println(MatiereDaoImpl.getInstance().getNom(matsuivie.get(e)));
+                String string = MatiereDaoImpl.getInstance().getNom(matsuivie.get(e));
             }
             hmap.put(userid,nomSuivie);
         }
         return hmap;
     }
+
     public Map<String, List<Cours>> listMat(Integer id){
         Map<String, List<Cours>> hmap = new HashMap<String, List<Cours>>();
         Map<Integer, List<String>>map=UserandMat();
